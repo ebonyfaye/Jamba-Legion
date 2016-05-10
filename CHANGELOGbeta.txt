@@ -1,0 +1,105 @@
+# Jamba-Legion
+The Repo for legion WoW 7.0.3 
+---------------------------
+
+TODO:??
+Broken Shore QuestLines with QuestWatcher.
+Warlocks now only use Soulshards.
+Opt: To Turn of ToolTips
+
+
+
+---------------------------
+ChangeLogs:
+---------------------------
+Jamba Version: 5.0.1
+WoW Game Version: 6.1.2
+Release Date: TBA
+Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
+
+
+
+
+---------------------------
+Jamba Version: 5.0
+WoW Game Version: 6.1.2
+Release Date: TBA
+Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
+
+Welcome to the Beta-Jamba-4.0 For World of Warcraft 7.0.3! Legion!
+
+Merged 5.0 form 6.2.4 Beta to 7.0.3
+Change log:
+
+*jamba-Core Some Back End Work for Legion/7.0.x
+	* New tooltips on the options config to help make it easter to understand what some buttons to do and to clean up some of the long line texts.
+	
+
+*Jamba-Display-Team
+	-Added a NewTooltip when you hover over Follow bar to show
+		- Level of minion If not level capped.
+		- ItemLevel of minion.
+		- Durability of the minion.
+		- Bag Space of the minion (this will phase out the old barspace bar to make room for artifact Weapon-XP)
+		- Gold of the minion.
+			- now shows Currency Icons > 4.3f
+		- Mail if the minion has mail and who it is from (last 3)
+		- Currency You can pick the currency from the ingame currency by showing on BackPack
+			- now shows Currency Icon > 4.3f
+	- Removed Display BagSpace see the tooltip..	
+
+	- Renamed "Combo PointBar" to "Alternate PowerBar"
+		- Added Support for Other classess Alternate Power
+			-Warlocks
+				-Burning Embers
+				-Shoul Shards
+				-Demonic Fury
+			-Paladin
+				-Holy Power
+				
+* Removed Jamba-Proc 
+			You can download this as a separate Download.
+			See infomation at http://www.dual-boxing.com/threads/52151-Addon-Jamba-4-0-An-assistant-for-Multiboxers-Release-for-WoW-6?p=402394&viewfull=1#post402394 		
+
+*Jamba-Toon
+	-Removed Jamba-Currency From the toon module to its own module
+			
+* New Module Jamba-Curr
+	- All Currency Information
+		- You can now Edit the Currency ID to show whatever Currency you like (no more waiting for updates on patchs/xpacs Has a default list)
+			-Config Show Currency Name and Icon.
+			-You can Have a max of 6 Currency's. (todo Might change on feedback)
+		- Now shows Currency Icon.
+		- Now shows the Currency Gold Icons on when showing gold/Sliver/Copper
+		- NoLonger Shows Currency for Offline minions.
+		- Should Now Order the character right That are Offline/Online.
+	-Added Help Information Tooltips.
+		
+* Jamba-Team
+	- Added two new ways to add team members to the team with command line and GUI.
+		@target will add your current target to the team list
+		@mouseOver Will add your current MouseOver to the team list.
+	- cleaned up some loot code. and some offline code.
+	
+* Jamba-Macro
+	- Tag Sould nolonger set the realm name if playing from the same realm. thanks to Sonof from dual-boxing for the bug report.	
+	
+* Jamba-Quest-Watcher
+	- Now Shows Scenario quests on the watcher.
+	--4.3j Should now work with progress quests again.	
+
+
+* Jamba-Quest (A big thanks to schilm from dual-boxing.com to the new changes. little edited by me )
+	- Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and untrack and to abandon quests.
+	-New Bar Now part of the QuestMap Frame. with new buttons(TODO: Beta - Fix/change icons.)
+		-Abandon All
+			-Works just like it used to. It loops through all of your toons and abandons all the quests on each toon. 
+			-NOW ignores quests that cannot be abandoned, such as the Account Wide quests Luxlunae mentioned.
+		-Share All
+			-Used to just loop through the current toons quests and just shared those, NOW loops through all toons and attempts to share all quests from all toons.
+		-Track All
+			-Back from the abyss!!!
+			-Used to just loop through the current toons quests and just tracked those, NOW loops through all toons and attempts to track all quests from all toons.
+		-Untrack All
+			-Back from the abyss!!!
+			-Used to just loop through the current toons quests and just untracked those, NOW loops through all toons and attempts to untracks all quests from all toons.	
