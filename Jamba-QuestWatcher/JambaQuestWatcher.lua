@@ -1157,13 +1157,9 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 	local isInScenario = C_Scenario.IsInScenario()
 	if isInScenario == true then
 		local scenarioName, currentStage, numStages, flags, _, _, _, xp, money = C_Scenario.GetInfo()
-		local useCache = true
 		--AJM:Print("scenario", scenarioName, currentStage, numStages)
-			--if currentStage > 0 then
-			--AJM:Print("Player is in scenario")
 			for StagesIndex = 1, currentStage do
 				--AJM:Print("Player is on Stage", currentStage)
-				-- Ebonylocal stageName, stageDescription, numCriteria, _, _, _, _, _, _, Progress  = C_Scenario.GetStepInfo()
 				local stageName, stageDescription, numCriteria, _, _, _, numSpells, spellInfo, weightedProgress = C_Scenario.GetStepInfo()
 				--AJM:Print("test match 0")
 				if numCriteria == 0 then
@@ -1196,35 +1192,40 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 					
 				else
 				for criteriaIndex = 1, numCriteria do
-				--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
+	--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
 				local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
 				local questID = 1001
 				local amountCompleted = tostring(quantity).."/"..(totalQuantity)
-					if (numStages) > 1 then
-						local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
-					else
-						local name = "Scenario:"..stageName --.." "..currentStage.."/"..numStages
-						if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
-							AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed )						if AJM.db.sendProgressChatMessages == true then
-								AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
-							end							
+					local name = nil
+						if (numStages) > 1 then
+							local textName = "Scenario:"..stageName.." "..currentStage.."/"..numStages
+							newName = textName
+						else
+							local textName = "Scenario:"..stageName
+							newName = textName
 						end
-					end	
+					local name = newName
+						if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
+						AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed )						if AJM.db.sendProgressChatMessages == true then
+							if AJM.db.sendProgressChatMessages == true then
+							AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
+							end
+						end							
+					end
 				end
 			end
 		end
 	-- SCENARIO_BONUS
 		local tblBonusSteps = C_Scenario.GetBonusSteps()
-		if tblBonusSteps then
-	--AJM:Print("BonusTest", #tblBonusSteps )
-		for i = 1, #tblBonusSteps do
+		if #tblBonusSteps > 0 then
+	AJM:Print("BonusTest", #tblBonusSteps )
+			for i = 1, #tblBonusSteps do
 					local bonusStepIndex = tblBonusSteps[i]
 	--AJM:Print("bonusIndex", bonusStepIndex)
 					local stageName, stageDescription, numCriteria = C_Scenario.GetStepInfo(bonusStepIndex)
 	--AJM:Print("bonusInfo", numCriteria, stageName, stageDescription) 
 				for criteriaIndex = 1, numCriteria do
 					--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
-					--local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
 					local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID = C_Scenario.GetCriteriaInfoByStep(bonusStepIndex, criteriaIndex)
 					local questID = assetID
 					local amountCompleted = tostring(quantity).."/"..(totalQuantity)
@@ -1244,20 +1245,14 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 		for iterateWatchedQuests = 1, GetNumQuestWatches() do
 		--for iterateQuests = 1, GetNumQuestLogEntries() do
 			local questIndex = GetQuestIndexForWatch( iterateWatchedQuests )
-			--local _, questIndex = GetNumQuestLogEntries()
-		   --local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questIDD, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isStory = GetQuestLogTitle( iterateWatchedQuests )
-			--local questIndex = questIDD
 			AJM:DebugMessage( "GetQuestIndexForWatch: questIndex: ", questIndex )
 			if questIndex ~= nil then
-				--local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isStory = GetQuestLogTitle( questIndex )
 				local title, level, suggestedGroup, isHeader, isCollapsed, isComplete, frequency, questID, startEvent, displayQuestID, isOnMap, hasLocalPOI, isTask, isStory = GetQuestLogTitle( questIndex )			
 				isComplete = AJM:IsCompletedAutoCompleteFieldQuest( questIndex, isComplete )
 				local numObjectives = GetNumQuestLeaderBoards( questIndex )
-				--local _,_,numObjectives = GetTaskInfo( questIndex )
 				AJM:DebugMessage( "NumObjs:", numObjectives )
 				for iterateObjectives = 1, numObjectives do
 					local objectiveFullText, objectiveType, objectiveFinished = GetQuestLogLeaderBoard( iterateObjectives, questIndex )
-					--local objectiveFullText, objectiveType, objectiveFinished = GetQuestObjectiveInfo( iterateObjectives, questIndex )
 					AJM:DebugMessage( "ObjInfo:", objectiveFullText, objectiveType, objectiveFinished, iterateObjectives, questIndex  )
 					local amountCompleted, objectiveText = AJM:GetQuestObjectiveCompletion( objectiveFullText )
 					AJM:DebugMessage( "SplitObjInfo",  amountCompleted, objectiveText )
