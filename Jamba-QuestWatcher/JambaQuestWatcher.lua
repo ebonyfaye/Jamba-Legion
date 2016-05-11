@@ -1200,18 +1200,45 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 				local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
 				local questID = 1001
 				local amountCompleted = tostring(quantity).."/"..(totalQuantity)
-				local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
-				--AJM:Print("scenarioInfo", questID, scenarioName, criteriaIndex, criteriaString , amountCompleted , totalQuantity, completed )
+					if (numStages) > 1 then
+						local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
+					else
+						local name = "Scenario:"..stageName --.." "..currentStage.."/"..numStages
+						if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
+							AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed )						if AJM.db.sendProgressChatMessages == true then
+								AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
+							end							
+						end
+					end	
+				end
+			end
+		end
+	-- SCENARIO_BONUS
+		local tblBonusSteps = C_Scenario.GetBonusSteps()
+		if tblBonusSteps then
+	--AJM:Print("BonusTest", #tblBonusSteps )
+		for i = 1, #tblBonusSteps do
+					local bonusStepIndex = tblBonusSteps[i]
+	--AJM:Print("bonusIndex", bonusStepIndex)
+					local stageName, stageDescription, numCriteria = C_Scenario.GetStepInfo(bonusStepIndex)
+	--AJM:Print("bonusInfo", numCriteria, stageName, stageDescription) 
+				for criteriaIndex = 1, numCriteria do
+					--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
+					--local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
+					local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID = C_Scenario.GetCriteriaInfoByStep(bonusStepIndex, criteriaIndex)
+					local questID = assetID
+					local amountCompleted = tostring(quantity).."/"..(totalQuantity)
+					local name = "ScenarioBouns:"..stageName --.." "..currentStage.."/"..numStages
+	--AJM:Print("scenarioBouns", questID, name, criteriaIndexa, criteriaString , amountCompleted , totalQuantity, completed )
 					if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
 						AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed )
-						--AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, title, iterateObjectives, objectiveText, amountCompleted, objectiveFinished, isComplete )
 						if AJM.db.sendProgressChatMessages == true then
 							AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
 						end							
 					end
 				end
 			end
-		end	
+		end
 	end
 	-- old wow quests system
 		for iterateWatchedQuests = 1, GetNumQuestWatches() do
@@ -1723,28 +1750,35 @@ function AJM:QuestWatcherQuestListDrawLine( frame, iterateDisplayRows, type, inf
 		end
 	end
 	local matchDataScenario = string.find( information, "Scenario:" )
+	local matchDataScenarioBouns = string.find( information, "ScenarioBouns:" )
+	-- Scenario
 	if matchDataScenario then
 		local name = gsub(information, "[^|]+:", "")
-		
 		frame.questWatchList.rows[iterateDisplayRows].columns[1].textString:SetText( padding..toggleDisplay..name )
 		frame.questWatchList.rows[iterateDisplayRows].columns[2].textString:SetText( amount )
 		-- Turn off the mouse for these buttons.
 		frame.questWatchList.rows[iterateDisplayRows].columns[1]:EnableMouse( false )
 		frame.questWatchList.rows[iterateDisplayRows].columns[2]:EnableMouse( false )
-
+	-- Scenario Bouns
+	elseif matchDataScenarioBouns then
+		local name = gsub(information, "[^|]+:", "")
+		frame.questWatchList.rows[iterateDisplayRows].columns[1].textString:SetText( padding..toggleDisplay..name )
+		frame.questWatchList.rows[iterateDisplayRows].columns[2].textString:SetText( amount )
+		-- Turn off the mouse for these buttons.
+		frame.questWatchList.rows[iterateDisplayRows].columns[1]:EnableMouse( false )
+		frame.questWatchList.rows[iterateDisplayRows].columns[2]:EnableMouse( false )
 	else
-		
 		frame.questWatchList.rows[iterateDisplayRows].columns[1].textString:SetText( padding..toggleDisplay..teamCount..information )
 		frame.questWatchList.rows[iterateDisplayRows].columns[2].textString:SetText( amount )
 		-- Turn off the mouse for these buttons.
 		frame.questWatchList.rows[iterateDisplayRows].columns[1]:EnableMouse( false )
 		frame.questWatchList.rows[iterateDisplayRows].columns[2]:EnableMouse( false )
 	end
-	
 	--AJM:Print("test2343", type, information )
 	if type == "QUEST_HEADER" then
 		local matchData = string.find( information, "Bonus:" )
 		local matchDataScenario = string.find( information, "Scenario:" )
+		local matchDataScenarioBouns = string.find( information, "ScenarioBouns:" )
 		if matchData then 
 		-- 	Bonus Quests
 			--AJM:Print("Match", information)
@@ -1764,6 +1798,15 @@ function AJM:QuestWatcherQuestListDrawLine( frame, iterateDisplayRows, type, inf
 			frame.questWatchList.rows[iterateDisplayRows].columns[1]:EnableMouse( true )
 			frame.questWatchList.rows[iterateDisplayRows].columns[2]:EnableMouse( true )		
 			--frame.questWatchList.rowHeight = 60
+			
+			elseif matchDataScenarioBouns then
+			
+			frame.questWatchList.rows[iterateDisplayRows].columns[1].textString:SetTextColor( 0, 0.30, 1.0, 1.0 )
+			frame.questWatchList.rows[iterateDisplayRows].columns[2].textString:SetTextColor( 0, 0.30, 1.0, 1.0 )
+			-- Turn on the mouse for these buttons.
+			frame.questWatchList.rows[iterateDisplayRows].columns[1]:EnableMouse( true )
+			frame.questWatchList.rows[iterateDisplayRows].columns[2]:EnableMouse( true )
+			
 			else
 			frame.questWatchList.rows[iterateDisplayRows].columns[1].textString:SetTextColor( 1.0, 0.96, 0.41, 1.0 )
 			frame.questWatchList.rows[iterateDisplayRows].columns[2].textString:SetTextColor( 1.0, 0.96, 0.41, 1.0 )		
