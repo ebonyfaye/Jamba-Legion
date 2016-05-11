@@ -1,4 +1,4 @@
-## Interface: 60200
+## Interface: 70000
 ## Title: JambaProc
 ## Notes: JambaProc
 ## Author: Ebony, Former Author: Jafula

@@ -1,4 +1,4 @@
-## Interface: 60200
+## Interface: 70000
 ## Title: Jamba-Taxi
 ## Notes: Jamba-Taxi
 ## Author: Ebony, Former Author: Jafula
