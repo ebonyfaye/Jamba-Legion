@@ -80,7 +80,7 @@ function JambaHelperSettings:CreateSettings( settingsControl, displayName, paren
 	local tabGroupWidgetSettings = AceGUI:Create( "TabGroup" )
 	-- Was 'Fill', which causes lockup, started at patch 4.1 (40100).  Similar to http://forums.wowace.com/showthread.php?t=17872
 	tabGroupWidgetSettings:SetLayout( "JambaFillAce3Fix" )	
-	tabGroupWidgetSettings:SetTabs( { {text=L["Options"], value="options"}, {text=L["Help"], value="help"} } )
+	tabGroupWidgetSettings:SetTabs( { {text=L["Options"], value="options"}, {text=L["Commands"], value="help"} } )
 	
 	containerWidgetSettings:AddChild( tabGroupWidgetSettings )
 	tabGroupWidgetSettings:AddChild( widgetSettings )

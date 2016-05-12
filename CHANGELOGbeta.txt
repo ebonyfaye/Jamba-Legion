@@ -1,24 +1,96 @@
 # Jamba-Legion
 The Repo for legion WoW 7.0.3 
 ---------------------------
+Changes:
+
+Broken Shore QuestLines with QuestWatcher. -- Done 10/5/2016 ebony!
+Warlocks now only use Soulshards. -- done 			12/5/2016 ebony!
+Opt: To Turn of ToolTips Done
+Remove Currency From ToolTips. Done
 
 TODO:??
-Broken Shore QuestLines with QuestWatcher.
-Warlocks now only use Soulshards.
-Opt: To Turn of ToolTips
 
 
-
+--jamba_team
+	Add a Artfact XP bar!
+	Add Honor Bar?
+	
+-- Jamba-Curr Add Legion defaults Currencys http://legion.wowhead.com/currencies/legion
+		- 1220 -- order-resources Replace Garrson
+		- 1273 -- seal-of-broken-fate Replace Wod Seals
+		- Remove Honor
+		- Remove Conquest
+	
+	
+	
+	
 ---------------------------
 ChangeLogs:
 ---------------------------
-Jamba Version: 5.0.1
+Jamba Version: 5.0
 WoW Game Version: 6.1.2
 Release Date: TBA
 Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
 
+* Removed Jamba-Proc 
+			You can download this as a separate Download.
+			See infomation at http://www.dual-boxing.com/threads/52151-Addon-Jamba-4-0-An-assistant-for-Multiboxers-Release-for-WoW-6?p=402394&viewfull=1#post402394
 
 
+*jamba-Core Some Back End Work for Legion/7.0.x
+	* New tooltips on the options config to help make it easter to understand what some buttons to do and to clean up some of the long line texts.
+
+ Jamba-Team
+	- Added two new ways to add team members to the team with command line and GUI.
+		@target will add your current target to the team list
+		@mouseOver Will add your current MouseOver to the team list.
+	- cleaned up some loot code. and some offline code.	
+	
+
+* Jamba-Quest-Watcher 
+	-Renamed from Jamba Quest Watcher to Jamba Objective Tracker(To fit inline with blizzards own naming)
+		- Now Shows Scenario Objective on the watcher.
+		- Fixed with Broken Shore QuestLines a % bar needed codeing in.
+		- Only Show stage if there is more the one stage (so does not show in dungons.)
+		- Only Shows character name if the character is not from the same server.
+		- Shows Bouns Scenario Objective
+		- Added Help Tooltips to Jamba-Quest-Watcher
+		
+*Jamba-Display-Team
+	-Added a NewTooltip when you hover over Follow bar to show
+		- Level of minion If not level capped.
+		- ItemLevel of minion.
+		- Durability of the minion.
+		- Bag Space of the minion (this will phase out the old barspace bar to make room for artifact Weapon-XP and other Legion Stuff)
+		- Gold of the minion.
+		- now shows currency icons > 4.3f
+		- Mail if the minion has mail and who it is from (Same as minimap)
+		- Currency You can pick the currency from the ingame currency by showing on BackPack
+			- now shows Currency Icon > 4.3f
+	- Removed Display BagSpace see the tooltip..	
+
+	- Renamed "Combo PointBar" to "Alternate PowerBar"
+		- Added Support for Other classess Alternate Power
+			-Warlocks
+				-Shoul Shards
+			-Paladin
+				-Holy Power
+				
+				
+*Jamba-Toon
+	-Removed Jamba-Currency From the toon module to its own module
+			
+* New Module Jamba-Curr
+	- All Currency Information
+		- You can now Edit the Currency ID to show whatever Currency you like (no more waiting for updates on patchs/xpacs Has a default list i will update)
+			-Config Show Currency Name and Icon.
+			-You can Have a max of 6 Currency's.
+		- Now shows Currency Icon Then Three Letter of text.
+		- Now shows the Currency Gold Icons on when showing gold/Sliver/Copper
+		- NoLonger Shows Currency for Offline minions.
+		- Should Now Order the character right That are Offline/Online.
+	-Added Help Information Tooltips.				
+				
 
 ---------------------------
 Jamba Version: 5.0

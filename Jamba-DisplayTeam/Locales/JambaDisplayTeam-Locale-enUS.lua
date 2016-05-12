@@ -76,3 +76,28 @@ L["Gold:"] = true
 L["Has New Mail From:"] = true
 L["Currency:"] = true
 L["Unknown Sender"] = true
+
+
+--Help System
+
+L["Show ToolTip"] = true
+L["Show ToolTip Information"] = true
+L["Show Team List"] = true
+L["Only Sows on Master Character"] = true
+L["Only On Master"] = true
+L["Hide Team List In Combat"] = true
+L["Olny Shows the  Team List out of Combat"] = true
+L["Enable Clique Support"] = true
+L["Enable Clique Support/n**reload UI to take effect**"] = true
+L["Show Title"] = true
+L["Show the Character Portrait"] = true
+L["Show the Follow Bar and Character Name/nHover over for tooltips"] = true
+L["Olny shows Equipped item Level"] = true
+L["Show the Team Experience(xp) bar"] = true
+L["Show the Team Reputation Bar"] = true
+L["Show the Teams Health Bars"] = true
+L["Show the Team Power Bar/nEG:Mana"] = true
+L["Show the Teams Alternate Power Bar/nComboPoints/nSoulShards/nHolyPower"] = true
+L["Show Values"]  = true
+L["Show Percentage"]  = true
+L["Faction Name"] = true 

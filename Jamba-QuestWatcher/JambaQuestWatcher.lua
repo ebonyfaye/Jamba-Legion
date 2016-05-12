@@ -252,9 +252,12 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		column1Left, 
 		movingTop,
-		L["Enable Team Quest Watcher"],
-		AJM.SettingsToggleEnableQuestWatcher
+		L["Enable JoT"],
+		AJM.SettingsToggleEnableQuestWatcher,
+		L["Enables Jamba Objective Tracker"]
 	)	
+	--[[
+--Is there a point showing quest watcher? when truning it off would do the same thing???
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxShowFrame = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControlWatcher, 
@@ -262,16 +265,18 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		left, 
 		movingTop, 
 		L["Show Quest Watcher"],
-		AJM.SettingsToggleShowFrame 
+		AJM.SettingsToggleShowFrame
 	)
+	--]]
 	movingTop = movingTop - checkBoxHeight		
 	AJM.settingsControlWatcher.checkBoxUnlockWatcherFrame = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControlWatcher, 
 		headingWidth, 
 		left, 
 		movingTop, 
-		L["Unlock Quest Watcher Frame (To Move It)"],
-		AJM.SettingsToggleUnlockWatcherFrame 
+		L["Unlock JoT"],
+		AJM.SettingsToggleUnlockWatcherFrame,
+		L["Unlocks Jamba Objective Tracker/nTo Move It/nLock to Click Through"]	
 	)
 	movingTop = movingTop - checkBoxHeight	
 	AJM.settingsControlWatcher.checkBoxHideBlizzardWatchFrame = JambaHelperSettings:CreateCheckBox( 
@@ -279,8 +284,9 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		left, 
 		movingTop, 
-		L["Hide Blizzard's Objectives Watch Frame"],
-		AJM.SettingsToggleHideBlizzardWatchFrame
+		L["Hide Blizzard's Objectives Tracker"],
+		AJM.SettingsToggleHideBlizzardWatchFrame,
+		L["Hides Defualt Objective Tracker"]
 	)
 	movingTop = movingTop - checkBoxHeight	
 	AJM.settingsControlWatcher.checkBoxEnableQuestWatcherMasterOnly = JambaHelperSettings:CreateCheckBox( 
@@ -288,8 +294,10 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		column1Left, 
 		movingTop,
-		L["Show Team Quest Watcher On Master Only"],
-		AJM.SettingsToggleEnableQuestWatcherMasterOnly
+		L["Show JoT On Master Only"],
+		AJM.SettingsToggleEnableQuestWatcherMasterOnly,
+		L["Olny show Jamba Objective Tracker On Master Character Olny"]
+		
 	)	
 	movingTop = movingTop - checkBoxHeight	
 	AJM.settingsControlWatcher.displayOptionsCheckBoxHideQuestWatcherInCombat = JambaHelperSettings:CreateCheckBox( 
@@ -297,8 +305,9 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		column1Left, 
 		movingTop, 
-		L["Hide Quest Watcher In Combat"],
-		AJM.SettingsToggleHideQuestWatcherInCombat
+		L["Hide JoT In Combat"],
+		AJM.SettingsToggleHideQuestWatcherInCombat,
+		L["Hide Jamba Objective Tracker in Combat"]
 	)	
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxShowCompletedObjectivesAsDone = JambaHelperSettings:CreateCheckBox( 
@@ -306,8 +315,9 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		left, 
 		movingTop, 
-		L["Show Completed Objectives As 'DONE'"],
-		AJM.SettingsShowCompletedObjectivesAsDone
+		L["Show Completed objective As 'DONE'"],
+		AJM.SettingsShowCompletedObjectivesAsDone,
+		L["Show Completed Objectives/Quests As 'DONE'"]
 	)
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxHideQuestIfAllComplete = JambaHelperSettings:CreateCheckBox( 
@@ -315,8 +325,9 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		left, 
 		movingTop, 
-		L["Hide Quests Completed By Team"],
-		AJM.SettingsHideQuestIfAllComplete
+		L["Hide objectives Completed By Team"],
+		AJM.SettingsHideQuestIfAllComplete,
+		L["Hide Objectives/Quests Completed By Team"]
 	)
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxShowDoNotHideCompletedObjectives = JambaHelperSettings:CreateCheckBox( 
@@ -325,7 +336,8 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		left, 
 		movingTop, 
 		L["Do Not Hide An Individuals Completed Objectives"],
-		AJM.SettingsDoNotHideCompletedObjectives
+		AJM.SettingsDoNotHideCompletedObjectives,
+		L["Do Not Hide An Individuals Completed Objectives"]
 	)
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxSendProgressChatMessages = JambaHelperSettings:CreateCheckBox( 
@@ -334,7 +346,8 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		left, 
 		movingTop, 
 		L["Send Progress Messages To Message Area"],
-		AJM.SettingsToggleSendProgressChatMessages
+		AJM.SettingsToggleSendProgressChatMessages,
+		L["Send Progress Messages To Message Area/Chat"],
 	)
 	movingTop = movingTop - checkBoxHeight			
 	-- Message area.
@@ -343,7 +356,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		headingWidth, 
 		left, 
 		movingTop, 
-		L["Send Message Area"] 
+		L["Send Message Area"]	
 	)
 	AJM.settingsControlWatcher.dropdownMessageArea:SetList( JambaApi.MessageAreaList() )
 	AJM.settingsControlWatcher.dropdownMessageArea:SetCallback( "OnValueChanged", AJM.SettingsSetMessageArea )
@@ -502,7 +515,7 @@ function AJM:CreateQuestWatcherFrame()
 	local titleName = frame:CreateFontString( "JambaQuestWatcherWindowFrameTitleText", "OVERLAY", "GameFontNormal" )
     titleName:SetPoint( "TOPLEFT", frame, "TOPLEFT", 7, -7 )
     titleName:SetTextColor( 1.00, 1.00, 1.00 )
-    titleName:SetText( L["Jamba Quest Watcher"] )
+    titleName:SetText( L["Jamba Objective Tracker"] )
 	frame.titleName = titleName
 	-- Update button.
 	local updateButton = CreateFrame( "Button", "JambaQuestWatcherWindowFrameButtonUpdate", frame, "UIPanelButtonGrayTemplate" )
@@ -1536,6 +1549,7 @@ function AJM:GetQuestHeaderInWatchList( questID, questName, characterName )
 		local position = questWatchInfoContainer.position
 		if questWatchInfo.questID == questID and questWatchInfo.type == "QUEST_HEADER" then
 			AJM:UpdateTeamQuestCountAddCharacter( questWatchInfo, characterName )
+			
 			if AJM.db.hideQuestIfAllComplete == true then
 				AJM:CheckQuestForAllObjectivesCompleteAndHide( questID )
 			end
@@ -1562,7 +1576,8 @@ function AJM:UpdateTeamQuestCount( questWatchInfo, characterName )
 	questWatchInfo.questTeamCount = count
 end
 
-function AJM:UpdateTeamQuestCountAddCharacter( questWatchInfo, characterName )
+function AJM:UpdateTeamQuestCountAddCharacter( questWatchInfo, name )
+	local characterName = (( Ambiguate( name, "none" ) ))
 	questWatchInfo.teamCharacters[characterName] = true
 	AJM:UpdateTeamQuestCount( questWatchInfo, characterName )
 end
@@ -1740,7 +1755,7 @@ function AJM:QuestWatcherQuestListDrawLine( frame, iterateDisplayRows, type, inf
 	if type == "QUEST_HEADER" then
 		if questTeamCount ~= 0 then
 			--teamCount = " ("..questTeamCount.."/"..JambaApi.GetTeamListMaximumOrder()..") "
-			--Ebony Only Shows online character info
+			--Ebony Only Show online character info
 			teamCount = " ("..questTeamCount.."/"..JambaApi.GetTeamListMaximumOrderOnline()..") "			
 		end
 	end
@@ -2017,7 +2032,8 @@ function AJM:DisplayAutoQuestPopUps()
 		local characterName, characterPopUpType, popUpType
 		local characterList = ""
 		for characterName, characterPopUpType in pairs( characterInfo ) do
-			characterList = characterList..characterName.." "
+			--characterList = characterList..characterName.." "
+			characterList = characterList..( Ambiguate( characterName, "none" ) ).." "
 			-- TODO - hack, assuming all characters have the same sort of popup.
 			popUpType = characterPopUpType
 		end
