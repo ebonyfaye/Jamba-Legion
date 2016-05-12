@@ -256,8 +256,6 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		AJM.SettingsToggleEnableQuestWatcher,
 		L["Enables Jamba Objective Tracker"]
 	)	
-	--[[
---Is there a point showing quest watcher? when truning it off would do the same thing???
 	movingTop = movingTop - checkBoxHeight
 	AJM.settingsControlWatcher.checkBoxShowFrame = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControlWatcher, 
@@ -265,9 +263,9 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		left, 
 		movingTop, 
 		L["Show Quest Watcher"],
-		AJM.SettingsToggleShowFrame
+		AJM.SettingsToggleShowFrame,
+		L["Show Quest Watcher"]
 	)
-	--]]
 	movingTop = movingTop - checkBoxHeight		
 	AJM.settingsControlWatcher.checkBoxUnlockWatcherFrame = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControlWatcher, 
@@ -347,7 +345,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		movingTop, 
 		L["Send Progress Messages To Message Area"],
 		AJM.SettingsToggleSendProgressChatMessages,
-		L["Send Progress Messages To Message Area/Chat"],
+		L["Send Progress Messages To Message Area/Chat"]
 	)
 	movingTop = movingTop - checkBoxHeight			
 	-- Message area.

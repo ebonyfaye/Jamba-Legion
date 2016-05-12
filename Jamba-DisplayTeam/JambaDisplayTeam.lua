@@ -1015,7 +1015,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Only On Master"],
 		AJM.SettingsToggleShowTeamListOnMasterOnly,
-		L["Only Sows on Master Character"]
+		L["Only Show on Master Character"]
 	)	
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
 	AJM.settingsControl.displayOptionsCheckBoxHideTeamListInCombat = JambaHelperSettings:CreateCheckBox( 
@@ -1025,7 +1025,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Hide Team List In Combat"],
 		AJM.SettingsToggleHideTeamListInCombat,
-		L["Olny Shows the  Team List out of Combat"]
+		L["Olny Show the  Team List out of Combat"]
 	)
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
 	AJM.settingsControl.displayOptionsCheckBoxEnableClique = JambaHelperSettings:CreateCheckBox( 
@@ -1181,14 +1181,14 @@ local function SettingsCreateDisplayOptions( top )
 		L["Show Character Name"]
 	)
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
-	AJM.settingsControl.displayOptionsCheckBoxShowIlvlInformation = JambaHelperSettings:CreateCheckBox( 
+	AJM.settingsControl.displayOptionsCheckBoxShowToolTipInformation = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
 		thirdWidth, 
 		left, 
 		movingTop, 
 		L["Show ToolTip"],
 		AJM.SettingsToggleShowToolTipInformation,
-		L["Show ToolTip Information"],
+		L["Show ToolTip Information"]
 	)
 	AJM.settingsControl.displayOptionsCheckBoxShowEquippedOnly = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1229,7 +1229,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowExperienceStatus,
-		L["Shows the Team Experience(xp) bar"]
+		L["Show the Team Experience(xp) bar"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowExperienceStatusValues = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1277,7 +1277,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowReputationStatus,
-		L["Shows the Team Reputation Bar"]
+		L["Show the Team Reputation Bar"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowReputationStatusValues = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1334,7 +1334,7 @@ local function SettingsCreateDisplayOptions( top )
 		left, 
 		movingTop, 
 		L["Show"],
-		AJM.SettingsToggleShowHealthStatus
+		AJM.SettingsToggleShowHealthStatus,
 		L["Show the Teams Health Bars"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowHealthStatusValues = JambaHelperSettings:CreateCheckBox( 
@@ -1434,7 +1434,7 @@ local function SettingsCreateDisplayOptions( top )
 		left, 
 		movingTop, 
 		L["Show"],
-		AJM.SettingsToggleShowComboStatus
+		AJM.SettingsToggleShowComboStatus,
 		L["Show the Teams Alternate Power Bar/nComboPoints/nSoulShards/nHolyPower"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowComboStatusValues = JambaHelperSettings:CreateCheckBox( 
@@ -1986,6 +1986,7 @@ function AJM:SettingsChangeComboStatusHeight( event, value )
 	AJM.db.comboStatusHeight = tonumber( value )
 	AJM:SettingsRefresh()
 end
+
 function AJM:SettingsBackgroundColourPickerChanged( event, r, g, b, a )
 	AJM.db.frameBackgroundColourR = r
 	AJM.db.frameBackgroundColourG = g
@@ -2947,7 +2948,6 @@ function AJM:SetStatusBarColourForCombo( comboBar )
 				-- Purple
 				comboBar:SetStatusBarColor( 0.58, 0.51, 0.79, 1 )
 				comboBar.backgroundTexture:SetTexture( 0.58, 0.51, 0.79, 0.25) 	
-			end
 	elseif  Class == "PALADIN" then
 				--yellow
 			comboBar:SetStatusBarColor( 0.96, 0.55, 0.73, 1 )

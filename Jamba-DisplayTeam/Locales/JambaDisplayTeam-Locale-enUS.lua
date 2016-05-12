@@ -83,10 +83,10 @@ L["Unknown Sender"] = true
 L["Show ToolTip"] = true
 L["Show ToolTip Information"] = true
 L["Show Team List"] = true
-L["Only Sows on Master Character"] = true
+L["Only Show on Master Character"] = true
 L["Only On Master"] = true
 L["Hide Team List In Combat"] = true
-L["Olny Shows the  Team List out of Combat"] = true
+L["Olny Show the  Team List out of Combat"] = true
 L["Enable Clique Support"] = true
 L["Enable Clique Support/n**reload UI to take effect**"] = true
 L["Show Title"] = true
@@ -101,3 +101,7 @@ L["Show the Teams Alternate Power Bar/nComboPoints/nSoulShards/nHolyPower"] = tr
 L["Show Values"]  = true
 L["Show Percentage"]  = true
 L["Faction Name"] = true 
+L["Show Jamba Team or Unit Frame List"] = true
+L["Show Character Name"] = true
+
+
