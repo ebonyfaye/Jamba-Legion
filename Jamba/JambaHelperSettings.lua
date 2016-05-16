@@ -348,13 +348,14 @@ end
 
 function JambaHelperSettings:CreateDropdown( settingsControl, width, left, top, text, toolTip )
 	local dropdown = AceGUI:Create( "Dropdown" )
+	--dropdown:ClearAllPoints()
 	dropdown:SetLabel( text )
 	settingsControl.widgetSettings:AddChild( dropdown )
 	dropdown:SetWidth( width )
 	dropdown:SetPoint( "TOPLEFT", settingsControl.widgetSettings.content, "TOPLEFT", left, top )
-	dropdown:SetUserData("tooltip", toolTip)
-	dropdown:SetCallback("OnEnter", onControlEnter)
-	dropdown:SetCallback("OnLeave", onControlLeave)
+	--dropdown:SetUserData("tooltip", toolTip)
+	--dropdown:SetCallback("OnEnter", onControlEnter)
+	--dropdown:SetCallback("OnLeave", onControlLeave)
 	return dropdown
 end
 
@@ -499,7 +500,9 @@ end
 -------------------------------------------------------------------------------------------------------------
 
 function JambaHelperSettings:CreateMediaSound( settingsControl, width, left, top, text )
+	print("Test", settingsControl.areaSoundDropdown, width, left, top, text)
 	local media = AceGUI:Create( "LSM30_Sound" )
+	--media:ClearAllPoints()
 	media:SetLabel( text )
 	media:SetWidth( width )
 	media:SetPoint( "TOPLEFT", settingsControl.widgetSettings.content, "TOPLEFT", left, top )

@@ -481,6 +481,7 @@ local function SettingsCreateAreaTypes( top )
 	AJM.settingsControl.areaOnScreenDropdown:SetCallback( "OnValueChanged", AJM.UpdateAreaOnScreenControls )
 	areaConfigurationTop = areaConfigurationTop - dropdownHeight
 	areaConfigurationTop = areaConfigurationTop - verticalSpacing - verticalSpacing		
+
 	AJM.settingsControl.areaSoundDropdown = JambaHelperSettings:CreateMediaSound( 
 		AJM.settingsControl, 
 		headingWidth, 
@@ -489,6 +490,7 @@ local function SettingsCreateAreaTypes( top )
 		L["Sound To Play"]
 	)
 	AJM.settingsControl.areaSoundDropdown:SetCallback( "OnValueChanged", AJM.UpdateSoundControls )
+
 	areaConfigurationTop = areaConfigurationTop - dropdownHeight
 	areaConfigurationTop = areaConfigurationTop - verticalSpacing - verticalSpacing
 	AJM.settingsControl.areaListButtonUpdate = JambaHelperSettings:CreateButton(

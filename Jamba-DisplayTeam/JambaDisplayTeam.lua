@@ -1192,7 +1192,7 @@ local function SettingsCreateDisplayOptions( top )
 	)
 	AJM.settingsControl.displayOptionsCheckBoxShowEquippedOnly = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
-		thirdWidth + thirdWidth, 
+		thirdWidth, --+ thirdWidth, 
 		left2, 
 		movingTop, 
 		L["Equipped iLvl Only"],

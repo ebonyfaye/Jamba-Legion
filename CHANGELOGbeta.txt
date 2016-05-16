@@ -7,9 +7,13 @@ Broken Shore QuestLines with QuestWatcher. -- Done 10/5/2016 ebony!
 Warlocks now only use Soulshards. -- done 			12/5/2016 ebony!
 Opt: To Turn of ToolTips Done
 Remove Currency From ToolTips. Done
+Jamba-taxi Frames updated for 7.0.3 done 15/5/2016
 
 TODO:??
 
+--jamba-taxi 
+	Not working!
+	
 
 --jamba_team
 	Add a Artfact XP bar!

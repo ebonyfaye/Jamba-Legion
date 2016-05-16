@@ -1167,6 +1167,7 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 	-- Scenario information
 	local isInScenario = C_Scenario.IsInScenario()
 	if isInScenario == true then
+		local useCache = false
 		local scenarioName, currentStage, numStages, flags, _, _, _, xp, money = C_Scenario.GetInfo()
 		--AJM:Print("scenario", scenarioName, currentStage, numStages)
 			for StagesIndex = 1, currentStage do
@@ -1185,7 +1186,6 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 						local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
 						--AJM:Print("scenarioProgressInfo", questID, name, criteriaIndex, stageDescription , amountCompleted , totalQuantity, completed )
 							if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
-								AJM:JambaQuestWatcherUpdate(false)
 								AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, numCriteria, stageDescription , amountCompleted , totalQuantity, completed )
 							end
 					else

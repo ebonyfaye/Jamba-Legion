@@ -14,6 +14,6 @@ mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Talk" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Talk"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Target" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Target"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Taxi" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Taxi"
-mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Toon" "D:\Dropbox\jamba\Jamba-Toon\Jamba-Toon"
-mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Trade" "D:\Dropbox\jamba\Jamba-Toon\Jamba-Trade"
+mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Toon" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Toon"
+mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Trade" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Trade"
 
