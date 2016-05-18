@@ -39,7 +39,7 @@ L["Width"] = true
 L["Height"] = true
 L["Portrait"] = true
 L["Follow Status Bar"] = true
-L["Experience Bar"] = true
+L["Experience Bars"] = true
 L["Health Bar"] = true
 L["Power Bar"] = true
 L["Alternate PowerBar"] = true
@@ -81,12 +81,11 @@ L["Unknown Sender"] = true
 --Help System
 
 L["Show ToolTip"] = true
-L["Show ToolTip Information"] = true
 L["Show Team List"] = true
 L["Only Show on Master Character"] = true
 L["Only On Master"] = true
 L["Hide Team List In Combat"] = true
-L["Olny Show the  Team List out of Combat"] = true
+L["Olny Show The Team List out of Combat"] = true
 L["Enable Clique Support"] = true
 L["Enable Clique Support/n**reload UI to take effect**"] = true
 L["Show Title"] = true
@@ -104,4 +103,15 @@ L["Faction Name"] = true
 L["Show Jamba Team or Unit Frame List"] = true
 L["Show Character Name"] = true
 
+L["ShowHonorXP"] = true
+L["Show ToolTip Information\nReload UI to Take Effect"] = true
+L["Show the Follow Bar and Character Name/nHover Over for Character Infomation"] = true
+L["Show the Team Experience bar\nAnd Artifact XP Bar\nAnd Honor XP Bar\nAnd Reputation Bar\n \nHover Over Bar With Mouse and Shift to Show More Infomation."] = true
+L["ShowXP"] = true
+L["Show the Team Experience bar"] = true
+L["ShowArtifactXP"] = true
+L["Show the Team Artifact XP bar"] = true
+L["Show the Team Honor XP Bar"] = true
+L["ShowReputation"] = true
+L["Show the Team Reputation Bar"] = true
 

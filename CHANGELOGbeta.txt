@@ -8,17 +8,16 @@ Warlocks now only use Soulshards. -- done 			12/5/2016 ebony!
 Opt: To Turn of ToolTips Done
 Remove Currency From ToolTips. Done
 Jamba-taxi Frames updated for 7.0.3 done 15/5/2016
+	New Exp Bars
+	Added Display-Team Artfact Bar
+	Added Display-Team Honor Bar
+	added Display-Team Rep Bar
 
-TODO:??
+Removed Rep and all config and its nowpart of the new xp bars
 
---jamba-taxi 
-	Not working!
-	
+Fixed Jmaba-Taxi
 
---jamba_team
-	Add a Artfact XP bar!
-	Add Honor Bar?
-	
+
 -- Jamba-Curr Add Legion defaults Currencys http://legion.wowhead.com/currencies/legion
 		- 1220 -- order-resources Replace Garrson
 		- 1273 -- seal-of-broken-fate Replace Wod Seals
