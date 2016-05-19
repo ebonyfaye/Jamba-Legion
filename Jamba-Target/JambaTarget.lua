@@ -730,7 +730,7 @@ function AJM:SettingsCreateTarget( top )
 	AJM.settingsControl.targetListTransparencySlider:SetSliderValues( 0, 1, 0.01 )
 	AJM.settingsControl.targetListTransparencySlider:SetCallback( "OnValueChanged", AJM.SettingsChangeTransparency )
 	movingTop = movingTop - sliderHeight - verticalSpacing
-	AJM.settingsControl.targetListMediaBorder = JambaHelperSettings:CreateMediaBorder( 
+--[[	AJM.settingsControl.targetListMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControl, 
 		halfWidth, 
 		left, 
@@ -738,7 +738,7 @@ function AJM:SettingsCreateTarget( top )
 		L["Border Style"]
 	)
 	AJM.settingsControl.targetListMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
-	AJM.settingsControl.targetListBorderColourPicker = JambaHelperSettings:CreateColourPicker(
+]]	AJM.settingsControl.targetListBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
 		column2left + 15,
@@ -748,7 +748,7 @@ function AJM:SettingsCreateTarget( top )
 	AJM.settingsControl.targetListBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.targetListBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBorderColourPickerChanged )	
 	movingTop = movingTop - mediaHeight - verticalSpacing
-	AJM.settingsControl.targetListMediaBackground = JambaHelperSettings:CreateMediaBackground( 
+--[[	AJM.settingsControl.targetListMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControl, 
 		halfWidth, 
 		left, 
@@ -756,7 +756,7 @@ function AJM:SettingsCreateTarget( top )
 		L["Background"]
 	)
 	AJM.settingsControl.targetListMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
-	AJM.settingsControl.targetListBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
+]]	AJM.settingsControl.targetListBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
 		column2left + 15,
@@ -1065,8 +1065,8 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.targetListHealthHeight:SetValue( AJM.db.targetListHealthHeight )
 	AJM.settingsControl.targetListTransparencySlider:SetValue( AJM.db.frameAlpha )
 	AJM.settingsControl.targetListScaleSlider:SetValue( AJM.db.frameScale )
-	AJM.settingsControl.targetListMediaBorder:SetValue( AJM.db.borderStyle )
-	AJM.settingsControl.targetListMediaBackground:SetValue( AJM.db.backgroundStyle )
+--	AJM.settingsControl.targetListMediaBorder:SetValue( AJM.db.borderStyle )
+--	AJM.settingsControl.targetListMediaBackground:SetValue( AJM.db.backgroundStyle )
 	AJM.settingsControl.targetListBackgroundColourPicker:SetColor( AJM.db.frameBackgroundColourR, AJM.db.frameBackgroundColourG, AJM.db.frameBackgroundColourB, AJM.db.frameBackgroundColourA )
 	AJM.settingsControl.targetListBorderColourPicker:SetColor( AJM.db.frameBorderColourR, AJM.db.frameBorderColourG, AJM.db.frameBorderColourB, AJM.db.frameBorderColourA )	
 	AJM.settingsControlMacros.editMacro1Star:SetText( AJM.db.targetMacro["1"] )

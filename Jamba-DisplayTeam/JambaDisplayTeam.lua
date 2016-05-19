@@ -1286,7 +1286,7 @@ local function SettingsCreateDisplayOptions( top )
 	AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetSliderValues( 0, 1, 0.01 )
 	AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetCallback( "OnValueChanged", AJM.SettingsChangeTransparency )
 	movingTop = movingTop - sliderHeight - verticalSpacing	
-	AJM.settingsControl.displayOptionsTeamListMediaStatus = JambaHelperSettings:CreateMediaStatus( 
+--[[	AJM.settingsControl.displayOptionsTeamListMediaStatus = JambaHelperSettings:CreateMediaStatus( 
 		AJM.settingsControl, 
 		halfWidthSlider, 
 		left, 
@@ -1294,7 +1294,11 @@ local function SettingsCreateDisplayOptions( top )
 		L["Status Bar Texture"]
 	)
 	AJM.settingsControl.displayOptionsTeamListMediaStatus:SetCallback( "OnValueChanged", AJM.SettingsChangeStatusBarTexture )
-	movingTop = movingTop - mediaHeight - verticalSpacing
+]]	movingTop = movingTop - mediaHeight - verticalSpacing
+
+-- TODO Wait on update need to add back after BETA STUFF!!!!
+
+--[[	
 	AJM.settingsControl.displayOptionsTeamListMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControl, 
 		halfWidthSlider, 
@@ -1303,6 +1307,7 @@ local function SettingsCreateDisplayOptions( top )
 		L["Border Style"]
 	)
 	AJM.settingsControl.displayOptionsTeamListMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
+--]]
 	AJM.settingsControl.displayOptionsBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidthSlider,
@@ -1313,7 +1318,7 @@ local function SettingsCreateDisplayOptions( top )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBorderColourPickerChanged )	
 	movingTop = movingTop - mediaHeight - verticalSpacing
-	AJM.settingsControl.displayOptionsTeamListMediaBackground = JambaHelperSettings:CreateMediaBackground( 
+--[[	AJM.settingsControl.displayOptionsTeamListMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControl, 
 		halfWidthSlider, 
 		left, 
@@ -1321,6 +1326,7 @@ local function SettingsCreateDisplayOptions( top )
 		L["Background"]
 	)
 	AJM.settingsControl.displayOptionsTeamListMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
+]]
 	AJM.settingsControl.displayOptionsBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidthSlider,
@@ -1328,6 +1334,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop - 15,
 		L["Background Colour"]
 	)
+	
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBackgroundColourPickerChanged )
 	movingTop = movingTop - mediaHeight - sectionSpacing	
@@ -1736,9 +1743,11 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.displayOptionsCheckBoxShowListTitle:SetValue( AJM.db.showListTitle )
 	AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetValue( AJM.db.frameAlpha )
 	AJM.settingsControl.displayOptionsTeamListScaleSlider:SetValue( AJM.db.teamListScale )
-	AJM.settingsControl.displayOptionsTeamListMediaStatus:SetValue( AJM.db.statusBarTexture )
-	AJM.settingsControl.displayOptionsTeamListMediaBorder:SetValue( AJM.db.borderStyle )
-	AJM.settingsControl.displayOptionsTeamListMediaBackground:SetValue( AJM.db.backgroundStyle )
+--Add back in! 
+--	AJM.settingsControl.displayOptionsTeamListMediaStatus:SetValue( AJM.db.statusBarTexture ) 
+--	AJM.settingsControl.displayOptionsTeamListMediaBorder:SetValue( AJM.db.borderStyle )
+--	AJM.settingsControl.displayOptionsTeamListMediaBackground:SetValue( AJM.db.backgroundStyle )
+
 	AJM.settingsControl.displayOptionsCheckBoxShowPortrait:SetValue( AJM.db.showCharacterPortrait )
 	AJM.settingsControl.displayOptionsPortraitWidthSlider:SetValue( AJM.db.characterPortraitWidth )
 	AJM.settingsControl.displayOptionsCheckBoxShowFollowStatus:SetValue( AJM.db.showFollowStatus )
@@ -1790,9 +1799,13 @@ function AJM:SettingsRefresh()
 		AJM.settingsControl.displayOptionsCheckBoxShowListTitle:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListScaleSlider:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetDisabled( not AJM.db.showTeamList )
-		AJM.settingsControl.displayOptionsTeamListMediaStatus:SetDisabled( not AJM.db.showTeamList )
-		AJM.settingsControl.displayOptionsTeamListMediaBorder:SetDisabled( not AJM.db.showTeamList )
-		AJM.settingsControl.displayOptionsTeamListMediaBackground:SetDisabled( not AJM.db.showTeamList )
+
+-- TODO add back in
+--		AJM.settingsControl.displayOptionsTeamListMediaStatus:SetDisabled( not AJM.db.showTeamList )
+--		AJM.settingsControl.displayOptionsTeamListMediaBorder:SetDisabled( not AJM.db.showTeamList )
+--		AJM.settingsControl.displayOptionsTeamListMediaBackground:SetDisabled( not AJM.db.showTeamList )
+	
+
 		AJM.settingsControl.displayOptionsCheckBoxShowPortrait:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsPortraitWidthSlider:SetDisabled( not AJM.db.showTeamList or not AJM.db.showCharacterPortrait )
 		AJM.settingsControl.displayOptionsCheckBoxShowFollowStatus:SetDisabled( not AJM.db.showTeamList)
@@ -2610,6 +2623,10 @@ function AJM:SendExperienceStatusUpdateCommand()
 			end
 		local honorXP = UnitHonor("player")
 		local honorMax = UnitHonorMax("player")
+		-- A DityDityHack if capped --Ebony
+		if honorMax == 0 then
+			honorMax = 10000
+		end
 		local HonorLevel = UnitHonorLevel("player")		
 		local honorExhaustionStateID = GetHonorRestState()		
 		if not (honorexhaustionStateID == 1) then
@@ -3130,11 +3147,19 @@ function AJM:UNIT_POWER_FREQUENT( event, Unit, powerType, ... )
 		elseif( event and powerType == "SOUL_SHARDS" ) then
 			AJM:SendComboStatusUpdateCommand()
 		elseif( event and powerType == "HOLY_POWER" ) then
-			AJM:SendComboStatusUpdateCommand()		
+			AJM:SendComboStatusUpdateCommand()
+		elseif( event and powerType == "ARCANE_CHARGES" ) then
+			AJM:SendComboStatusUpdateCommand()	
+		elseif( event and powerType == "CHI" ) then
+			AJM:SendComboStatusUpdateCommand()
 		else
 			return
 		end
 	end	
+end
+
+function AJM:RUNE_POWER_UPDATE( event, ...)
+	AJM:SendComboStatusUpdateCommand()
 end
 
 function AJM:PLAYER_TALENT_UPDATE(event, ...)
@@ -3147,7 +3172,7 @@ function AJM:SendComboStatusUpdateCommand()
 		-- get powerType from http://wowprogramming.com/docs/api_types#powerType as there no real API to get this infomation as of yet.
 		local Class = select(2, UnitClass("player"))
 		--AJM:Print("class", Class)
-		-- ComboPoints
+		-- Combo Points
 		if Class == "DRUID" then
 			PowerType = 4
 		-- Combo Points
@@ -3159,11 +3184,31 @@ function AJM:SendComboStatusUpdateCommand()
 		-- Paladin Holy Power
 		elseif Class == "PALADIN" then
 			PowerType = 9
-		else 
+		-- DEATHKNIGHT Runes
+		elseif Class == "DEATHKNIGHT" then
+			PowerType = 5
+		-- Mage ARCANE_CHARGES
+		elseif Class == "MAGE" then
+			PowerType = 16
+		-- Monk Cil
+		elseif Class == "MONK" then
+			PowerType = 12
 			return
-		end
+		end		
+		
 		local playerCombo = UnitPower ( "player", PowerType)
 		local playerMaxCombo = UnitPowerMax( "player", PowerType)
+		
+		--Deathkight Dity Hacky Hacky.
+		if Class == "DEATHKNIGHT" then
+			for i=1, playerMaxCombo do
+				local start, duration, runeReady = GetRuneCooldown(i)
+					if not runeReady then
+						playerCombo = playerCombo - 1
+					end	
+			end
+		end		
+		
 		
 		--AJM:Print ("PowerType", PowerType, playerCombo, playerMaxCombo)
 		if AJM.db.showTeamListOnMasterOnly == true then
@@ -3254,6 +3299,15 @@ function AJM:SetStatusBarColourForCombo( comboBar )
 				--yellow(gold)
 			comboBar:SetStatusBarColor( 0.96, 0.55, 0.73, 1 )
 			comboBar.backgroundTexture:SetColorTexture( 0.96, 0.55, 0.73, 0.25) 	
+	elseif Class =="DEATHKNIGHT" then
+			comboBar:SetStatusBarColor( 0.60, 0.80, 1.0, 1 )
+			comboBar.backgroundTexture:SetColorTexture( 0.60, 0.80, 1.0, 0.25)
+	elseif Class =="MAGE" then
+			comboBar:SetStatusBarColor( 0.07, 0.30, 0.92, 1 )
+			comboBar.backgroundTexture:SetColorTexture( 0.07, 0.30, 0.92, 0.25)
+	elseif Class =="MONK" then
+			comboBar:SetStatusBarColor( 0.44, 0.79, 0.67, 1 )
+			comboBar.backgroundTexture:SetColorTexture( 0.44, 0.79, 0.67, 0.25)
 	else
 		return
 	end	
@@ -3296,6 +3350,7 @@ function AJM:OnEnable()
 	AJM:RegisterEvent( "UNIT_DISPLAYPOWER" )
 	AJM:RegisterEvent( "CHAT_MSG_COMBAT_FACTION_CHANGE" )
 	AJM:RegisterEvent( "UNIT_POWER_FREQUENT")
+	AJM:RegisterEvent("RUNE_POWER_UPDATE")
 	AJM:RegisterEvent( "PLAYER_TALENT_UPDATE")
 	AJM.SharedMedia.RegisterCallback( AJM, "LibSharedMedia_Registered" )
     AJM.SharedMedia.RegisterCallback( AJM, "LibSharedMedia_SetGlobal" )	

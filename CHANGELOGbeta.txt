@@ -11,7 +11,8 @@ Jamba-taxi Frames updated for 7.0.3 done 15/5/2016
 	New Exp Bars
 	Added Display-Team Artfact Bar
 	Added Display-Team Honor Bar
-	added Display-Team Rep Bar
+	Added Display-Team Rep Bar
+	Added Display-Team DeathKight Runes!
 
 Removed Rep and all config and its nowpart of the new xp bars
 
@@ -24,8 +25,19 @@ Fixed Jmaba-Taxi
 		- Remove Honor
 		- Remove Conquest
 	
-	
-	
+-- DM have a random % quest that need adding to jamba-questwatcher
+
+-- Add back in AceGUI-3.0-SharedMediaWidgets after update:
+		http://mods.curse.com/addons/wow/ace-gui-3-0-shared-media-widgets
+		Jamba-Team display
+		Jamba-JambaMessage
+		Jamba-Curr
+		Jamba-itemUse
+		Jamba-Porc
+		Jamba-QuestWatcher
+		Jamba-Target
+		
+		
 	
 ---------------------------
 ChangeLogs:
@@ -74,10 +86,11 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 
 	- Renamed "Combo PointBar" to "Alternate PowerBar"
 		- Added Support for Other classess Alternate Power
-			-Warlocks
-				-Shoul Shards
-			-Paladin
-				-Holy Power
+			-Warlocks - Shoul Shards
+			-Paladin - Holy Power
+			-DeathKight - Runes
+			-Mage -ARCANE CHARGES
+			-Monk -CHI
 				
 				
 *Jamba-Toon

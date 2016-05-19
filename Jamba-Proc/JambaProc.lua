@@ -97,9 +97,9 @@ function AJM:SettingsRefresh()
 	-- Update the settings area list.
 	AJM.settingsControl.procCheckBoxEnable:SetValue( AJM.db.procEnabled )
 	AJM:SettingsProcListScrollRefresh()
-	AJM.settingsControl.appearanceProcBarMediaStatus:SetValue( AJM.db.barTexture )
-	AJM.settingsControl.appearanceProcBarMediaFont:SetValue( AJM.db.barFont )
-	AJM.settingsControl.appearanceProcBarMediaFontSizeSlider:SetValue( AJM.db.barFontSize )
+--	AJM.settingsControl.appearanceProcBarMediaStatus:SetValue( AJM.db.barTexture )
+--	AJM.settingsControl.appearanceProcBarMediaFont:SetValue( AJM.db.barFont )
+--	AJM.settingsControl.appearanceProcBarMediaFontSizeSlider:SetValue( AJM.db.barFontSize )
 	AJM.settingsControl.appearanceProcBarWidthSlider:SetValue( AJM.db.procTimerBarWidth )
 	AJM.settingsControl.appearanceProcBarHeightSlider:SetValue( AJM.db.procTimerBarHeight )
 	AJM.settingsControl.appearanceProcBarSpacingSlider:SetValue( AJM.db.procTimerBarSpacing )
@@ -108,9 +108,9 @@ function AJM:SettingsRefresh()
 	AJM:SettingsUpdateStatusBarMediaAppearance()
 	AJM:SettingsUpdateStatusBarLayout()
 	-- State
-	AJM.settingsControl.appearanceProcBarMediaStatus:SetDisabled( not AJM.db.procEnabled )
-	AJM.settingsControl.appearanceProcBarMediaFont:SetDisabled( not AJM.db.procEnabled )
-	AJM.settingsControl.appearanceProcBarMediaFontSizeSlider:SetDisabled( not AJM.db.procEnabled )
+--	AJM.settingsControl.appearanceProcBarMediaStatus:SetDisabled( not AJM.db.procEnabled )
+--	AJM.settingsControl.appearanceProcBarMediaFont:SetDisabled( not AJM.db.procEnabled )
+--	AJM.settingsControl.appearanceProcBarMediaFontSizeSlider:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.appearanceProcBarWidthSlider:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.appearanceProcBarHeightSlider:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.appearanceProcBarSpacingSlider:SetDisabled( not AJM.db.procEnabled )
@@ -123,7 +123,7 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.procEditBoxDisplayText:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.procEditBoxTag:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.procColourPicker:SetDisabled( not AJM.db.procEnabled )
-	AJM.settingsControl.procSound:SetDisabled( not AJM.db.procEnabled )
+--	AJM.settingsControl.procSound:SetDisabled( not AJM.db.procEnabled )
 	AJM.settingsControl.procListButtonUpdate:SetDisabled( not AJM.db.procEnabled )
 	if AJM.procFrame ~= nil then
 		AJM.procFrame:ClearAllPoints()
@@ -455,7 +455,8 @@ local function SettingsCreateProcConfiguration( top )
 	)
 	AJM.settingsControl.procColourPicker:SetHasAlpha( false )
 	AJM.settingsControl.procColourPicker:SetCallback( "OnValueConfirmed", AJM.ProcColourPickerChanged )	
-	AJM.settingsControl.procSound = JambaHelperSettings:CreateMediaSound( 
+--TODO ADD BACK IN BETA CODE
+--[[	AJM.settingsControl.procSound = JambaHelperSettings:CreateMediaSound( 
 		AJM.settingsControl, 
 		halfWidth, 
 		column2Left, 
@@ -464,7 +465,7 @@ local function SettingsCreateProcConfiguration( top )
 	)
 	AJM.settingsControl.procSound:SetCallback( "OnValueChanged", AJM.ProcSoundChanged )
 	procConfigurationTop = procConfigurationTop - mediaHeight - verticalSpacing
-	AJM.settingsControl.procListButtonUpdate = JambaHelperSettings:CreateButton(
+]]	AJM.settingsControl.procListButtonUpdate = JambaHelperSettings:CreateButton(
 		AJM.settingsControl, 
 		procListButtonControlWidth, 
 		column1Left, 
@@ -513,7 +514,8 @@ local function SettingsCreateProcAppearanceAndLayout( top )
 		AJM.SettingsToggleShowOnMasterOnly
 	)	
 	movingTop = movingTop - checkBoxHeight - verticalSpacing	
-	AJM.settingsControl.appearanceProcBarMediaStatus = JambaHelperSettings:CreateMediaStatus( 
+--TODO ADD BACK IN
+--[[	AJM.settingsControl.appearanceProcBarMediaStatus = JambaHelperSettings:CreateMediaStatus( 
 		AJM.settingsControl, 
 		halfWidth, 
 		left, 
@@ -529,7 +531,7 @@ local function SettingsCreateProcAppearanceAndLayout( top )
 		L["Proc Bar Font"]
 	)
 	AJM.settingsControl.appearanceProcBarMediaFont:SetCallback( "OnValueChanged", AJM.SettingsChangeStatusBarFont )
-	movingTop = movingTop - mediaHeight - verticalSpacing
+]]	movingTop = movingTop - mediaHeight - verticalSpacing
 	AJM.settingsControl.appearanceProcBarMediaFontSizeSlider = JambaHelperSettings:CreateSlider( 
 		AJM.settingsControl, 
 		headingWidth, 
@@ -682,7 +684,7 @@ local function UpdateProcInformation()
 	AJM.currentProcColourR = tonumber( procInformation.colourRed )
 	AJM.currentProcColourG = tonumber( procInformation.colourGreen )
 	AJM.currentProcColourB = tonumber( procInformation.colourBlue )
-	AJM.settingsControl.procSound:SetValue( procInformation.sound )
+--	AJM.settingsControl.procSound:SetValue( procInformation.sound )
 	AJM.currentSound = procInformation.sound
 end
 
@@ -705,7 +707,7 @@ function AJM:EditBoxTagChanged( event, text )
 end
 
 function AJM:ProcSoundChanged( event, value )
-	AJM.settingsControl.procSound:SetValue( value )
+--	AJM.settingsControl.procSound:SetValue( value )
 	AJM.currentSound = value
 end
 

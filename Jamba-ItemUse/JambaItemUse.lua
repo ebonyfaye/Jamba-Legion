@@ -671,6 +671,8 @@ local function SettingsCreateOptions( top )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetSliderValues( 0, 1, 0.01 )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetCallback( "OnValueChanged", AJM.SettingsChangeTransparency )
 	movingTop = movingTop - sliderHeight - verticalSpacing
+-- TODO ADD BACK IN BETA
+--[[
 	AJM.settingsControl.displayOptionsItemUseMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControl, 
 		halfWidth, 
@@ -679,6 +681,7 @@ local function SettingsCreateOptions( top )
 		L["Border Style"]
 	)
 	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
+--]]
 	AJM.settingsControl.displayOptionsBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
@@ -689,6 +692,7 @@ local function SettingsCreateOptions( top )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBorderColourPickerChanged )
 	movingTop = movingTop - mediaHeight - verticalSpacing
+--[[
 	AJM.settingsControl.displayOptionsItemUseMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControl, 
 		halfWidth, 
@@ -697,7 +701,7 @@ local function SettingsCreateOptions( top )
 		L["Background"]
 	)
 	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
-	AJM.settingsControl.displayOptionsBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
+]]	AJM.settingsControl.displayOptionsBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
 		column2left + 15,
@@ -774,8 +778,8 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.displayOptionsCheckBoxItemBarsSynchronized:SetValue( AJM.db.itemBarsSynchronized )
 	AJM.settingsControl.displayOptionsItemUseScaleSlider:SetValue( AJM.db.itemUseScale )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetValue( AJM.db.frameAlpha )
-	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetValue( AJM.db.borderStyle )
-	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetValue( AJM.db.backgroundStyle )
+--	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetValue( AJM.db.borderStyle )
+--	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetValue( AJM.db.backgroundStyle )
 	AJM.settingsControl.dropdownMessageArea:SetValue( AJM.db.messageArea )
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetColor( AJM.db.frameBackgroundColourR, AJM.db.frameBackgroundColourG, AJM.db.frameBackgroundColourB, AJM.db.frameBackgroundColourA )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetColor( AJM.db.frameBorderColourR, AJM.db.frameBorderColourG, AJM.db.frameBorderColourB, AJM.db.frameBorderColourA )
@@ -791,8 +795,8 @@ function AJM:SettingsRefresh()
 		AJM.settingsControl.displayOptionsCheckBoxItemBarsSynchronized:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsItemUseScaleSlider:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetDisabled( not AJM.db.showItemUse )
-		AJM.settingsControl.displayOptionsItemUseMediaBorder:SetDisabled( not AJM.db.showItemUse )
-		AJM.settingsControl.displayOptionsItemUseMediaBackground:SetDisabled( not AJM.db.showItemUse )
+--		AJM.settingsControl.displayOptionsItemUseMediaBorder:SetDisabled( not AJM.db.showItemUse )
+--		AJM.settingsControl.displayOptionsItemUseMediaBackground:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.dropdownMessageArea:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsBackgroundColourPicker:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsBorderColourPicker:SetDisabled( not AJM.db.showItemUse )		

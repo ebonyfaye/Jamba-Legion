@@ -481,7 +481,8 @@ local function SettingsCreateAreaTypes( top )
 	AJM.settingsControl.areaOnScreenDropdown:SetCallback( "OnValueChanged", AJM.UpdateAreaOnScreenControls )
 	areaConfigurationTop = areaConfigurationTop - dropdownHeight
 	areaConfigurationTop = areaConfigurationTop - verticalSpacing - verticalSpacing		
-
+--TODO add back in!
+--[[
 	AJM.settingsControl.areaSoundDropdown = JambaHelperSettings:CreateMediaSound( 
 		AJM.settingsControl, 
 		headingWidth, 
@@ -490,7 +491,7 @@ local function SettingsCreateAreaTypes( top )
 		L["Sound To Play"]
 	)
 	AJM.settingsControl.areaSoundDropdown:SetCallback( "OnValueChanged", AJM.UpdateSoundControls )
-
+]]
 	areaConfigurationTop = areaConfigurationTop - dropdownHeight
 	areaConfigurationTop = areaConfigurationTop - verticalSpacing - verticalSpacing
 	AJM.settingsControl.areaListButtonUpdate = JambaHelperSettings:CreateButton(
@@ -510,8 +511,8 @@ local function SettingsCreateAreaTypes( top )
 	AJM.settingsControl.areaEditBoxPassword:SetText( "" )	
 	AJM.settingsControl.areaOnScreenDropdown:SetDisabled( true )
 	AJM.settingsControl.areaOnScreenDropdown:SetText( "" )
-	AJM.settingsControl.areaSoundDropdown:SetDisabled( true )
-	AJM.settingsControl.areaSoundDropdown:SetText( "" )	
+--	AJM.settingsControl.areaSoundDropdown:SetDisabled( true )
+--	AJM.settingsControl.areaSoundDropdown:SetText( "" )	
 	local bottomOfSection = areaConfigurationTop
 	return bottomOfSection	
 end
@@ -579,7 +580,7 @@ function AJM:UpdateAreaTypeControls( event, areaTypeIdentifier )
 	AJM.settingsControl.areaEditBoxName:SetDisabled( true )
 	AJM.settingsControl.areaEditBoxPassword:SetDisabled( true )
 	AJM.settingsControl.areaOnScreenDropdown:SetDisabled( true )
-	AJM.settingsControl.areaSoundDropdown:SetDisabled( true )
+--	AJM.settingsControl.areaSoundDropdown:SetDisabled( true )
 	-- Enable controls if they are used.
 	if areaType.usesTag == true then
 		AJM.settingsControl.areaEditBoxTag:SetDisabled( false )
@@ -616,7 +617,7 @@ function AJM:UpdateAreaTypeControls( event, areaTypeIdentifier )
 		end
 	end
 	if areaType.usesSound == true then
-		AJM.settingsControl.areaSoundDropdown:SetDisabled( false )
+--		AJM.settingsControl.areaSoundDropdown:SetDisabled( false )
 	end
 end
 
@@ -652,7 +653,7 @@ local function UpdateAreaTypeInformation()
 		AJM:UpdateAreaOnScreenControls( "OnValueChanged", areaInformation.areaOnScreenName )
 	end
 	if areaType.usesSound == true then
-		AJM.settingsControl.areaSoundDropdown:SetValue( areaInformation.soundToPlay )
+--		AJM.settingsControl.areaSoundDropdown:SetValue( areaInformation.soundToPlay )
 	end
 end
 
@@ -711,7 +712,7 @@ function AJM:UpdateAreaOnScreenControls( event, areaOnScreenName )
 end
 
 function AJM:UpdateSoundControls( event, value )
-	AJM.settingsControl.areaSoundDropdown:SetValue( value )
+--	AJM.settingsControl.areaSoundDropdown:SetValue( value )
 	AJM.currentlySelectedAreaSoundToPlay = value
 end
 
