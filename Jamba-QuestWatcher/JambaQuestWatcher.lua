@@ -1519,6 +1519,7 @@ function AJM:GetCharacterInWatchList( questID, objectiveIndex, characterName, am
 end
 
 function AJM:GetObjectiveHeaderInWatchList( questID, questName, objectiveIndex, objectiveText, totalAmountCompleted, questHeaderPosition )
+	--AJM:Print("testposition", questName, "oT", objectiveText, questHeaderPosition)
 	if strtrim( objectiveText ) == "" then
 		objectiveText = questName
 	end
@@ -1539,7 +1540,7 @@ function AJM:GetObjectiveHeaderInWatchList( questID, questName, objectiveIndex, 
 	-- Hide the team list by default.
 	questWatchInfo.childrenAreHidden = true
 	AJM:InsertQuestWatchInfoToListAfterPosition( questWatchInfo, questHeaderPosition )
-	return questHeaderPosition + 1
+	return questHeaderPosition + 1	
 end
 
 function AJM:GetQuestHeaderInWatchList( questID, questName, characterName )
@@ -1555,7 +1556,7 @@ function AJM:GetQuestHeaderInWatchList( questID, questName, characterName )
 			return position
 		end
 	end
-	local iconTexture = ("Interface\\ICONS\\INV_Misc_Map08")
+	local iconTexture = ("Interface\\ICONS\\INV_Misc_Map07")
 	local icon = strconcat(" |T"..iconTexture..":18|t")
 	local questWatchInfo = AJM:CreateQuestWatchInfo( questID, "QUEST_HEADER", -1, "", questName, icon ) --L["<Map>"] )
 	AJM:UpdateTeamQuestCountAddCharacter( questWatchInfo, characterName )

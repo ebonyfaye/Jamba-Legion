@@ -580,6 +580,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["followBarClick"] = followBarClick	
 	local followBarText = followBar:CreateFontString( followName.."Text", "OVERLAY", "GameFontNormal" )
 	followBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	followBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	followBarText:SetAllPoints()
 	characterStatusBar["followBarText"] = followBarText
 	AJM:SettingsUpdateFollowText( characterName, UnitLevel( Ambiguate( characterName, "none" ) ), nil, nil )
@@ -605,13 +606,13 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceBarClick"] = experienceBarClick
 	local experienceBarText = experienceBar:CreateFontString( experienceName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	experienceBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	experienceBarText:SetAllPoints()
 	experienceBarText.playerExperience = 100
 	experienceBarText.playerMaxExperience = 100
 	experienceBarText.exhaustionStateID = 1
 	characterStatusBar["experienceBarText"] = experienceBarText
 	AJM:UpdateExperienceStatus( characterName, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil )	
-	
 	-- Set the artifactXP bar.
 	local experienceArtName = AJM.globalFramePrefix.."ExperienceArtBar"
 	local experienceArtBar = CreateFrame( "StatusBar", experienceArtName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
@@ -630,6 +631,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceArtBarClick"] = experienceArtBarClick
 	local experienceArtBarText = experienceArtBar:CreateFontString( experienceArtName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceArtBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	experienceArtBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	experienceArtBarText:SetAllPoints()
 	experienceArtBarText.artifactName = "N/A"
 	experienceArtBarText.artifactXP = 0
@@ -655,6 +657,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceHonorBarClick"] = experienceHonorBarClick
 	local experienceHonorBarText = experienceHonorBar:CreateFontString( experienceHonorName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceHonorBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	experienceHonorBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	experienceHonorBarText:SetAllPoints()
 	experienceHonorBarText.honorLevel = 0
 	experienceHonorBarText.honorXP = 0
@@ -681,6 +684,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["reputationBarClick"] = reputationBarClick
 	local reputationBarText = reputationBar:CreateFontString( reputationName.."Text", "OVERLAY", "GameFontNormal" )
 	reputationBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	reputationBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	reputationBarText:SetAllPoints()
 	reputationBarText.reputationName = "Faction"
 	reputationBarText.reputationStandingID = 4
@@ -710,6 +714,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["healthBarClick"] = healthBarClick
 	local healthBarText = healthBar:CreateFontString( healthName.."Text", "OVERLAY", "GameFontNormal" )
 	healthBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	healthBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	healthBarText:SetAllPoints()
 	healthBarText.playerHealth = 100
 	healthBarText.playerMaxHealth = 100
@@ -734,6 +739,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["powerBarClick"] = powerBarClick
 	local powerBarText = powerBar:CreateFontString( powerName.."Text", "OVERLAY", "GameFontNormal" )
 	powerBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
+	powerBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	powerBarText:SetAllPoints()
 	powerBarText.playerPower = 100
 	powerBarText.playerMaxPower = 100
@@ -759,6 +765,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["comboBarClick"] = comboBarClick
 	local comboBarText = comboBar:CreateFontString( comboName.."Text", "OVERLAY", "GameFontNormal" )
 	comboBarText:SetTextColor( 1.00, 1.00, 0.0, 1.00 )
+	comboBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
 	comboBarText:SetAllPoints()
 	comboBarText.playerCombo = 0
 	comboBarText.playerMaxCombo = 5
@@ -995,26 +1002,26 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 			--AJM:Print("Show Reputation")
 			showBarCount = showBarCount + 1
 			if AJM.db.showXpStatus == true and AJM.db.showArtifactStatus == false and AJM.db.showHonorStatus == false then
-				AJM:Print("Show Reputation 1")
+				--AJM:Print("Show Reputation 1")
 				showRepBeforeBar = experienceBar
 				setRepPoint = "BOTTOMLEFT"
 				setRepLeft = 0
 				setRepTop = -1				
 			elseif AJM.db.showArtifactStatus == true and AJM.db.showHonorStatus == false then
-				AJM:Print("Show Reputation 2")
+				--AJM:Print("Show Reputation 2")
 				showRepBeforeBar = experienceArtBar
 				setRepPoint = "BOTTOMLEFT"
 				setRepLeft = 0
 				setRepTop = -1				
 			elseif AJM.db.showHonorStatus == true then
-				AJM:Print("Show Reputation 3")
+				--AJM:Print("Show Reputation 3")
 				showRepBeforeBar = experienceHonorBar
 				setRepPoint = "BOTTOMLEFT"
 				setRepLeft = 0
 				setRepTop = -1				
 			
 			else
-				AJM:Print("Show Reputation 4")
+				--AJM:Print("Show Reputation 4")
 				showRepBeforeBar = parentFrame
 				setRepPoint = "TOPLEFT"
 				setRepLeft = positionLeft
@@ -2773,20 +2780,21 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 --]]	
 	local text = ""
 	if AJM.db.experienceStatusShowValues == true then
-		text = text..tostring( playerExperience )..L[" / "]..tostring( playerMaxExperience )..L[" "]
+		text = text..tostring( AbbreviateLargeNumbers(playerExperience) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxExperience) )..L[" "]
 	end
 	if AJM.db.experienceStatusShowPercentage == true then
 		if AJM.db.experienceStatusShowValues == true then
-			text = text..L["("]..tostring( floor( (playerExperience/playerMaxExperience)*100) )..L["%"]..L[")"]
+			text = tostring( AbbreviateLargeNumbers(playerExperience) )..L[" "]..L["("]..tostring( floor( (playerExperience/playerMaxExperience)*100) )..L["%"]..L[")"]
 		else
 			text = tostring( floor( (playerExperience/playerMaxExperience)*100) )..L["%"]
 		end
 	end
-	experienceBarText:SetText( text )		
+	experienceBarText:SetText( text )
 	if exhaustionStateID == 1 then
 		experienceBar:SetStatusBarColor( 0.0, 0.39, 0.88, 1.0 )
 		experienceBar.backgroundTexture:SetColorTexture( 0.0, 0.39, 0.88, 0.15 )
 	else
+		AJM:Print("xpNo")
 		experienceBar:SetStatusBarColor( 0.58, 0.0, 0.55, 1.0 )
 		experienceBar.backgroundTexture:SetColorTexture( 0.58, 0.0, 0.55, 0.15 )
 	end	
@@ -2795,11 +2803,11 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 	local artText = ""
 	--AJM:Print("TextTest", artifactXP, artifactForNextPoint)
 	if AJM.db.experienceStatusShowValues == true then
-		artText = artText..tostring( artifactXP )..L[" / "]..tostring( artifactForNextPoint )..L[" "]
+		artText = artText..tostring( AbbreviateLargeNumbers(artifactXP ) )..L[" / "]..tostring( AbbreviateLargeNumbers(artifactForNextPoint) )..L[" "]
 	end
 	if AJM.db.experienceStatusShowPercentage == true then
 		if AJM.db.experienceStatusShowValues == true then
-			artText = artText..L["("]..tostring( floor( (artifactXP/artifactForNextPoint)*100) )..L["%"]..L[")"]
+			artText = tostring( AbbreviateLargeNumbers(artifactXP ) )..L[" "]..L["("]..tostring( floor( (artifactXP/artifactForNextPoint)*100) )..L["%"]..L[")"]
 		else
 			artText = tostring( floor( (artifactXP/artifactForNextPoint)*100) )..L["%"]
 		end
@@ -2811,22 +2819,22 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 	--HonorText	
 	local honorText = ""
 	if AJM.db.experienceStatusShowValues == true then
-		honorText = honorText..tostring( honorXP )..L[" / "]..tostring( honorMax )..L[" "]
+		honorText = honorText..tostring( AbbreviateLargeNumbers(honorXP) )..L[" / "]..tostring( AbbreviateLargeNumbers(honorMax) )..L[" "]
 	end
 	if AJM.db.experienceStatusShowPercentage == true then
 		if AJM.db.experienceStatusShowValues == true then
-			honorText = honorText..L["("]..tostring( floor( (honorXP/honorMax)*100) )..L["%"]..L[")"]
+			honorText = tostring( AbbreviateLargeNumbers(honorXP) )..L[" "]..L["("]..tostring( floor( (honorXP/honorMax)*100) )..L["%"]..L[")"]
 		else
 			honorText = tostring( floor( (honorXP/honorMax)*100) )..L["%"]
 		end
 	end
 	experienceHonorBarText:SetText( honorText )		
 	if honorExhaustionStateID == 1 then
-		experienceBar:SetStatusBarColor( 0.0, 0.39, 0.88, 1.0 )
-		experienceBar.backgroundTexture:SetColorTexture( 0.0, 0.39, 0.88, 0.15 )
+		experienceHonorBar:SetStatusBarColor( 0.0, 0.39, 0.88, 1.0 )
+		experienceHonorBar.backgroundTexture:SetColorTexture( 0.0, 0.39, 0.88, 0.15 )
 	else
-		experienceBar:SetStatusBarColor( 0.58, 0.0, 0.55, 1.0 )
-		experienceBar.backgroundTexture:SetColorTexture( 0.58, 0.0, 0.55, 0.15 )
+		experienceHonorBar:SetStatusBarColor( 0.58, 0.0, 0.55, 1.0 )
+		experienceHonorBar.backgroundTexture:SetColorTexture( 0.58, 0.0, 0.55, 0.15 )
 	end		
 end	
 
@@ -2921,12 +2929,12 @@ function AJM:UpdateReputationStatus( characterName, reputationName, reputationSt
 --]]	
 	local text = ""
 	if AJM.db.experienceStatusShowValues == true then
-		text = text..tostring( reputationBarValue-reputationBarMin )..L[" / "]..tostring( reputationBarMax-reputationBarMin )..L[" "]
+		text = text..tostring( AbbreviateLargeNumbers(reputationBarValue-reputationBarMin) )..L[" / "]..tostring( AbbreviateLargeNumbers(reputationBarMax-reputationBarMin) )..L[" "]
 	end
 	if AJM.db.experienceStatusShowPercentage == true then
 		local textPercentage = tostring( floor( (reputationBarValue-reputationBarMin)/(reputationBarMax-reputationBarMin)*100 ) )..L["%"]
 		if AJM.db.experienceStatusShowValues == true then
-			text = text..L["("]..textPercentage..L[")"]
+			text = tostring( AbbreviateLargeNumbers(reputationBarValue-reputationBarMin) )..L[" "]..L["("]..textPercentage..L[")"]
 		else
 			text = text..textPercentage
 		end
@@ -3013,11 +3021,11 @@ function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, i
 		text = text..L["DEAD"]	
 	else
 		if AJM.db.healthStatusShowValues == true then
-			text = text..tostring( playerHealth )..L[" / "]..tostring( playerMaxHealth )..L[" "]
+			text = text..tostring( AbbreviateLargeNumbers(playerHealth) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxHealth) )..L[" "]
 		end
 		if AJM.db.healthStatusShowPercentage == true then
 			if AJM.db.healthStatusShowValues == true then
-				text = text..L["("]..tostring( floor( (playerHealth/playerMaxHealth)*100) )..L["%"]..L[")"]
+				text = tostring( AbbreviateLargeNumbers(playerHealth) )..L[" "]..L["("]..tostring( floor( (playerHealth/playerMaxHealth)*100) )..L["%"]..L[")"]
 			else
 				text = tostring( floor( (playerHealth/playerMaxHealth)*100) )..L["%"]
 			end
@@ -3108,11 +3116,11 @@ function AJM:UpdatePowerStatus( characterName, playerPower, playerMaxPower)
 	powerBar:SetValue( tonumber( playerPower ) )
 	local text = ""
 	if AJM.db.powerStatusShowValues == true then
-		text = text..tostring( playerPower )..L[" / "]..tostring( playerMaxPower )..L[" "]
+		text = text..tostring( AbbreviateLargeNumbers(playerPower) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxPower) )..L[" "]
 	end
 	if AJM.db.powerStatusShowPercentage == true then
 		if AJM.db.powerStatusShowValues == true then
-			text = text..L["("]..tostring( floor( (playerPower/playerMaxPower)*100) )..L["%"]..L[")"]
+			text = tostring( AbbreviateLargeNumbers(playerPower) )..L[" "]..L["("]..tostring( floor( (playerPower/playerMaxPower)*100) )..L["%"]..L[")"]
 		else
 			text = tostring( floor( (playerPower/playerMaxPower)*100) )..L["%"]
 		end
@@ -3274,12 +3282,12 @@ function AJM:UpdateComboStatus( characterName, playerCombo, playerMaxCombo )
 	local text = ""
 	
 	if AJM.db.comboStatusShowValues == true then
-		text = text..tostring( playerCombo )..L[" / "]..tostring( playerMaxCombo )..L[" "]
+		text = text..tostring( AbbreviateLargeNumbers(playerCombo) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxCombo) )..L[" "]
 	end
 	
 	if AJM.db.ComboStatusShowPercentage == true then
 		if AJM.db.comboStatusShowValues == true then
-			text = text..L["("]..tostring( floor( (playerCombo/playerMaxCombo)*100) )..L["%"]..L[")"]
+			text = text..tostring( AbbreviateLargeNumbers(playerCombo) )..L[" "]..L["("]..tostring( floor( (playerCombo/playerMaxCombo)*100) )..L["%"]..L[")"]
 		else
 			text = tostring( floor( (playerCombo/playerMaxCombo)*100) )..L["%"]
 		end
@@ -3292,22 +3300,25 @@ end
 function AJM:SetStatusBarColourForCombo( comboBar )
 	local Class = select(2, UnitClass("player"))
 	if Class == "WARLOCK" then
-				-- Purple
-				comboBar:SetStatusBarColor( 0.58, 0.51, 0.79, 1 )
-				comboBar.backgroundTexture:SetColorTexture( 0.58, 0.51, 0.79, 0.25) 	
+		-- Purple
+		comboBar:SetStatusBarColor( 0.58, 0.51, 0.79, 1 )
+		comboBar.backgroundTexture:SetColorTexture( 0.58, 0.51, 0.79, 0.25) 	
 	elseif  Class == "PALADIN" then
-				--yellow(gold)
-			comboBar:SetStatusBarColor( 0.96, 0.55, 0.73, 1 )
-			comboBar.backgroundTexture:SetColorTexture( 0.96, 0.55, 0.73, 0.25) 	
+		--yellow(gold)
+		comboBar:SetStatusBarColor( 0.96, 0.55, 0.73, 1 )
+		comboBar.backgroundTexture:SetColorTexture( 0.96, 0.55, 0.73, 0.25) 	
 	elseif Class =="DEATHKNIGHT" then
-			comboBar:SetStatusBarColor( 0.60, 0.80, 1.0, 1 )
-			comboBar.backgroundTexture:SetColorTexture( 0.60, 0.80, 1.0, 0.25)
+		--Sky Blue?
+		comboBar:SetStatusBarColor( 0.60, 0.80, 1.0, 1 )
+		comboBar.backgroundTexture:SetColorTexture( 0.60, 0.80, 1.0, 0.25)
 	elseif Class =="MAGE" then
-			comboBar:SetStatusBarColor( 0.07, 0.30, 0.92, 1 )
-			comboBar.backgroundTexture:SetColorTexture( 0.07, 0.30, 0.92, 0.25)
+		--Very Blue ice?
+		comboBar:SetStatusBarColor( 0.07, 0.30, 0.92, 1 )
+		comboBar.backgroundTexture:SetColorTexture( 0.07, 0.30, 0.92, 0.25)
 	elseif Class =="MONK" then
-			comboBar:SetStatusBarColor( 0.44, 0.79, 0.67, 1 )
-			comboBar.backgroundTexture:SetColorTexture( 0.44, 0.79, 0.67, 0.25)
+		--Greenish
+		comboBar:SetStatusBarColor( 0.44, 0.79, 0.67, 1 )
+		comboBar.backgroundTexture:SetColorTexture( 0.44, 0.79, 0.67, 0.25)
 	else
 		return
 	end	
