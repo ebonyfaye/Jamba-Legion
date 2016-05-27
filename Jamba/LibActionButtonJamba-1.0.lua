@@ -1181,7 +1181,8 @@ function UpdateCooldown(self)
 			self.cooldown:SetHideCountdownNumbers(true)
 			self.cooldown.currentCooldownType = COOLDOWN_TYPE_LOSS_OF_CONTROL
 		end
-		CooldownFrame_SetTimer(self.cooldown, locStart, locDuration, 1, nil, nil, true)
+		--CooldownFrame_SetTimer(self.cooldown, locStart, locDuration, 1, nil, nil, true)
+		CooldownFrame_Set(self.cooldown, locStart, locDuration, 1, nil, nil, true)
 	else
 		if self.cooldown.currentCooldownType ~= COOLDOWN_TYPE_NORMAL then
 			self.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")
@@ -1192,7 +1193,8 @@ function UpdateCooldown(self)
 		if locStart > 0 then
 			self.cooldown:SetScript("OnCooldownDone", OnCooldownDone)
 		end
-		CooldownFrame_SetTimer(self.cooldown, start, duration, enable, charges, maxCharges)
+		--CooldownFrame_SetTimer(self.cooldown, start, duration, enable, charges, maxCharges)
+		CooldownFrame_Set(self.cooldown, start, duration, enable, charges, maxCharges)
 	end
 end
 

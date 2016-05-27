@@ -2794,7 +2794,6 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 		experienceBar:SetStatusBarColor( 0.0, 0.39, 0.88, 1.0 )
 		experienceBar.backgroundTexture:SetColorTexture( 0.0, 0.39, 0.88, 0.15 )
 	else
-		AJM:Print("xpNo")
 		experienceBar:SetStatusBarColor( 0.58, 0.0, 0.55, 1.0 )
 		experienceBar.backgroundTexture:SetColorTexture( 0.58, 0.0, 0.55, 0.15 )
 	end	
