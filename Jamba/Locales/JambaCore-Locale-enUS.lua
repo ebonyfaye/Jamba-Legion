@@ -66,8 +66,12 @@ L["Release Notes / News"] = true
 L["Close and Do Not Show Again"] = true
 L["Close"] = true
 L["Commands"] = true
+L["Module Not Loaded:"] = true
 -- test stuff
 L["**Untick this to use the WIP Set Offline team List Set offline Button"] =true
 L["Use Team List Offline Button"] = true
 L["Auto Set Team Members On and Off Line"] = true
 L[""] = true
+
+--Change Log Infomation
+

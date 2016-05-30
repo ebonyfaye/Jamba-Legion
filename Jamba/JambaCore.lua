@@ -38,8 +38,12 @@ local AceGUI = LibStub("AceGUI-3.0")
 
 -- Create frame for Jamba Settings.
 JambaPrivate.SettingsFrame = {}
-JambaPrivate.SettingsFrame.Widget = AceGUI:Create( "JambaWindow" )
-JambaPrivate.SettingsFrame.Widget:SetTitle( L["Jamba"].." "..GetAddOnMetadata("Jamba", "version").." - "..L["A Awesome Multi-Boxer Assistant"] )
+--JambaPrivate.SettingsFrame.Widget = AceGUI:Create( "JambaWindow" )
+JambaPrivate.SettingsFrame.Widget = AceGUI:Create( "Frame" )
+JambaPrivate.SettingsFrame.Widget:SetTitle( L["Jamba"].." "..GetAddOnMetadata("Jamba", "version") )
+JambaPrivate.SettingsFrame.Widget:SetStatusText(L["A Awesome Multi-Boxer Assistant"])
+JambaPrivate.SettingsFrame.Widget:SetWidth(770)
+JambaPrivate.SettingsFrame.Widget:SetHeight(650)
 JambaPrivate.SettingsFrame.Widget:SetLayout( "Fill" )
 JambaPrivate.SettingsFrame.WidgetTree = AceGUI:Create( "TreeGroup" )
 JambaPrivate.SettingsFrame.TreeGroupStatus = { treesizable = false, groups = {} }
@@ -312,13 +316,18 @@ end
 
 -- Settings are received, pass them to the relevant module.
 local function OnSettingsReceived( sender, moduleName, settings )
-	
 	sender = JambaUtilities:AddRealmToNameIfMissing( sender )
 	--AJM:Print("onsettings", sender, moduleName )
 	-- Get the address of the module.
 	local moduleAddress = AJM.registeredModulesByName[moduleName]	
-	-- Pass the module its settings.
-	moduleAddress:JambaOnSettingsReceived( sender, settings )
+	-- can not receive a message from a Module not Loaded so ignore it. Better tell them its not loaded --ebony.
+	if moduleAddress == nil then 
+		AJM:Print(L["Module Not Loaded:"], moduleName)
+		return
+	else
+	-- loaded? Pass the module its settings.
+		moduleAddress:JambaOnSettingsReceived( sender, settings )
+	end	
 end
 
 function AJM:SendSettingsAllModules()

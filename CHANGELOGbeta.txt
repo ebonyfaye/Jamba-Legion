@@ -9,23 +9,22 @@ Opt: To Turn of ToolTips Done
 Remove Currency From ToolTips. Done
 Jamba-taxi Frames updated for 7.0.3 done 15/5/2016
 	New Exp Bars
-	Added Display-Team Artfact Bar
-	Added Display-Team Honor Bar
-	Added Display-Team Rep Bar
-	Added Display-Team DeathKight Runes!
+		Added Display-Team Artfact Bar
+		Added Display-Team Honor Bar
+		Added Display-Team Rep Bar
+		Added Display-Team DeathKight Runes!
 
-Removed Rep and all config and its nowpart of the new xp bars
+Removed Rep and all config and its nowpart of the new xp bars Addone done 20/5/2016
 
-Fixed Jmaba-Taxi
+Fixed Jmaba-Taxi 20/5/2016
 
-
--- Jamba-Curr Add Legion defaults Currencys http://legion.wowhead.com/currencies/legion
+-- Jamba-Curr Add Legion defaults Currencys http://legion.wowhead.com/currencies/legion << still needs doing this,
 		- 1220 -- order-resources Replace Garrson
 		- 1273 -- seal-of-broken-fate Replace Wod Seals
 		- Remove Honor
 		- Remove Conquest
 	
--- DM have a random % quest that need adding to jamba-questwatcher
+-- DM have a random % quest that need adding to jamba-questwatcher < need to look this up *sigh*
 
 -- Add back in AceGUI-3.0-SharedMediaWidgets after update:
 		http://mods.curse.com/addons/wow/ace-gui-3-0-shared-media-widgets
@@ -37,13 +36,21 @@ Fixed Jmaba-Taxi
 		Jamba-QuestWatcher
 		Jamba-Target
 		
-		
+Fixed temp fix, CooldownFrame_SetTimer(self.cooldown, start, duration, enable) to CooldownFrame_Set(self.cooldown, start, duration, enable) in jamba-libactionButton1.0		
+	--Might be better to update LibAction Button in 7.0.x or when a update comes out?
+
+Add Font and text size to GUI. Jamba-display Jamba-QuestWatcher Jamba-Currency. <TODO.
+	--A dropdown box to show a list of currencys?
+
+Only Shows character name if the character is not from the same server < jamba-questwatcher. <TODO
+
+Have a look into Jmaba-quest with Taint > http://www.wowinterface.com/downloads/info22630-NoTaintUIDropDownMenu.html
 	
 ---------------------------
 ChangeLogs:
 ---------------------------
 Jamba Version: 5.0
-WoW Game Version: 6.1.2
+WoW Game Version: 7.0.3
 Release Date: TBA
 Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
 
@@ -57,6 +64,8 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	- Some Back End Work for Legion/7.0.x
 	- New tooltips on the options config to help make it easter to understand what some buttons to do and to clean up some of the long line texts.
 	- Changed Help to Commands - as it shows more of the command Line stuff.
+	- Now Useing the Defualt Ace3 Frame for config. Resize and close button.
+	- If a Module is not loaded on all characters then it no longer Lua-Error and tells the client what Module will need to be loaded.
 
 *Jamba-Team
 	- Added two new ways to add team members to the team with command line and GUI.
@@ -67,10 +76,28 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 * Jamba-Quest-Watcher 
 	-Renamed from Jamba Quest Watcher to Jamba Objective Tracker(To fit inline with blizzards own naming)
 		- Now Shows Scenario Objective on the watcher.
+		- Shows Bouns Scenario Objective.
 		- Fixed with Broken Shore QuestLines a % bar needed codeing in.
 		- Only Show stage if there is more the one stage (so does not show in dungons.)
-		- Only Shows character name if the character is not from the same server.
-		- Shows Bouns Scenario Objective
+		- Only Shows character name if the character is not from the same server. < TODO
+
+-- This needs a lot of work still EBONY TODO: taint on dropdown box.
+
+* Jamba-Quest (A big thanks to schilm from dual-boxing.com to the new changes. little edited by me )
+	- Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and untrack and to abandon quests.
+	-New Bar Now part of the QuestMap Frame. with new buttons(TODO: Beta - Fix/change icons.)
+		-Abandon All
+			-Works just like it used to. It loops through all of your toons and abandons all the quests on each toon. 
+			-NOW ignores quests that cannot be abandoned, such as the Account Wide quests Luxlunae mentioned.
+		-Share All
+			-Used to just loop through the current toons quests and just shared those, NOW loops through all toons and attempts to share all quests from all toons.
+		-Track All
+			-Back from the abyss!!!
+			-Used to just loop through the current toons quests and just tracked those, NOW loops through all toons and attempts to track all quests from all toons.
+		-Untrack All
+			-Back from the abyss!!!
+			-Used to just loop through the current toons quests and just untracked those, NOW loops through all toons and attempts to untracks all quests from all toons.	
+		
 		
 *Jamba-Display-Team
 	- Values are now Abbreviated to smaller Numbers.
@@ -83,6 +110,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 		- Bag Space of the minion (this will phase out the old barspace bar to make room for artifact Weapon-XP and other Legion Stuff)
 		- Gold of the minion.
 		- Mail if the minion has mail and who it is from (Same as minimap)
+	- Tooltip should nolonger show in combat.	
 	- Removed Display BagSpace Bar
 	- Renamed "Combo PointBar" to "Alternate PowerBar"
 		- Added Support for Other classess Alternate Power
@@ -94,7 +122,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	
 	- Removed Reputation bar.
 	- Changes to the XP bar.
-		- Your can show up for four Xp Bars For the 4 xp taypes each bar will take the same space and makes its bar a little smaller.
+		- Your can show up for four Xp Bars For the 4 xp tpyes each bar will take the same space and makes its bar a little smaller.
 			- Xp Players XP.
 			- Artfact XP, Show the players wepon Artifact XP.
 			- Show Honor XP, Show a bar for the new honor xp bar in game.
@@ -111,13 +139,13 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 		- Now shows Currency Icon Then The Three Letters of text.
 		- Now shows the Currency Gold Icons on when showing gold/Sliver/Copper
 		- No Longer Shows Currency for Offline minions.
-		- Should Now Order the characters That are Offline/Online curecty.
+		- Should Now Order the characters That are Offline/Online curtecty.
 		
 * Jamba-Taxi
 	- Fixed a Bug with The new flight maps in borken island (Legion Zones)		
 
 ---------------------------
-Jamba Version: 5.0
+Jamba Version: 4.3
 WoW Game Version: 6.1.2
 Release Date: TBA
 Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
@@ -176,9 +204,6 @@ Change log:
 		@target will add your current target to the team list
 		@mouseOver Will add your current MouseOver to the team list.
 	- cleaned up some loot code. and some offline code.
-	
-* Jamba-Macro
-	- Tag Sould nolonger set the realm name if playing from the same realm. thanks to Sonof from dual-boxing for the bug report.	
 	
 * Jamba-Quest-Watcher
 	- Now Shows Scenario quests on the watcher.
