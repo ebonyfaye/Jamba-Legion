@@ -42,7 +42,7 @@ L["Follow Status Bar"] = true
 L["Experience Bars"] = true
 L["Health Bar"] = true
 L["Power Bar"] = true
-L["Alternate PowerBar"] = true
+L["Class Power Bar"] = true
 L["Jamba Team"] = true
 L["Hide Team Display"] = true
 L["Hide the display team panel."] = true
@@ -76,27 +76,25 @@ L["Gold:"] = true
 L["Has New Mail From:"] = true
 L["Currency:"] = true
 L["Unknown Sender"] = true
-
+L["Show ToolTip"] = true
 
 --Help System
 
-L["Show ToolTip"] = true
 L["Show Team List"] = true
 L["Only Show on Master Character"] = true
 L["Only On Master"] = true
 L["Hide Team List In Combat"] = true
 L["Olny Show The Team List out of Combat"] = true
 L["Enable Clique Support"] = true
-L["Enable Clique Support/n**reload UI to take effect**"] = true
+L["Enable Clique Support\n\n**reload UI to take effect**"] = true
 L["Show Title"] = true
 L["Show the Character Portrait"] = true
-L["Show the Follow Bar and Character Name/nHover over for tooltips"] = true
 L["Olny shows Equipped item Level"] = true
 L["Show the Team Experience(xp) bar"] = true
 L["Show the Team Reputation Bar"] = true
 L["Show the Teams Health Bars"] = true
-L["Show the Team Power Bar/nEG:Mana"] = true
-L["Show the Teams Alternate Power Bar/nComboPoints/nSoulShards/nHolyPower"] = true
+L["Show the Team Power Bar\n\nMana, Rage, Etc..."] = true
+L["Show the Teams Class Power Bar\n\nComboPoints\nSoulShards\nHoly Power\nRunes\nArcane Charges\nCHI"] = true
 L["Show Values"]  = true
 L["Show Percentage"]  = true
 L["Faction Name"] = true 
@@ -104,9 +102,10 @@ L["Show Jamba Team or Unit Frame List"] = true
 L["Show Character Name"] = true
 
 L["ShowHonorXP"] = true
-L["Show ToolTip Information\nReload UI to Take Effect"] = true
-L["Show the Follow Bar and Character Name/nHover Over for Character Infomation"] = true
-L["Show the Team Experience bar\nAnd Artifact XP Bar\nAnd Honor XP Bar\nAnd Reputation Bar\n \nHover Over Bar With Mouse and Shift to Show More Infomation."] = true
+L["Show ToolTip Information"] = true
+L["Show the Follow Bar and Character Name\n\nHover Over for Character Infomation"] = true
+L["Show the Team Experience bar\n\nAnd Artifact XP Bar\nAnd Honor XP Bar\nAnd Reputation Bar\n \nHover Over Bar With Mouse and Shift to Show More Infomation."] = true
+
 L["ShowXP"] = true
 L["Show the Team Experience bar"] = true
 L["ShowArtifactXP"] = true

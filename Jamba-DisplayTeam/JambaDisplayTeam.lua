@@ -1237,7 +1237,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Enable Clique Support"],
 		AJM.SettingsToggleEnableClique,
-		L["Enable Clique Support/n**reload UI to take effect**"]
+		L["Enable Clique Support\n\n**reload UI to take effect**"]
 	)	
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
 	-- Create appearance & layout.
@@ -1378,7 +1378,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowFollowStatus,
-		L["Show the Follow Bar and Character Name/nHover Over for Character Infomation"]
+		L["Show the Follow Bar and Character Name\n\nHover Over for Character Infomation"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowFollowStatusName = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1396,7 +1396,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show ToolTip"],
 		AJM.SettingsToggleShowToolTipInfo,
-		L["Show ToolTip Information\nReload UI to Take Effect"]
+		L["Show ToolTip Information"]
 	)
 --[[
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
@@ -1440,7 +1440,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowExperienceStatus,
-		L["Show the Team Experience bar\nAnd Artifact XP Bar\nAnd Honor XP Bar\nAnd Reputation Bar\n \nHover Over Bar With Mouse and Shift to Show More Infomation."]
+		L["Show the Team Experience bar\n\nAnd Artifact XP Bar\nAnd Honor XP Bar\nAnd Reputation Bar\n \nHover Over Bar With Mouse and Shift to Show More Infomation."]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowExperienceStatusValues = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1578,7 +1578,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowPowerStatus,
-		L["Show the Team Power Bar/nEG:Mana"]
+		L["Show the Team Power Bar\n\nMana, Rage, Etc..."]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowPowerStatusValues = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1619,7 +1619,7 @@ local function SettingsCreateDisplayOptions( top )
 	AJM.settingsControl.displayOptionsPowerStatusHeightSlider:SetCallback( "OnValueChanged", AJM.SettingsChangePowerStatusHeight )
 	movingTop = movingTop - sliderHeight - sectionSpacing
 	-- Create Combo Point status.
-	JambaHelperSettings:CreateHeading( AJM.settingsControl, L["Alternate PowerBar"], movingTop, true )
+	JambaHelperSettings:CreateHeading( AJM.settingsControl, L["Class Power Bar"], movingTop, true )
 	movingTop = movingTop - headingHeight
 	AJM.settingsControl.displayOptionsCheckBoxShowComboStatus = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -1628,7 +1628,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Show"],
 		AJM.SettingsToggleShowComboStatus,
-		L["Show the Teams Alternate Power Bar/nComboPoints/nSoulShards/nHolyPower"]
+		L["Show the Teams Class Power Bar\n\nComboPoints\nSoulShards\nHoly Power\nRunes\nArcane Charges\nCHI"]
 	)	
 	AJM.settingsControl.displayOptionsCheckBoxShowComboStatusValues = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
@@ -2100,6 +2100,11 @@ end
 
 function AJM:SettingsChangeExperienceStatusHeight( event, value )
 	AJM.db.experienceStatusHeight = tonumber( value )
+	AJM:SettingsRefresh()
+end
+
+function AJM:SettingsToggleShowHealthStatus( event, checked )
+	AJM.db.showHealthStatus = checked
 	AJM:SettingsRefresh()
 end
 

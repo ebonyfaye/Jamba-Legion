@@ -42,7 +42,7 @@ JambaPrivate.SettingsFrame = {}
 JambaPrivate.SettingsFrame.Widget = AceGUI:Create( "Frame" )
 JambaPrivate.SettingsFrame.Widget:SetTitle( L["Jamba"].." "..GetAddOnMetadata("Jamba", "version") )
 JambaPrivate.SettingsFrame.Widget:SetStatusText(L["A Awesome Multi-Boxer Assistant"])
-JambaPrivate.SettingsFrame.Widget:SetWidth(770)
+JambaPrivate.SettingsFrame.Widget:SetWidth(800)
 JambaPrivate.SettingsFrame.Widget:SetHeight(650)
 JambaPrivate.SettingsFrame.Widget:SetLayout( "Fill" )
 JambaPrivate.SettingsFrame.WidgetTree = AceGUI:Create( "TreeGroup" )

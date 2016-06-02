@@ -500,12 +500,12 @@ end
 -------------------------------------------------------------------------------------------------------------
 
 function JambaHelperSettings:CreateMediaSound( settingsControl, width, left, top, text )
-	print("Test", settingsControl.areaSoundDropdown, width, left, top, text)
 	local media = AceGUI:Create( "LSM30_Sound" )
 	--media:ClearAllPoints()
 	media:SetLabel( text )
 	media:SetWidth( width )
-	media:SetPoint( "TOPLEFT", settingsControl.widgetSettings.content, "TOPLEFT", left, top )
+
+	media:SetPoint( "TOPLEFT", settingsControl.widgetSettings.content , "TOPLEFT", left, top )
 	media:SetList()
 	settingsControl.widgetSettings:AddChild( media )
 	return media
