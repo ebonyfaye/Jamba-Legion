@@ -6,7 +6,6 @@ mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-FTL" "D:\Dropbox\jamba\Jamba-Legion\Jamba-FTL"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-ItemUse" "D:\Dropbox\jamba\Jamba-Legion\Jamba-ItemUse"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Macro" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Macro"
-mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Proc" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Proc"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Purchase" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Purchase"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-Quest" "D:\Dropbox\jamba\Jamba-Legion\Jamba-Quest"
 mklink /d "C:\Program Files (x86)\World of Warcraft Beta\interface\addons\Jamba-QuestWatcher" "D:\Dropbox\jamba\Jamba-Legion\Jamba-QuestWatcher"
