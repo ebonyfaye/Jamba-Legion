@@ -381,8 +381,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherFrameWidthSlider:SetSliderValues( 250, 600, 5 )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherFrameWidthSlider:SetCallback( "OnValueChanged", AJM.SettingsChangeWatchFrameWidth )
 	movingTop = movingTop - sliderHeight - verticalSpacing	
---TODO ADD BACK IN BETA!
---[[	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder = JambaHelperSettings:CreateMediaBorder( 
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControlWatcher, 
 		headingWidth, 
 		column1Left, 
@@ -390,7 +389,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		L["Border Style"]
 	)
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
-]]	movingTop = movingTop - mediaHeight - verticalSpacing
+	movingTop = movingTop - mediaHeight - verticalSpacing
 	AJM.settingsControlWatcher.questWatchBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControlWatcher,
 		headingWidth,
@@ -401,7 +400,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 	AJM.settingsControlWatcher.questWatchBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControlWatcher.questWatchBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsQuestWatchBorderColourPickerChanged )
 	movingTop = movingTop - checkBoxHeight - verticalSpacing	
---[[	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground = JambaHelperSettings:CreateMediaBackground( 
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControlWatcher, 
 		headingWidth, 
 		column1Left, 
@@ -409,7 +408,7 @@ function AJM:SettingsCreateQuestWatcherControl( top )
 		L["Background"]
 	)
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
-]]	movingTop = movingTop - mediaHeight - verticalSpacing
+	movingTop = movingTop - mediaHeight - verticalSpacing
 	AJM.settingsControlWatcher.questWatchBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControlWatcher,
 		headingWidth,
@@ -679,8 +678,8 @@ end
 function AJM:SettingsRefresh()
 	-- Quest watcher options.
 	AJM.settingsControlWatcher.checkBoxEnableQuestWatcher:SetValue( AJM.db.enableQuestWatcher )
---	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder:SetValue( AJM.db.borderStyle )
---	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground:SetValue( AJM.db.backgroundStyle )
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder:SetValue( AJM.db.borderStyle )
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground:SetValue( AJM.db.backgroundStyle )
 	AJM.settingsControlWatcher.displayOptionsCheckBoxHideQuestWatcherInCombat:SetValue( AJM.db.hideQuestWatcherInCombat )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherTransparencySlider:SetValue( AJM.db.watcherFrameAlpha )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherScaleSlider:SetValue( AJM.db.watcherFrameScale )
@@ -698,8 +697,8 @@ function AJM:SettingsRefresh()
 	AJM.settingsControlWatcher.dropdownMessageArea:SetValue( AJM.db.messageArea )
 	AJM.settingsControlWatcher.checkBoxSendProgressChatMessages:SetValue( AJM.db.sendProgressChatMessages )
 	-- Quest watcher state.
---	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder:SetDisabled( not AJM.db.enableQuestWatcher )
---	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground:SetDisabled( not AJM.db.enableQuestWatcher )
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBorder:SetDisabled( not AJM.db.enableQuestWatcher )
+	AJM.settingsControlWatcher.displayOptionsQuestWatcherMediaBackground:SetDisabled( not AJM.db.enableQuestWatcher )
 	AJM.settingsControlWatcher.displayOptionsCheckBoxHideQuestWatcherInCombat:SetDisabled( not AJM.db.enableQuestWatcher )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherTransparencySlider:SetDisabled( not AJM.db.enableQuestWatcher )
 	AJM.settingsControlWatcher.displayOptionsQuestWatcherScaleSlider:SetDisabled( not AJM.db.enableQuestWatcher )

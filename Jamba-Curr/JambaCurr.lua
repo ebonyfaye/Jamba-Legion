@@ -355,8 +355,6 @@ function AJM:SettingsCreateCurrency( top )
 	AJM.settingsControl.currencyTransparencySlider:SetSliderValues( 0, 1, 0.01 )
 	AJM.settingsControl.currencyTransparencySlider:SetCallback( "OnValueChanged", AJM.SettingsChangeTransparency )
 	movingTop = movingTop - sliderHeight - verticalSpacing	
---TODO TEMP REMOVED FOR BETA ADDD BACK IN
---[[
 	AJM.settingsControl.currencyMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControl, 
 		halfWidthSlider, 
@@ -365,7 +363,7 @@ function AJM:SettingsCreateCurrency( top )
 		L["Border Style"]
 	)
 	AJM.settingsControl.currencyMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
---]]
+
 	AJM.settingsControl.currencyBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidthSlider,
@@ -376,7 +374,6 @@ function AJM:SettingsCreateCurrency( top )
 	AJM.settingsControl.currencyBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.currencyBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBorderColourPickerChanged )	
 	movingTop = movingTop - mediaHeight - verticalSpacing
---[[
 	AJM.settingsControl.currencyMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControl, 
 		halfWidthSlider, 
@@ -385,7 +382,7 @@ function AJM:SettingsCreateCurrency( top )
 		L["Background"]
 	)
 	AJM.settingsControl.currencyMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
-]]	AJM.settingsControl.currencyBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
+	AJM.settingsControl.currencyBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidthSlider,
 		column2left + 15,
@@ -471,9 +468,8 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.checkBoxCurrencyOpenStartUpMaster:SetValue( AJM.db.currOpenStartUpMaster )
 	AJM.settingsControl.currencyTransparencySlider:SetValue( AJM.db.currencyFrameAlpha )
 	AJM.settingsControl.currencyScaleSlider:SetValue( AJM.db.currencyScale )
---ADD BACK IN
---	AJM.settingsControl.currencyMediaBorder:SetValue( AJM.db.currencyBorderStyle )
---	AJM.settingsControl.currencyMediaBackground:SetValue( AJM.db.currencyBackgroundStyle )
+	AJM.settingsControl.currencyMediaBorder:SetValue( AJM.db.currencyBorderStyle )
+	AJM.settingsControl.currencyMediaBackground:SetValue( AJM.db.currencyBackgroundStyle )
 
 
 	AJM.settingsControl.currencyBackgroundColourPicker:SetColor( AJM.db.currencyFrameBackgroundColourR, AJM.db.currencyFrameBackgroundColourG, AJM.db.currencyFrameBackgroundColourB, AJM.db.currencyFrameBackgroundColourA )

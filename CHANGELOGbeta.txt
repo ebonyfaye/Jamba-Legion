@@ -9,12 +9,15 @@ Changes:
 	
 -- DM have a random % quest that need adding to jamba-questwatcher < need to look this up *sigh* < have seen this bar a few times now on normal quests.
 
--- Add back in AceGUI-3.0-SharedMediaWidgets after update: << still loooking into this and still don't know whats wrong with the dam thing. tryed updateing ace/shardLib other addons don't seem to have problam  1/6/2016
+-- Add back in AceGUI-3.0-SharedMediaWidgets 
+		--http://forums.wowace.com/showthread.php?t=30549
+		If topic get updated if not use my fix copy. or update the main version
+		
+		--Add Font and text size
+		
 		Jamba-Team display
-		Jamba-JambaMessage
 		Jamba-Curr
 		Jamba-itemUse
-		Jamba-Porc
 		Jamba-QuestWatcher
 		Jamba-Target
 		
@@ -28,7 +31,7 @@ Only Shows character name if the character is not from the same server < jamba-q
 
 Have a look into Jmaba-quest with Taint > http://www.wowinterface.com/downloads/info22630-NoTaintUIDropDownMenu.html
 
-TODO: BUG: JambaDispaly Team, Heath TickBox does nothing and does not trun of the bar!
+TODO: BUG: JambaDispaly Team, Heath TickBox does nothing and does not trun of the bar! -- fixed 2/6/2016
 	- Add Own Code to support, for Millon and not just thusand when the player is over 1M HP > so, 1.5m was 1500 k
 	
 TODO: Now Useing the Defualt Ace3 Frame for config. Resize and close button. < TODO Change back or fix??? bugs with always being ontop of frames.
@@ -137,6 +140,9 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	- Fixed a text bug that was not working with trade goods. (cloth)
 	- Personal-Loot OverRights The Advanced Loot list. 
 
+* Jamba-ItemUse
+	- You can now Use spells on the item bar without errors. 	
+	
 ---------------------------
 Jamba Version: 4.3
 WoW Game Version: 6.1.2

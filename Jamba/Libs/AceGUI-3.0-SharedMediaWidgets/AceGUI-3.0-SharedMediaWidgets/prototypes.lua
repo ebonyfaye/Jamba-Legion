@@ -58,7 +58,9 @@ do
 		frame:SetHeight(44)
 		frame:SetWidth(200)
 		frame:SetPoint("CENTER", UIParent, "CENTER")
-
+		-- Kinda fix's my bug in Jamba4 Jennifer (Ebony) anchor to parenting
+		frame:ClearAllPoints()
+		
 		local label = frame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
 			label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,0)
 			label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,0)

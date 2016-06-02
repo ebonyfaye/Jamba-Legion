@@ -383,50 +383,6 @@ function AJM:CreateJambaItemUseItemContainer( itemNumber, parentFrame )
 	itemContainer["container"] = containerButton	
 end
 
---TODO CLEAN UP NOLONGER NEEDED
---[[
-function AJM:CheckForQuestItemAndAddToBar()
-	local isQuest
-	local questId
-	local isActive
-	local iterateQuests
-	local numEntries
-	local numQuests
-	local questItemLink
-	local questItemIcon
-	local questItemCharges
-	-- Iterate all bags looming for quest item.
-	for bag, slot, link in LibBagUtils:Iterate( "BAGS" ) do
-		-- Don't check slots that have no items and don't check anything in the keyring bag (-2)
-		if link ~= nil and bag ~= -2 then
-			-- Starts a quest items.
-			-- Battlepet links break tooltips!
-			if string.find(link, "battlepet") then
-					return 
-				end
-			LibGratuity:SetHyperlink( link )
-			if LibGratuity:Find( ITEM_STARTS_QUEST ) then
-				AJM:AddAnItemToTheBarIfNotExists( link, true )
-			end
-			-- Useable quest items.
-			isQuest, questId, isActive = GetContainerItemQuestInfo(bag, slot)
-			if isQuest == true then
-				-- Quest item, but it is useable?  Check.
-				numEntries, numQuests = GetNumQuestLogEntries()
-				for iterateQuests = 1, numEntries, 1 do
-					questItemLink, questItemIcon, questItemCharges = GetQuestLogSpecialItemInfo( iterateQuests )
-					if questItemLink ~= nil then
-						if JambaUtilities:DoItemLinksContainTheSameItem( link, questItemLink ) == true then
-							AJM:AddAnItemToTheBarIfNotExists( link, false )				
-						end
-					end
-				end
-			end
-		end
-	end
-end
---]]
-
 --ebony test Using the wowapi and not the scanning of tooltips
 function AJM:CheckForQuestItemAndAddToBar()
 	for bag = 0,4,1 do 
@@ -492,13 +448,7 @@ function AJM:AddAnItemToTheBarIfNotExists( itemLink, startsQuest )
 	if alreadyExists == false then
 		for iterateItems = 1, AJM.db.numberOfItems, 1 do
 			itemInfo = AJM:GetItemFromItemDatabase( iterateItems )
-			--TODO LOOK in if we need this i don't think we do.
-			--AJM:Print( "ITEMiD", itemLink)
-			--ebonyfassttest
-			--AJM:Print( "checking item is in players bag.")
 			--Checks the items we talking about is in the bags of the player.
-			--if AJM:IsInInventory( itemLink ) == true then
-				--AJM:Print( "is in bags")
 			if itemInfo.kind == "empty" then
 				AJM:AddItemToItemDatabase( iterateItems, "item", itemId )
 				AJM:JambaSendSettings()
@@ -507,7 +457,6 @@ function AJM:AddAnItemToTheBarIfNotExists( itemLink, startsQuest )
 					AJM:JambaSendMessageToTeam( AJM.db.messageArea, L["New item that starts a quest found!"], false )
 				end
 				return
-			--end	
 			end
 		end
 	end
@@ -671,8 +620,6 @@ local function SettingsCreateOptions( top )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetSliderValues( 0, 1, 0.01 )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetCallback( "OnValueChanged", AJM.SettingsChangeTransparency )
 	movingTop = movingTop - sliderHeight - verticalSpacing
--- TODO ADD BACK IN BETA
---[[
 	AJM.settingsControl.displayOptionsItemUseMediaBorder = JambaHelperSettings:CreateMediaBorder( 
 		AJM.settingsControl, 
 		halfWidth, 
@@ -681,7 +628,6 @@ local function SettingsCreateOptions( top )
 		L["Border Style"]
 	)
 	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetCallback( "OnValueChanged", AJM.SettingsChangeBorderStyle )
---]]
 	AJM.settingsControl.displayOptionsBorderColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
@@ -692,7 +638,6 @@ local function SettingsCreateOptions( top )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBorderColourPickerChanged )
 	movingTop = movingTop - mediaHeight - verticalSpacing
---[[
 	AJM.settingsControl.displayOptionsItemUseMediaBackground = JambaHelperSettings:CreateMediaBackground( 
 		AJM.settingsControl, 
 		halfWidth, 
@@ -701,7 +646,7 @@ local function SettingsCreateOptions( top )
 		L["Background"]
 	)
 	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetCallback( "OnValueChanged", AJM.SettingsChangeBackgroundStyle )
-]]	AJM.settingsControl.displayOptionsBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
+	AJM.settingsControl.displayOptionsBackgroundColourPicker = JambaHelperSettings:CreateColourPicker(
 		AJM.settingsControl,
 		halfWidth,
 		column2left + 15,
@@ -778,8 +723,8 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.displayOptionsCheckBoxItemBarsSynchronized:SetValue( AJM.db.itemBarsSynchronized )
 	AJM.settingsControl.displayOptionsItemUseScaleSlider:SetValue( AJM.db.itemUseScale )
 	AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetValue( AJM.db.frameAlpha )
---	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetValue( AJM.db.borderStyle )
---	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetValue( AJM.db.backgroundStyle )
+	AJM.settingsControl.displayOptionsItemUseMediaBorder:SetValue( AJM.db.borderStyle )
+	AJM.settingsControl.displayOptionsItemUseMediaBackground:SetValue( AJM.db.backgroundStyle )
 	AJM.settingsControl.dropdownMessageArea:SetValue( AJM.db.messageArea )
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetColor( AJM.db.frameBackgroundColourR, AJM.db.frameBackgroundColourG, AJM.db.frameBackgroundColourB, AJM.db.frameBackgroundColourA )
 	AJM.settingsControl.displayOptionsBorderColourPicker:SetColor( AJM.db.frameBorderColourR, AJM.db.frameBorderColourG, AJM.db.frameBorderColourB, AJM.db.frameBorderColourA )
@@ -795,8 +740,8 @@ function AJM:SettingsRefresh()
 		AJM.settingsControl.displayOptionsCheckBoxItemBarsSynchronized:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsItemUseScaleSlider:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsItemUseTransparencySlider:SetDisabled( not AJM.db.showItemUse )
---		AJM.settingsControl.displayOptionsItemUseMediaBorder:SetDisabled( not AJM.db.showItemUse )
---		AJM.settingsControl.displayOptionsItemUseMediaBackground:SetDisabled( not AJM.db.showItemUse )
+		AJM.settingsControl.displayOptionsItemUseMediaBorder:SetDisabled( not AJM.db.showItemUse )
+		AJM.settingsControl.displayOptionsItemUseMediaBackground:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.dropdownMessageArea:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsBackgroundColourPicker:SetDisabled( not AJM.db.showItemUse )
 		AJM.settingsControl.displayOptionsBorderColourPicker:SetDisabled( not AJM.db.showItemUse )		
