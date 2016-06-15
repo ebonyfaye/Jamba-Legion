@@ -968,14 +968,12 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 	local reputationBar	= characterStatusBar["reputationBar"]
 	local reputationBarClick = characterStatusBar["reputationBarClick"]	
 	if AJM.db.showExperienceStatus == true then
-		local showBarCount = 0
 		--AJM:Print("TestLevel", characterName, level, maxLevel, xpDisabled, showXP, showArtifact )
+		local showBarCount = 0
 		if AJM.db.showXpStatus == true then
-		--	if AJM.db.toonCharacterLevel ~= AJM.db.toonMaxCharacterLevel then
-				showBarCount = showBarCount + 1
-				showBeforeBar = parentFrame
-				showXP = true
-		--	end	
+			showBarCount = showBarCount + 1
+			showBeforeBar = parentFrame
+			showXP = true
 		end
 		if AJM.db.showArtifactStatus == true then
 			--AJM:Print("ShowArtifact")
@@ -992,7 +990,6 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 				setArtTop = positionTop
 			end	
 		end				
-	
 		if AJM.db.showHonorStatus == true then
 			--AJM:Print("ShowHonorXP")
 			showBarCount = showBarCount + 1
@@ -1072,7 +1069,7 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 			experienceArtBarClick:SetHeight( AJM.db.experienceStatusHeight / showBarCount )		
 		if AJM.db.showArtifactStatus == true then	
 			experienceArtBar:Show()
-			--experienceArtBarClick:Show()
+			experienceArtBarClick:Show()
 		else
 			experienceArtBar:Hide()
 			experienceArtBarClick:Hide()
@@ -2505,8 +2502,7 @@ function AJM:SettingsUpdateToonInfomation( characterName, characterLevel, charac
 	end	
 	if currText == nil then
 		currText = AJM.db.toonCurrText
-	end	
-		
+	end		
 	AJM.db.toonFreeBagSpace = totalSlots
 	AJM.db.toonTotalBagSpace = slotsFree
 	AJM.db.toonOverallIlvl = overall
@@ -2526,18 +2522,14 @@ end
 AJM.isFollowing = false
  
 function AJM:AUTOFOLLOW_BEGIN( event, name, ... )	
-	--AJM:Print("FollowNameChange", AJM.isFollowing )
 	if AJM.isFollowing == false then
-		--AJM:Print("tester123a")
 		AJM:ScheduleTimer( "SendFollowStatusUpdateCommand", 1 , true)
 		AJM.isFollowing = true
 	end
-	--AJM:SendFollowStatusUpdateCommand( true )
 end
 
 function AJM:AUTOFOLLOW_END( event, ... )	
 	AJM:ScheduleTimer( "SendFollowStatusUpdateCommand", 1 , false )	
-	--AJM:SendFollowStatusUpdateCommand( false )
 end
 
 
@@ -2545,16 +2537,12 @@ function AJM:SendFollowStatusUpdateCommand( isFollowing )
 	if AJM.db.showTeamList == true and AJM.db.showFollowStatus == true then	
 		local canSend = false
 		local alpha = AutoFollowStatus:GetAlpha()
-		
-		--AJM:Print("updatetest", alpha, isFollowing, AJM.isFollowing)
 		if alpha < 1 then
 			canSend = true
 			AJM.isFollowing = false
 		end
-		
 		if isFollowing == true then
-			canSend = true
-			
+			canSend = true	
 		end	
 		-- Check to see if JambaFollow is enabled and follow strobing is on.  If this is the case then
 		-- do not send the follow update.
@@ -2578,7 +2566,6 @@ function AJM:ProcessUpdateFollowStatusMessage( characterName, isFollowing )
 	AJM:UpdateFollowStatus( characterName, isFollowing, isFollowLeader )
 end
 
---TODO: Ebony,-- See if this code could be cleaned up a little as when in combat takes a few mins after to catch up. Sending add-on msg with combat?
 function AJM:UpdateFollowStatus( characterName, isFollowing, isFollowLeader )
 	--AJM:Print("follow", characterName, isFollowing, isFollowLeader)
 	if CanDisplayTeamList() == false then
@@ -2602,7 +2589,6 @@ function AJM:UpdateFollowStatus( characterName, isFollowing, isFollowLeader )
 			followBar:SetStatusBarColor( 0.55, 0.15, 0.15, 0.25 )
 		else
 			-- Not following.
-	
 		followBar:SetStatusBarColor( 0.85, 0.05, 0.05, 1.00 )
 		end
 	end		
@@ -2860,8 +2846,10 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 	end
 		--AJM:Print("arttest", artText)
 		experienceArtBarText:SetText( artText )		
-		experienceArtBar:SetStatusBarColor( 1.0, 0.0, 0.0, 1.0 )
-		experienceArtBar.backgroundTexture:SetColorTexture( 0.1, 0.0, 0.0, 0.15 )
+		experienceArtBar:SetStatusBarColor( 0.901, 0.8, 0.601, 1.0 )
+		experienceArtBar.backgroundTexture:SetColorTexture( 0.901, 0.8, 0.601, 0.20 )
+		
+		
 	--HonorText	
 	local honorText = ""
 	if AJM.db.experienceStatusShowValues == true then
@@ -2876,11 +2864,11 @@ function AJM:UpdateExperienceStatus( characterName, playerExperience, playerMaxE
 	end
 	experienceHonorBarText:SetText( honorText )		
 	if honorExhaustionStateID == 1 then
-		experienceHonorBar:SetStatusBarColor( 0.0, 0.39, 0.88, 1.0 )
-		experienceHonorBar.backgroundTexture:SetColorTexture( 0.0, 0.39, 0.88, 0.15 )
+		experienceHonorBar:SetStatusBarColor( 1.0, 0.71, 0.0, 1.0 )
+		experienceHonorBar.backgroundTexture:SetColorTexture( 1.0, 0.71, 0.0, 0.20 )
 	else
-		experienceHonorBar:SetStatusBarColor( 0.58, 0.0, 0.55, 1.0 )
-		experienceHonorBar.backgroundTexture:SetColorTexture( 0.58, 0.0, 0.55, 0.15 )
+		experienceHonorBar:SetStatusBarColor( 1.0, 0.24, 0.0, 1.0 )
+		experienceHonorBar.backgroundTexture:SetColorTexture( 1.0, 0.24, 0.0, 0.20 )
 	end		
 end	
 
@@ -3247,6 +3235,7 @@ function AJM:SendComboStatusUpdateCommand()
 		-- Monk Cil
 		elseif Class == "MONK" then
 			PowerType = 12
+		else
 			return
 		end		
 		

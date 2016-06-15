@@ -1173,14 +1173,14 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 			for StagesIndex = 1, currentStage do
 				--AJM:Print("Player is on Stage", currentStage)
 				local stageName, stageDescription, numCriteria, _, _, _, numSpells, spellInfo, weightedProgress = C_Scenario.GetStepInfo()
-				--AJM:Print("test match 0")
+				--AJM:Print("test match", numCriteria)
 				if numCriteria == 0 then
 					if (weightedProgress) then
 						--AJM:Print("Checking Progress", weightedProgress)
 						local questID = 1001	
 						local criteriaIndex = 0
 						local maxProgress = 100
-						--local totalQuantity = 100
+						local totalQuantity = 100
 						local completed = false
 						local amountCompleted = tostring(weightedProgress).."/"..(maxProgress)
 						local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
@@ -1203,10 +1203,11 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 					
 				else
 				for criteriaIndex = 1, numCriteria do
-	--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
+		--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
 				local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
 				local questID = 1001
 				local amountCompleted = tostring(quantity).."/"..(totalQuantity)
+					--AJM:Print("Stages", numStages)
 					local name = nil
 						if (numStages) > 1 then
 							local textName = "Scenario:"..stageName.." "..currentStage.."/"..numStages
@@ -1217,6 +1218,7 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 						end
 					local name = newName
 						if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
+						--AJM:Print("test", questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed)
 						AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, criteriaIndex, criteriaString , amountCompleted , completed, completed )						if AJM.db.sendProgressChatMessages == true then
 							if AJM.db.sendProgressChatMessages == true then
 							AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
@@ -1229,7 +1231,7 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 	-- SCENARIO_BONUS
 		local tblBonusSteps = C_Scenario.GetBonusSteps()
 		if #tblBonusSteps > 0 then
-	AJM:Print("BonusTest", #tblBonusSteps )
+	--AJM:Print("BonusTest", #tblBonusSteps )
 			for i = 1, #tblBonusSteps do
 					local bonusStepIndex = tblBonusSteps[i]
 	--AJM:Print("bonusIndex", bonusStepIndex)

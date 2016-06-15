@@ -41,15 +41,27 @@ L["Change Channel"] = true
 L["Change the communications channel."] = true
 L["Jamba4"] = true
 L["Jamba"] = true
-L["A Awesome Multi-Boxer Assistant"] = true
+
+L["The Awesome Multi-Boxer Assistant"] = true
+
+
 L["Jafula's Awesome Multi-Boxer Assistant"] = true
+
 L["Copyright 2008-2016 Michael 'Jafula' Miller, Now managed By Ebony"] = true
-L["Special thanks to Michael 'Jafula' Miller who made Jamba"] = true
+
+L["Copyright 2008-2016 Michael 'Jafula' Miller, Released Under The MIT License"] = true
+L["Current Project Manager - Jennifer 'Ebony'"] = true
+L["Special thanks:"] = true
+L["To Schilm (Max Schilling) for building Advanced Loot and The changes to Jamba-Quest for 4.3"] = true
+L["To Schilm (Max Schilling) for Advanced Loot and Jamba-Quest for 4.3"] = true 
+L["To Olipcs on dual-boxing.com for writing the FTL Helper module."] = true
+L["To Michael 'Jafula' Miller who made Jamba"] = true
 L["Made For MultiBoxing"] = true
 L["Help & Documentation"] = true
 L["For user manuals and documentation please visit:"] = true
-L["Other useful websites:"] = true
-L["http://dual-boxing.com/"] = true
+L["Useful websites:"] = true
+L["www.dual-boxing.com"] = true
+L["www.isboxer.com"] = true
 L["Special thanks to olipcs on dual-boxing.com for writing the FTL Helper module."] = true
 L["Advanced Loot by schilm (Max Schilling) - modified by Tehtsuo and Jafula."] = true
 L["Attempting to reset the Jamba Settings Frame."] = true
@@ -62,7 +74,7 @@ L["Assume All Team Members Always Online*"] = true
 L["Boost Jamba to Jamba Communications**"] = true
 L["**reload UI to take effect, may cause disconnections"] = true
 L["*reload UI to take effect"] = true
-L["Release Notes / News"] = true
+L["Release Notes / News: "] = true
 L["Close and Do Not Show Again"] = true
 L["Close"] = true
 L["Commands"] = true
@@ -72,6 +84,24 @@ L["**Untick this to use the WIP Set Offline team List Set offline Button"] =true
 L["Use Team List Offline Button"] = true
 L["Auto Set Team Members On and Off Line"] = true
 L[""] = true
-
+L["Full Change Log"] = true
 --Change Log Infomation
+L["Full ChangeLog"] = true
+L["ChangeLog"] = true
+L["Shows the Full changelog\nOpens a new Frame."] = true
+L["Text1"] = "Welcome to Legion 7.0.3!"
+L["Text2"] = "Jamba Has Had a Lot of changes here are a few..."
+L["Text3"] = "display-team been updated a lot."
+L["Text4"] = "Honor/XP/Artifact/Rep can be Showen."
+L["Text5"] = "Can see the Class Power for a lot of the other clasess."
+L["Text6"] = "QuestLog changes with a DropdownMenu."
+L["Text7"] = "Quest Watcher Been renamed and now supports most Objectives."
+L["Text8"] = "new Sutff for Currency!"
+L["Text9"] = ""
+L["Text10"] = ""
+
+
+
+
+
 
