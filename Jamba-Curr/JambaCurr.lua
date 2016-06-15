@@ -718,6 +718,7 @@ function AJM:CurrDropDownBox()
 	return AJM.simpleCurrList
 end	
 
+
 function AJM:MatchCurrValue(value)
 	if value == "" then	
 		return "", 0

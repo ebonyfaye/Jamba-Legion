@@ -3,7 +3,7 @@
 local DataVersion = 9001 -- dev version always overwrites everything else :)
 --@end-debug@]===]
 --@non-debug@
-local DataVersion = 51
+local DataVersion = 53
 --@end-non-debug@
 local AGSMW = LibStub:NewLibrary("AceGUISharedMediaWidgets-1.0", DataVersion)
 
@@ -57,10 +57,7 @@ do
 		local frame = CreateFrame("Frame", nil, UIParent)
 		frame:SetHeight(44)
 		frame:SetWidth(200)
-		frame:SetPoint("CENTER", UIParent, "CENTER")
-		-- Kinda fix's my bug in Jamba4 Jennifer (Ebony) anchor to parenting
-		frame:ClearAllPoints()
-		
+
 		local label = frame:CreateFontString(nil,"OVERLAY","GameFontNormalSmall")
 			label:SetPoint("TOPLEFT",frame,"TOPLEFT",0,0)
 			label:SetPoint("TOPRIGHT",frame,"TOPRIGHT",0,0)

@@ -9,9 +9,6 @@ Changes:
 	
 -- DM have a random % quest that need adding to jamba-questwatcher < need to look this up *sigh* < have seen this bar a few times now on normal quests.
 
--- Add back in AceGUI-3.0-SharedMediaWidgets 
-		--http://forums.wowace.com/showthread.php?t=30549
-		If topic get updated if not use my fix copy. or update the main version
 		
 Add Font and text size to GUI <TODO.
 		Jamba-Team display
@@ -29,6 +26,8 @@ TODO: BUG: JambaDispaly Team, -Add Own Code to support, for Millon and not just 
 TODO: Now Useing the Defualt Ace3 Frame for config. Resize and close button. < TODO Change back or fix??? bugs with always being ontop of frames.
 
 TODO: Fix jamba set master button in team becouse you need to push settings after you press it? more work easy to fix.
+
+TODO: Have a Look at Jamba-FTL spaming chat or assit not updaing right.
 	
 ---------------------------
 ChangeLogs:
@@ -50,6 +49,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	- Changed Help to Commands - as it shows more of the command Line stuff.
 	- If a Module is not loaded on all characters then it no longer Lua-Error and tells the client what Module will need to be loaded.
 	- Updated LibActionButton
+	- Updated AceGUI-3.0-SharedMediaWidgets
 	
 *Jamba-Team
 	- Added two new ways to add team members to the team with command line and GUI.
@@ -86,7 +86,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 *Jamba-Display-Team
 	- Values are now Abbreviated to smaller Numbers.
 	- Nolonger Shows max Value when showing Percentage
-	- Added support to change the font And text size (TODO)
+-	- Added support to change the font And text size (TODO)
 	- Added a NewTooltip when you hover over Follow bar to show
 		- Level of minion If not level capped.
 		- ItemLevel of minion.
@@ -111,6 +111,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 			- Artfact XP, Show the players wepon Artifact XP.
 			- Show Honor XP, Show a bar for the new honor xp bar in game.
 			- Show Reputation, show a bar for Reputation
+	- Added new checks to fix The FollowDance when spaming follow key.		
 				
 *Jamba-Toon
 	-Removed Jamba-Currency From the toon module
@@ -123,7 +124,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 		- Now shows Currency Icon Then The Three Letters of text.
 		- Now shows the Currency Gold Icons when showing gold/Sliver/Copper
 		- No Longer Shows Currency for Offline minions.
-		- Should Now Order minions That are Offline/Online curtecty.
+		- Should Now Order minions That are Offline/Online correcly.
 		
 * Jamba-Taxi
 	- Fixed a Frame Bug with The new flight maps in borken island (Legion Zones)		
@@ -134,6 +135,10 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 
 * Jamba-ItemUse
 	- You can now Use spells on the item bar without errors. 	
+
+* Jamba-Follow
+	- Made some back end checks to make sure follow has been really borken borken. (spaming follow key should not spam "follow Borken")
+	- NoLonger warns if the player is on a taxi
 	
 ---------------------------
 Jamba Version: 4.3
