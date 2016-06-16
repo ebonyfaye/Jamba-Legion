@@ -550,15 +550,9 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["bagInformationFrame"] = bagInformationFrame
 	characterStatusBar["bagInformationFrameText"] = bagInformationFrameText
 --]]
-	--set the ilevel Information.	
---[[	local ilvlInformationFrameName = AJM.globalFramePrefix.."IlvlInformationFrame"
+--[[	--set the ilevel Information.	
+	local ilvlInformationFrameName = AJM.globalFramePrefix.."IlvlInformationFrame"
 	local ilvlInformationFrame = CreateFrame( "Frame", ilvlInformationFrameName, parentFrame )
-	local ilvlInformationFrameText = ilvlInformationFrame:CreateFontString( ilvlInformationFrameName.."Text", "OVERLAY", "GameFontNormal" )
-	ilvlInformationFrameText:SetText( "999/999" )
-	ilvlInformationFrameText:SetAllPoints()
-	ilvlInformationFrameText:SetJustifyH( "CENTER" )
-	ilvlInformationFrameText:SetJustifyV( "MIDDLE" )
-	ilvlInformationFrameText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
 	ilvlInformationFrame.overall = 999
 	ilvlInformationFrame.equipped = 999
 	ilvlInformationFrame.characterLevel = 0
@@ -569,7 +563,6 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	ilvlInformationFrame.totalSlots = 999
 	ilvlInformationFrame.toolText = "nothing"
 	characterStatusBar["ilvlInformationFrame"] = ilvlInformationFrame
-	characterStatusBar["ilvlInformationFrameText"] = ilvlInformationFrameText	
 ]]
 	-- Set the follow bar.
 	local followName = AJM.globalFramePrefix.."FollowBar"
@@ -596,7 +589,21 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	followBarText:SetAllPoints()
 	characterStatusBar["followBarText"] = followBarText
 	AJM:SettingsUpdateFollowText( characterName ) --, UnitLevel( Ambiguate( characterName, "none" ) ), nil, nil )
-	followBarClick:SetScript("OnEnter", function(self) AJM:ShowFollowTooltip(followBarClick, characterName, true) end)
+	
+	--ToolTip infomation
+	followBar.FreeBagSpace = 0
+	followBar.TotalBagSpace = 8
+	followBar.ArgIlvl = 1
+	followBar.Durability = 000
+	followBar.Gold = 0
+	followBar.Mail = "nothing"
+	followBar.CurrText = "currNothing"
+	followBar.CharacterLevel = 1
+	followBar.MaxCharacterLevel = 100
+	
+	
+	
+	followBarClick:SetScript("OnEnter", function(self) AJM:ShowFollowTooltip(followBarClick, followBar, characterName, true) end)
 	--followBarClick:SetScript("OnLeave", function(self) AJM:ShowFollowTooltip(followBarClick, CharacterName, false) end)
 	followBarClick:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
 	
@@ -808,17 +815,9 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	end
 end
 
-function AJM:ShowFollowTooltip( frame, characterName, canShow )
+function AJM:ShowFollowTooltip( frame, followBar, characterName, canShow )
 	--AJM:Print("test", frame, characterName, canShow)
 	AJM:JambaRequestUpdate()
---[[	local characterStatusBar = AJM.characterStatusBar[characterName]
-	
-	if characterStatusBar == nil then
-		AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
-		characterStatusBar = AJM.characterStatusBar[characterName]
-	end	
-	local ilvlInformationFrame = characterStatusBar["ilvlInformationFrame"]
-]]	
 	--Tooltip
 	if canShow then	
 		if AJM.db.showToolTipInfo == true then
@@ -829,25 +828,25 @@ function AJM:ShowFollowTooltip( frame, characterName, canShow )
 					GameTooltip:SetOwner(frame, "ANCHOR_TOP")
 					GameTooltip:AddLine(L["Toon Information"], 1, 0.82, 0, 1)	
 				--level of player if not max.
-				if AJM.db.toonMaxCharacterLevel == AJM.db.toonCharacterLevel == false then
-					GameTooltip:AddLine(L["Player Level:"]..L[" "]..L["("]..tostring (format("%.0f", AJM.db.toonCharacterLevel ))..L[")"],1,1,1,1)
+				if followBar.CharacterLevel == followBar.MaxCharacterLevel then
+					GameTooltip:AddLine(L["Player Level:"]..L[" "]..L["("]..tostring (format("%.0f", followBar.CharacterLevel ))..L[")"],1,1,1,1)
 				end
 					-- Item Level of player
-					GameTooltip:AddLine(L["Item Level:"]..L[" "]..L["("]..tostring (format("%.0f", AJM.db.toonCharacterLevel ))..L[")"],1,1,1,1)
+					GameTooltip:AddLine(L["Item Level:"]..L[" "]..L["("]..tostring (format("%.0f", followBar.ArgIlvl ))..L[")"],1,1,1,1)
 					-- Bag Space
 					GameTooltip:AddLine(" ",1,1,1,1)
-					GameTooltip:AddLine(L["Bag Space:"]..L[" "]..L["("]..tostring(AJM.db.toonFreeBagSpace).."/"..tostring( AJM.db.toonTotalBagSpace)..L[")"],1,1,1,1)
+					GameTooltip:AddLine(L["Bag Space:"]..L[" "]..L["("]..tostring(followBar.FreeBagSpace).."/"..tostring( followBar.TotalBagSpace)..L[")"],1,1,1,1)
 					-- Durability
-					GameTooltip:AddLine(L["Durability:"]..L[" "]..L["("]..tostring(gsub( AJM.db.toonDurability , "%.[^|]+", "") )..L["%"]..L[")"],1,1,1,1)
+					GameTooltip:AddLine(L["Durability:"]..L[" "]..L["("]..tostring(gsub( followBar.Durability , "%.[^|]+", "") )..L["%"]..L[")"],1,1,1,1)
 					-- Gold
 					GameTooltip:AddLine(" ",1,1,1,1)
-					GameTooltip:AddLine(L["Gold:"]..L[" "]..GetCoinTextureString( AJM.db.toonGold ),1,1,1,1)
+					GameTooltip:AddLine(L["Gold:"]..L[" "]..GetCoinTextureString( followBar.Gold ),1,1,1,1)
 					--AJM:Print("mail", ilvlInformationFrame.toolText, "Curr", ilvlInformationFrame.currText)
 					-- Shows if has Ingame Mail
-					if not (AJM.db.toonMail == "nothing") then
+					if not (followBar.Mail == "nothing") then
 						GameTooltip:AddLine(" ",1,1,1,1)
 						GameTooltip:AddLine(L["Has New Mail From:"], 1, 0.82, 0, 1)
-						GameTooltip:AddLine( AJM.db.toonMail,1,1,1,1)
+						GameTooltip:AddLine( followBar.Mail,1,1,1,1)
 					end	
 					GameTooltip:Show()
 				else
@@ -2396,7 +2395,7 @@ end
 
 function AJM:SendInfomationUpdateCommand()
 		-- Item Level	
-		local overall, equipped = GetAverageItemLevel()
+		local _, iLevel = GetAverageItemLevel()
 		-- characterLevel
 		local characterLevel = UnitLevel("player")
 		--Max Level
@@ -2430,12 +2429,13 @@ function AJM:SendInfomationUpdateCommand()
 					mailText = mailText.."\n"..sender2
 				end
 				if( sender3 ) then
-				mailText = mailText.."\n"..sender3
+					mailText = mailText.."\n"..sender3
 				end
 			else
 				mailText = L["Unknown Sender"]
 			end
 		end
+		--mailText = text
 		--local name, count, icon, currencyID
 		currText = "currNothing"
 		local name, count, icon, currencyID = GetBackpackCurrencyInfo(1)
@@ -2454,65 +2454,71 @@ function AJM:SendInfomationUpdateCommand()
 				currText = currText.."\n"..name.." ".." |T"..icon..":16|t".." "..count
 			end
 			if AJM.db.showTeamListOnMasterOnly == true then
-				AJM:JambaSendCommandToMaster( AJM.COMMAND_TOONINFORMATION_UPDATE, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, currName, currCout, mailText, currText)
+				AJM:JambaSendCommandToMaster( AJM.COMMAND_TOONINFORMATION_UPDATE, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, currName, currCout, mailText, currText)
 			else
-				AJM:JambaSendCommandToTeam( AJM.COMMAND_TOONINFORMATION_UPDATE, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, currName, currCout, mailText, currText)
+				AJM:JambaSendCommandToTeam( AJM.COMMAND_TOONINFORMATION_UPDATE, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, currName, currCout, mailText, currText)
 			end
 end
 
-function AJM:ProcessUpdateToonInformationMessage( characterName, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, mailText, currText )
-	AJM:SettingsUpdateToonInfomation( characterName, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, mailText, currText )
+function AJM:ProcessUpdateToonInformationMessage( characterName, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, mailText, currText )
+	AJM:SettingsUpdateToonInfomation( characterName, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, mailText, currText )
 end
 
 
 function AJM:SettingsUpdateToonInfomationAll()
 	for characterName, characterStatusBar in pairs( AJM.characterStatusBar ) do			
-		AJM:SettingsUpdateToonInfomation( characterName, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil )
+		AJM:SettingsUpdateToonInfomation( characterName, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil )
 	end
 end
 
-function AJM:SettingsUpdateToonInfomation( characterName, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, mailText, currText )
-	--AJM:Print("toonInfoUpdate", characterName, characterLevel, characterMaxLevel, overall, equipped, gold, durability, slotsFree, totalSlots, mailText, currText )
-	if overall == nil then
-		overall = AJM.db.toonOverallIlvl
+function AJM:SettingsUpdateToonInfomation( characterName, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, mailText, currText )
+	--AJM:Print("toonInfoUpdate", characterName, characterLevel, characterMaxLevel, iLevel, gold, durability, slotsFree, totalSlots, mailText, currText )
+	if CanDisplayTeamList() == false then
+		return
 	end
-	if equipped == nil then
-		equipped = AJM.db.toonArgIlvl
+	characterName = JambaUtilities:AddRealmToNameIfMissing( characterName )
+	local characterStatusBar = AJM.characterStatusBar[characterName]
+	if characterStatusBar == nil then
+		return
+	end
+	local followBar = characterStatusBar["followBar"]
+	if iLevel == nil then
+		iLevel = followBar.ArgIlvl
 	end
 	if characterLevel == nil then
-		characterLevel = AJM.db.toonCharacterLevel
+		characterLevel = followBar.CharacterLevel
 	end
 	if characterMaxLevel == nil then
-		characterMaxLevel = AJM.db.toonMaxCharacterLevel
+		characterMaxLevel = followBar.MaxCharacterLevel
 	end	
 	if gold == nil then
-		gold = AJM.db.toonGold
+		gold = followBar.Gold 
 	end
 	if durability == nil then
-		durability = AJM.db.toonDurability
+		durability = followBar.Durability
 	end
 	if slotsFree == nil then
-		slotsFree = AJM.db.toonFreeBagSpace
+		slotsFree = followBar.FreeBagSpace
 	end
 	if totalSlots == nil then
-		totalSlots = AJM.db.toonTotalBagSpace
+		totalSlots = followBar.TotalBagSpace
 	end
 	if mailText == nil then
-		mailText = AJM.db.toonMail
+		mailText = followBar.Mail
 	end	
 	if currText == nil then
-		currText = AJM.db.toonCurrText
+		currText = followBar.CurrText
 	end		
-	AJM.db.toonFreeBagSpace = totalSlots
-	AJM.db.toonTotalBagSpace = slotsFree
-	AJM.db.toonOverallIlvl = overall
-	AJM.db.toonArgIlvl = equipped
-	AJM.db.toonDurability = durability
-	AJM.db.toonGold = gold
-	AJM.db.toonMail = mailTe
-	AJM.db.toonCurrText = currText
-	AJM.db.toonCharacterLevel = characterLevel
-	AJM.db.toonMaxCharacterLevel = characterMaxLevel
+	
+	followBar.ArgIlvl = iLevel
+	followBar.CharacterLevel = characterLevel
+	followBar.MaxCharacterLevel = characterMaxLevel
+	followBar.Gold = gold
+	followBar.Durability = durability
+	followBar.FreeBagSpace = slotsFree
+	followBar.TotalBagSpace = totalSlots
+	followBar.Mail = mailText
+	followBar.CurrText = currText
 	
 end
 
