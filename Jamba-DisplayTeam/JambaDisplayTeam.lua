@@ -98,17 +98,6 @@ AJM.settings = {
 		frameBorderColourA = 1.0,
 		timerCount = 1,
 		currGold = true,
-		--ToonInfomation
-		toonFreeBagSpace = 0,
-		toonTotalBagSpace = 8,
-		toonOverallIlvl = 1,
-		toonArgIlvl = 1,
-		toonDurability = 000,
-		toonGold = 0,
-		toonMail = "nothing",
-		toonCurrText = "currNothing",
-		toonCharacterLevel = 1,
-		toonMaxCharacterLevel = 100
 	},
 }
 
