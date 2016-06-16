@@ -97,7 +97,7 @@ AJM.settings = {
 		frameBorderColourB = 1.0,
 		frameBorderColourA = 1.0,
 		timerCount = 1,
-		currGold = true,
+		currGold = true
 	},
 }
 
