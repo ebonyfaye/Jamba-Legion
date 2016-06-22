@@ -38,14 +38,18 @@ AJM.settings = {
 		statusBarTexture = L["Blizzard"],
 		borderStyle = L["Blizzard Tooltip"],
 		backgroundStyle = L["Blizzard Dialog Background"],
+		fontStyle = L["Arial Narrow"],
+		fontSize = 11,
 		teamListScale = 1,
 		teamListTitleHeight = 15,
-		teamListVerticalSpacing = 4,
-		teamListHorizontalSpacing = 4,
+		teamListVerticalSpacing = 3,
+		teamListHorizontalSpacing = 6,
 		barVerticalSpacing = 2,
 		barHorizontalSpacing = 2,
-		barsAreStackedVertically = false,
-		teamListHorizontal = false,
+		--listInGroupsofFive = true,
+		charactersPerRow = 9,
+		barsAreStackedVertically = true,
+		teamListHorizontal = true,
 		showListTitle = true,
 		showCharacterPortrait = true,
 		characterPortraitWidth = 20,
@@ -220,8 +224,9 @@ local function GetCharacterHeight()
 	end	
 	if AJM.db.barsAreStackedVertically == true then
 		height = max( heightPortrait, heightAllBars )
+	
 	else
-	height = max( heightPortrait, heightFollowStatus, heightExperienceStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
+		height = max( heightPortrait, heightFollowStatus, heightExperienceStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
 	--height = max( heightPortrait, heightBagInformation, heightFollowStatus, heightExperienceStatus, heightReputationStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
 	end
 	return height
@@ -264,7 +269,7 @@ local function GetCharacterWidth()
 		widthAllBars = widthAllBars + widthComboStatus		
 	end
 	if AJM.db.barsAreStackedVertically == true then
-		width = widthPortrait + max( widthFollowStatus, widthExperienceStatus, widthHealthStatus, widthPowerStatus, widthComboStatus )		
+		width = widthPortrait + max( widthFollowStatus, widthExperienceStatus, widthHealthStatus, widthPowerStatus, widthComboStatus )
 		--width = widthPortrait + max( widthBagInformation, widthFollowStatus, widthExperienceStatus, widthReputationStatus, widthHealthStatus, widthPowerStatus, widthComboStatus )
 	else
 		width = widthPortrait + widthAllBars
@@ -274,6 +279,15 @@ end
 
 local function UpdateJambaTeamListDimensions()
 	local frame = JambaDisplayTeamListFrame
+	local charactersPerRow = AJM.db.charactersPerRow
+	local MaxCharacters = JambaApi.GetTeamListMaximumOrder()
+	--local test = 0
+	--if (MaxCharacters / charactersPerRow ) > 0. and (MaxCharacters / charactersPerRow ) < 0. then
+		test = math.floor(MaxCharacters / charactersPerRow )
+	--else
+	--	test = (MaxCharacters / charactersPerRow )
+	--end	
+	--	AJM:Print("test510", test)
 	if AJM.db.showListTitle == true then
 		AJM.db.teamListTitleHeight = 15
 		JambaDisplayTeamListFrame.titleName:SetText( L["Jamba Team"] )
@@ -282,55 +296,25 @@ local function UpdateJambaTeamListDimensions()
 		JambaDisplayTeamListFrame.titleName:SetText( "" )
 	end
 	if AJM.db.teamListHorizontal == true then
-		frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() * AJM.totalMembersDisplayed) )
-		frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() )
+		
+			--frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() )  * ( charactersPerRow ) )
+			--frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * test ) ---( math.ceil(MaxCharacters) / charactersPerRow )   )
+			AJM.frameWidth = frame:GetWidth()
+		
+		
+		AJM:Print("test", AJM.totalMembersDisplayed, frame:GetWidth() )
+		--else
+		--	frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() * AJM.totalMembersDisplayed) )
+		--	frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() )
+	
+		--end
+	
 	else
 		frame:SetWidth( (AJM.db.teamListHorizontalSpacing * 3) + GetCharacterWidth() )
 		frame:SetHeight( AJM.db.teamListTitleHeight + (GetCharacterHeight() * AJM.totalMembersDisplayed) + (AJM.db.teamListVerticalSpacing * 3) )
 	end
 	frame:SetScale( AJM.db.teamListScale )
 end
-
-local function CreateJambaTeamInfoFrame()
-	local frame = CreateFrame( "Frame", "JambaTeamInfoWindowFrame", UIParent )
-		frame.obj = AJM
-	frame:SetFrameStrata( "LOW" )
-	frame:SetToplevel( true )
-	frame:SetClampedToScreen( true )
-	frame:EnableMouse( true )
-	frame:SetMovable( true )	
-	frame:RegisterForDrag( "LeftButton" )
-	frame:SetScript( "OnDragStart", 
-		function( this ) 
-			if IsAltKeyDown() then
-				if not UnitAffectingCombat("player") then		
-					this:StartMoving()
-				end	
-			end
-		end )
-	frame:SetScript( "OnDragStop", 
-		function( this ) 
-			this:StopMovingOrSizing() 
-			local point, relativeTo, relativePoint, xOffset, yOffset = this:GetPoint()
-			AJM.db.framePoint = point
-			AJM.db.frameRelativePoint = relativePoint
-			AJM.db.frameXOffset = xOffset
-			AJM.db.frameYOffset = yOffset
-		end	)	
-	frame:ClearAllPoints()
-	frame:SetPoint( AJM.db.framePoint, UIParent, AJM.db.frameRelativePoint, AJM.db.frameXOffset, AJM.db.frameYOffset )
-	frame:SetBackdrop( {
-		bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", 
-		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border", 
-		tile = true, tileSize = 10, edgeSize = 10, 
-		insets = { left = 3, right = 3, top = 3, bottom = 3 }
-	} )
-
-	
-end
-
-
-
 
 local function CreateJambaTeamListFrame()
 	-- The frame.
@@ -431,6 +415,8 @@ function AJM:RefreshTeamListControlsHide()
 		-- Hide their status bar.
 		AJM:HideJambaTeamStatusBar( characterName )		
 	end
+	
+	
 	UpdateJambaTeamListDimensions()
 end
 
@@ -440,15 +426,23 @@ function AJM:RefreshTeamListControlsShow()
 		return
 	end
 	-- Iterate all the team members.
+	--[[
+	AJM.totalMembersDisplayed = 0
+	AJM.groupNumber = 0
+	AJM.totalUnitsPerRows = 5
+	local maxRows = JambaApi.GetTeamListMaximumOrder()
+	local maxGroups = maxRows / AJM.totalUnitsPerRows
+	]]
+	
+	
 	AJM.totalMembersDisplayed = 0
 	for index, characterName in JambaApi.TeamListOrdered() do
 		characterName = JambaUtilities:AddRealmToNameIfMissing ( characterName )
 		-- Is the team member online?
 		if JambaApi.GetCharacterOnlineStatus( characterName ) == true then
-			-- Yes, the team member is online, draw their status bars.
+		-- Yes, the team member is online, draw their status bars.
 			AJM:UpdateJambaTeamStatusBar( characterName, AJM.totalMembersDisplayed )		
 			AJM.totalMembersDisplayed = AJM.totalMembersDisplayed + 1
---			AJM:ToolTip( characterName )
 		end
 	end
 	UpdateJambaTeamListDimensions()	
@@ -489,6 +483,27 @@ function AJM:SettingsUpdateStatusBarTexture()
 	end
 end
 
+function AJM:SettingsUpdateFontStyle()
+	local textFont = AJM.SharedMedia:Fetch( "font", AJM.db.fontStyle )
+	local textSize = AJM.db.fontSize
+	for characterName, characterStatusBar in pairs( AJM.characterStatusBar ) do	
+		--characterStatusBar["followBarText"]:SetFont("Fonts\\FRIZQT__.TTF", textSize , "OUTLINE")
+		characterStatusBar["followBarText"]:SetFont( textFont , textSize , "OUTLINE")		
+		characterStatusBar["experienceBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["experienceArtBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["experienceHonorBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["reputationBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["healthBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["powerBarText"]:SetFont( textFont , textSize , "OUTLINE")
+		characterStatusBar["comboBarText"]:SetFont( textFont , textSize , "OUTLINE")
+
+	end
+end
+
+
+
+
+
 function AJM:SettingsUpdateBorderStyle()
 	local borderStyle = AJM.SharedMedia:Fetch( "border", AJM.db.borderStyle )
 	local backgroundStyle = AJM.SharedMedia:Fetch( "background", AJM.db.backgroundStyle )
@@ -505,6 +520,9 @@ end
 
 function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	local statusBarTexture = AJM.SharedMedia:Fetch( "statusbar", AJM.db.statusBarTexture )
+	local textFont = AJM.SharedMedia:Fetch( "font", AJM.db.fontStyle )
+	local textSize = AJM.db.fontSize
+	
 	-- Create the table to hold the status bars for this character.
 	AJM.characterStatusBar[characterName] = {}
 	-- Get the status bars table.
@@ -574,7 +592,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["followBarClick"] = followBarClick	
 	local followBarText = followBar:CreateFontString( followName.."Text", "OVERLAY", "GameFontNormal" )
 	followBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	followBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	followBarText:SetFont( textFont , textSize, "OUTLINE")
 	followBarText:SetAllPoints()
 	characterStatusBar["followBarText"] = followBarText
 	AJM:SettingsUpdateFollowText( characterName ) --, UnitLevel( Ambiguate( characterName, "none" ) ), nil, nil )
@@ -614,7 +632,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceBarClick"] = experienceBarClick
 	local experienceBarText = experienceBar:CreateFontString( experienceName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	experienceBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	experienceBarText:SetFont( textFont , textSize, "OUTLINE")
 	experienceBarText:SetAllPoints()
 	experienceBarText.playerExperience = 100
 	experienceBarText.playerMaxExperience = 100
@@ -639,7 +657,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceArtBarClick"] = experienceArtBarClick
 	local experienceArtBarText = experienceArtBar:CreateFontString( experienceArtName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceArtBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	experienceArtBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	experienceArtBarText:SetFont( textFont , textSize, "OUTLINE")
 	experienceArtBarText:SetAllPoints()
 	experienceArtBarText.artifactName = "N/A"
 	experienceArtBarText.artifactXP = 0
@@ -665,7 +683,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["experienceHonorBarClick"] = experienceHonorBarClick
 	local experienceHonorBarText = experienceHonorBar:CreateFontString( experienceHonorName.."Text", "OVERLAY", "GameFontNormal" )
 	experienceHonorBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	experienceHonorBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	experienceHonorBarText:SetFont( textFont , textSize, "OUTLINE")
 	experienceHonorBarText:SetAllPoints()
 	experienceHonorBarText.honorLevel = 0
 	experienceHonorBarText.honorXP = 0
@@ -692,7 +710,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["reputationBarClick"] = reputationBarClick
 	local reputationBarText = reputationBar:CreateFontString( reputationName.."Text", "OVERLAY", "GameFontNormal" )
 	reputationBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	reputationBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	reputationBarText:SetFont( textFont , textSize, "OUTLINE")
 	reputationBarText:SetAllPoints()
 	reputationBarText.reputationName = "Faction"
 	reputationBarText.reputationStandingID = 4
@@ -722,7 +740,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["healthBarClick"] = healthBarClick
 	local healthBarText = healthBar:CreateFontString( healthName.."Text", "OVERLAY", "GameFontNormal" )
 	healthBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	healthBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	healthBarText:SetFont( textFont , textSize, "OUTLINE")
 	healthBarText:SetAllPoints()
 	healthBarText.playerHealth = 100
 	healthBarText.playerMaxHealth = 100
@@ -747,7 +765,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["powerBarClick"] = powerBarClick
 	local powerBarText = powerBar:CreateFontString( powerName.."Text", "OVERLAY", "GameFontNormal" )
 	powerBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
-	powerBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	powerBarText:SetFont( textFont , textSize, "OUTLINE")
 	powerBarText:SetAllPoints()
 	powerBarText.playerPower = 100
 	powerBarText.playerMaxPower = 100
@@ -773,7 +791,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["comboBarClick"] = comboBarClick
 	local comboBarText = comboBar:CreateFontString( comboName.."Text", "OVERLAY", "GameFontNormal" )
 	comboBarText:SetTextColor( 1.00, 1.00, 0.0, 1.00 )
-	comboBarText:SetFont("Fonts\\FRIZQT__.TTF", 11, "OUTLINE")
+	comboBarText:SetFont( textFont , textSize, "OUTLINE")
 	comboBarText:SetAllPoints()
 	comboBarText.playerCombo = 0
 	comboBarText.playerMaxCombo = 5
@@ -848,6 +866,10 @@ function AJM:ShowFollowTooltip( frame, followBar, characterName, canShow )
 end
 
 
+
+
+
+
 function AJM:HideJambaTeamStatusBar( characterName )	
 	local parentFrame = JambaDisplayTeamListFrame
 	-- Get (or create and get) the character status bar information.
@@ -881,6 +903,7 @@ function AJM:HideJambaTeamStatusBar( characterName )
 	characterStatusBar["comboBarClick"]:Hide()
 end	
 
+
 function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )	
 	local parentFrame = JambaDisplayTeamListFrame
 	-- Get (or create and get) the character status bar information.
@@ -894,8 +917,101 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 	local characterWidth = GetCharacterWidth()
 	local positionLeft = 0
 	local positionTop = -AJM.db.teamListTitleHeight - (AJM.db.teamListVerticalSpacing * 2)
+	local charactersPerRow = AJM.db.charactersPerRow
+	
+	--	frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() * AJM.totalMembersDisplayed) )
+	--	frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() )
+	
+	
 	if AJM.db.teamListHorizontal == true then
-		positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
+		--if AJM.db.listInGroupsofFive == true then
+			if characterPosition < charactersPerRow then
+				positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
+				AJM:Print("test1", positionLeft)
+				parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() ) 
+			-- Row 2
+			elseif 	characterPosition < ( charactersPerRow * 2 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight)
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + (positionLeft) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + ( GetCharacterHeight() ) * 2 ) 
+			-- Row 3	
+			elseif 	characterPosition < ( charactersPerRow * 3 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 2 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 2 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 3 )
+			-- Row 4	
+			elseif 	characterPosition < ( charactersPerRow * 4 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 3 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 3 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 4 )
+			-- Row 5
+			elseif 	characterPosition < ( charactersPerRow * 5 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 4 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 4 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 5)
+			-- Row 6
+			elseif 	characterPosition < ( charactersPerRow * 6 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 5 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 5 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 6 )				
+			--Row 7
+			elseif 	characterPosition < ( charactersPerRow * 7 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 6 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 6 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 7 )
+			--Row 8
+			elseif 	characterPosition < ( charactersPerRow * 8 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 7 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 7 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 8 )				
+			--Row 9
+			elseif 	characterPosition < ( charactersPerRow * 9 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 8 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 8 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 9 )
+			--Row 10
+			elseif 	characterPosition < ( charactersPerRow * 10 ) then
+				positionLeft = -6 + (characterPosition - charactersPerRow * 9 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+				positionTop = (positionTop - characterHeight * 9 )
+				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 10 )
+			else		
+				return
+				
+			
+			
+			end	
+
+
+
+
+
+	--AJM:Print("test1541", characterPosition)
+		
+		--[[
+		if characterPosition < characterRows then
+			AJM:Print("test1", characterName)
+			newCharacterPosition = characterPosition - characterRows
+			positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
+			test = characterRows + characterRows
+			AJM:Print("test1", characterName, test)
+		elseif characterPosition < test then
+			AJM:Print("test2", characterName)
+			test = characterRows + characterRows
+		elseif 	characterPosition < test then
+			AJM:Print("test3", characterName)
+			
+		end
+		]]
 	else
 		positionLeft = 6
 		positionTop = positionTop - (characterPosition * characterHeight)
@@ -1243,7 +1359,28 @@ local function SettingsCreateDisplayOptions( top )
 	-- Create appearance & layout.
 	JambaHelperSettings:CreateHeading( AJM.settingsControl, L["Appearance & Layout"], movingTop, true )
 	movingTop = movingTop - headingHeight
-	AJM.settingsControl.displayOptionsCheckBoxStackVertically = JambaHelperSettings:CreateCheckBox( 
+		AJM.settingsControl.displayOptionsCheckBoxShowListTitle = JambaHelperSettings:CreateCheckBox( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		left, 
+		movingTop, 
+		L["Show Title"],
+		AJM.SettingsToggleShowTeamListTitle,
+		L["Show Team List Title"]
+	)
+	movingTop = movingTop - checkBoxHeight - verticalSpacing
+	AJM.settingsControl.displayOptionsCharactersPerBar = JambaHelperSettings:CreateSlider( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		left, 
+		movingTop, 
+		L["Characters Per Bar"]
+	)
+	AJM.settingsControl.displayOptionsCharactersPerBar:SetSliderValues( 1, 10, 1 )
+	AJM.settingsControl.displayOptionsCharactersPerBar:SetCallback( "OnValueChanged", AJM.SettingsChangeCharactersPerBar )
+	--movingTop = movingTop - sliderHeight - sectionSpacing
+	
+--[[	AJM.settingsControl.displayOptionsCheckBoxStackVertically = JambaHelperSettings:CreateCheckBox( 
 		AJM.settingsControl, 
 		headingWidth, 
 		left, 
@@ -1263,20 +1400,13 @@ local function SettingsCreateDisplayOptions( top )
 		L["Display Team List Horizontally"]
 	)
 	movingTop = movingTop - checkBoxHeight - verticalSpacing
-	AJM.settingsControl.displayOptionsCheckBoxShowListTitle = JambaHelperSettings:CreateCheckBox( 
-		AJM.settingsControl, 
-		headingWidth, 
-		left, 
-		movingTop, 
-		L["Show Title"],
-		AJM.SettingsToggleShowTeamListTitle,
-		L["Show Team List Title"]
-	)
-	movingTop = movingTop - checkBoxHeight - verticalSpacing
+]]	
+
+	--movingTop = movingTop - checkBoxHeight - verticalSpacing
 	AJM.settingsControl.displayOptionsTeamListScaleSlider = JambaHelperSettings:CreateSlider( 
 		AJM.settingsControl, 
-		headingWidth, 
-		left, 
+		halfWidthSlider, 
+		column2left, 
 		movingTop, 
 		L["Scale"]
 	)
@@ -1285,7 +1415,7 @@ local function SettingsCreateDisplayOptions( top )
 	movingTop = movingTop - sliderHeight - verticalSpacing
 	AJM.settingsControl.displayOptionsTeamListTransparencySlider = JambaHelperSettings:CreateSlider( 
 		AJM.settingsControl, 
-		headingWidth, 
+		halfWidthSlider, 
 		left, 
 		movingTop, 
 		L["Transparency"]
@@ -1335,9 +1465,27 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop - 15,
 		L["Background Colour"]
 	)
-	
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.displayOptionsBackgroundColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBackgroundColourPickerChanged )
+	--Set the font
+	movingTop = movingTop - mediaHeight - verticalSpacing
+	AJM.settingsControl.displayOptionsTeamListMediaFont = JambaHelperSettings:CreateMediaFont( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		left, 
+		movingTop,
+		L["Font"]
+	)
+	AJM.settingsControl.displayOptionsTeamListMediaFont:SetCallback( "OnValueChanged", AJM.SettingsChangeFontStyle )
+	AJM.settingsControl.displayOptionsSetFontSize = JambaHelperSettings:CreateSlider( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		column2left, 
+		movingTop, 
+		L["Font Size"]
+	)
+	AJM.settingsControl.displayOptionsSetFontSize:SetSliderValues( 8, 20 , 1 )
+	AJM.settingsControl.displayOptionsSetFontSize:SetCallback( "OnValueChanged", AJM.SettingsChangeFontSize )
 	movingTop = movingTop - mediaHeight - sectionSpacing	
 	-- Create portrait.
 	JambaHelperSettings:CreateHeading( AJM.settingsControl, L["Portrait"], movingTop, true )
@@ -1600,7 +1748,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Width"]
 	)
-	AJM.settingsControl.displayOptionsPowerStatusWidthSlider:SetSliderValues( 15, 100, 1 )
+	AJM.settingsControl.displayOptionsPowerStatusWidthSlider:SetSliderValues( 15, 300, 1 )
 	AJM.settingsControl.displayOptionsPowerStatusWidthSlider:SetCallback( "OnValueChanged", AJM.SettingsChangePowerStatusWidth )
 	AJM.settingsControl.displayOptionsPowerStatusHeightSlider = JambaHelperSettings:CreateSlider( 
 		AJM.settingsControl, 
@@ -1609,7 +1757,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Height"]
 	)
-	AJM.settingsControl.displayOptionsPowerStatusHeightSlider:SetSliderValues( 15, 100, 1 )
+	AJM.settingsControl.displayOptionsPowerStatusHeightSlider:SetSliderValues( 10, 100, 1 )
 	AJM.settingsControl.displayOptionsPowerStatusHeightSlider:SetCallback( "OnValueChanged", AJM.SettingsChangePowerStatusHeight )
 	movingTop = movingTop - sliderHeight - sectionSpacing
 	-- Create Combo Point status.
@@ -1659,7 +1807,7 @@ local function SettingsCreateDisplayOptions( top )
 		movingTop, 
 		L["Height"]
 	)
-	AJM.settingsControl.displayOptionsComboStatusHeightSlider:SetSliderValues( 15, 100, 1 )
+	AJM.settingsControl.displayOptionsComboStatusHeightSlider:SetSliderValues( 10, 100, 1 )
 	AJM.settingsControl.displayOptionsComboStatusHeightSlider:SetCallback( "OnValueChanged", AJM.SettingsChangeComboStatusHeight )
 	movingTop = movingTop - sliderHeight - sectionSpacing
 --[[
@@ -1739,14 +1887,18 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.displayOptionsCheckBoxShowTeamListOnlyOnMaster:SetValue( AJM.db.showTeamListOnMasterOnly )
 	AJM.settingsControl.displayOptionsCheckBoxHideTeamListInCombat:SetValue( AJM.db.hideTeamListInCombat )
 	AJM.settingsControl.displayOptionsCheckBoxEnableClique:SetValue( AJM.db.enableClique )
-	AJM.settingsControl.displayOptionsCheckBoxStackVertically:SetValue( AJM.db.barsAreStackedVertically )
-	AJM.settingsControl.displayOptionsCheckBoxTeamHorizontal:SetValue( AJM.db.teamListHorizontal )
+	AJM.settingsControl.displayOptionsCharactersPerBar:SetValue( AJM.db.charactersPerRow )
+--	AJM.settingsControl.displayOptionsCheckBoxStackVertically:SetValue( AJM.db.barsAreStackedVertically )
+--	AJM.settingsControl.displayOptionsCheckBoxTeamHorizontal:SetValue( AJM.db.teamListHorizontal )
 	AJM.settingsControl.displayOptionsCheckBoxShowListTitle:SetValue( AJM.db.showListTitle )
 	AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetValue( AJM.db.frameAlpha )
 	AJM.settingsControl.displayOptionsTeamListScaleSlider:SetValue( AJM.db.teamListScale )
 	AJM.settingsControl.displayOptionsTeamListMediaStatus:SetValue( AJM.db.statusBarTexture ) 
 	AJM.settingsControl.displayOptionsTeamListMediaBorder:SetValue( AJM.db.borderStyle )
 	AJM.settingsControl.displayOptionsTeamListMediaBackground:SetValue( AJM.db.backgroundStyle )
+	AJM.settingsControl.displayOptionsTeamListMediaFont:SetValue( AJM.db.fontStyle )
+	AJM.settingsControl.displayOptionsSetFontSize:SetValue( AJM.db.fontSize )
+	
 	AJM.settingsControl.displayOptionsCheckBoxShowPortrait:SetValue( AJM.db.showCharacterPortrait )
 	AJM.settingsControl.displayOptionsPortraitWidthSlider:SetValue( AJM.db.characterPortraitWidth )
 	AJM.settingsControl.displayOptionsCheckBoxShowFollowStatus:SetValue( AJM.db.showFollowStatus )
@@ -1793,14 +1945,19 @@ function AJM:SettingsRefresh()
 		AJM.settingsControl.displayOptionsCheckBoxShowTeamListOnlyOnMaster:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsCheckBoxHideTeamListInCombat:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsCheckBoxEnableClique:SetDisabled( not AJM.db.showTeamList )
-		AJM.settingsControl.displayOptionsCheckBoxStackVertically:SetDisabled( not AJM.db.showTeamList )
-		AJM.settingsControl.displayOptionsCheckBoxTeamHorizontal:SetDisabled( not AJM.db.showTeamList )
+		AJM.settingsControl.displayOptionsCharactersPerBar:SetDisabled(not AJM.db.showTeamList )
+		--AJM.settingsControl.displayOptionsCheckBoxStackVertically:SetDisabled( not AJM.db.showTeamList )
+		--AJM.settingsControl.displayOptionsCheckBoxTeamHorizontal:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsCheckBoxShowListTitle:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListScaleSlider:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListTransparencySlider:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListMediaStatus:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListMediaBorder:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsTeamListMediaBackground:SetDisabled( not AJM.db.showTeamList )
+		AJM.settingsControl.displayOptionsTeamListMediaFont:SetDisabled( not AJM.db.showTeamList )
+		AJM.settingsControl.displayOptionsSetFontSize:SetDisabled( not AJM.db.showTeamList )
+		
+		
 		AJM.settingsControl.displayOptionsCheckBoxShowPortrait:SetDisabled( not AJM.db.showTeamList )
 		AJM.settingsControl.displayOptionsPortraitWidthSlider:SetDisabled( not AJM.db.showTeamList or not AJM.db.showCharacterPortrait )
 		AJM.settingsControl.displayOptionsCheckBoxShowFollowStatus:SetDisabled( not AJM.db.showTeamList)
@@ -1844,6 +2001,7 @@ function AJM:SettingsRefresh()
 			AJM:RefreshTeamListControls()
 			AJM:SettingsUpdateBorderStyle()
 			AJM:SettingsUpdateStatusBarTexture()
+			AJM:SettingsUpdateFontStyle()
 			AJM:SetTeamListVisibility()	
 			AJM:SettingsUpdateFollowTextAll()
 			AJM:SettingsUpdateExperienceAll()
@@ -1867,13 +2025,16 @@ function AJM:JambaOnSettingsReceived( characterName, settings )
 		AJM.db.showTeamListOnMasterOnly = settings.showTeamListOnMasterOnly
 		AJM.db.hideTeamListInCombat = settings.hideTeamListInCombat
 		AJM.db.enableClique = settings.enableClique
-		AJM.db.barsAreStackedVertically = settings.barsAreStackedVertically
-		AJM.db.teamListHorizontal = settings.teamListHorizontal
+		AJM.db.charactersPerRow = settings.charactersPerRow
+		--AJM.db.barsAreStackedVertically = settings.barsAreStackedVertically
+		--AJM.db.teamListHorizontal = settings.teamListHorizontal
 		AJM.db.showListTitle = settings.showListTitle
 		AJM.db.teamListScale = settings.teamListScale
 		AJM.db.statusBarTexture = settings.statusBarTexture
 		AJM.db.borderStyle = settings.borderStyle
 		AJM.db.backgroundStyle = settings.backgroundStyle
+		AJM.db.fontStyle = settings.fontStyle
+		
 		AJM.db.showCharacterPortrait = settings.showCharacterPortrait
 		AJM.db.characterPortraitWidth = settings.characterPortraitWidth
 		AJM.db.showFollowStatus = settings.showFollowStatus
@@ -1963,6 +2124,12 @@ function AJM:SettingsToggleEnableClique( event, checked )
 	AJM:SettingsRefresh()
 end
 
+function AJM:SettingsChangeCharactersPerBar( event, value )
+	AJM.db.charactersPerRow = tonumber( value )
+	AJM:SettingsRefresh()
+end
+
+--[[
 function AJM:SettingsToggleStackVertically( event, checked )
 	AJM.db.barsAreStackedVertically = checked
 	AJM:SettingsRefresh()
@@ -1972,6 +2139,7 @@ function AJM:SettingsToggleTeamHorizontal( event, checked )
 	AJM.db.teamListHorizontal = checked
 	AJM:SettingsRefresh()
 end
+]]
 
 function AJM:SettingsToggleShowTeamListTitle( event, checked )
 	AJM.db.showListTitle = checked
@@ -2002,6 +2170,17 @@ function AJM:SettingsChangeBackgroundStyle( event, value )
 	AJM.db.backgroundStyle = value
 	AJM:SettingsRefresh()
 end
+
+function AJM:SettingsChangeFontStyle( event, value )
+	AJM.db.fontStyle = value
+	AJM:SettingsRefresh()
+end
+
+function AJM:SettingsChangeFontSize( event, value )
+	AJM.db.fontSize = value
+	AJM:SettingsRefresh()
+end
+
 
 function AJM:SettingsToggleShowPortrait( event, checked )
 	AJM.db.showCharacterPortrait = checked

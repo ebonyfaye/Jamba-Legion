@@ -19,7 +19,6 @@ Add Font and text size to GUI <TODO.
 
 Only Shows character name if the character is not from the same server < jamba-questwatcher. <TODO
 
-Have a look into Jmaba-quest with Taint > http://www.wowinterface.com/downloads/info22630-NoTaintUIDropDownMenu.html
 
 TODO: BUG: JambaDispaly Team, -Add Own Code to support, for Millon and not just thusand when the player is over 1M HP > so, 1.5m was 1500 k
 
@@ -49,7 +48,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	- Updated LibActionButton
 	- Updated AceGUI-3.0-SharedMediaWidgets
 	- Updated settings Frame for config. Resize and close button. 
-	- added some News to the home page.	
+	- added some News to the GUIConfig page.	
 	
 *Jamba-Team
 	- Added two new ways to add team members to the team with command line and GUI.
@@ -74,7 +73,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	-New Bar Now part of the QuestMap Frame. with new buttons(TODO: Beta - Fix/change icons.)
 		-Abandon All
 			-Works just like it used to. It loops through all of your toons and abandons all the quests on each toon. 
-			-NOW ignores quests that cannot be abandoned, such as the Account Wide quests Luxlunae mentioned.
+			-Now ignores quests that cannot be abandoned, such as the Account Wide quests Luxlunae mentioned.
 		-Share All
 			-Used to just loop through the current toons quests and just shared those, NOW loops through all toons and attempts to share all quests from all toons.
 		-Track All
@@ -88,16 +87,16 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 *Jamba-Display-Team
 	- Values are now Abbreviated to smaller Numbers.
 	- Nolonger Shows max Value when showing Percentage
--	- Added support to change the font And text size (TODO)
+	- Added support to change the font And text size
 	- Added a NewTooltip when you hover over Follow bar to show
 		- Level of minion If not level capped.
 		- ItemLevel of minion.
 		- Durability of the minion.
-		- Bag Space of the minion (this will phase out the old barspace bar to make room for artifact Weapon-XP and other Legion Stuff)
+		- Bag Space of the minion.
 		- Gold of the minion.
 		- Mail if the minion has mail and who it is from (Same as minimap)
 	- Tooltip should nolonger show in combat.	
-	- Removed Display BagSpace Bar
+	- Removed the old Display Bag Space Bar added to tooltips
 	- Renamed "Combo PointBar" to "Class Power Bar"
 		- Added Support for Other class Power
 			-Warlocks - Shoul Shards
@@ -106,18 +105,19 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 			-Mage - ARCANE CHARGES
 			-Monk - CHI
 	
-	- Removed Reputation bar.
+	- Removed the Old Reputation bar.
 	- Changes to the XP bar.
-		- Your can show up for four Xp Bars For the 4 xp tpyes each bar will take the same space and makes its bar a little smaller.
+		- Your can show up for four Xp Bars For the 4 xp tpyes each bar is on the same xp frame and makes each bar a little smaller.
 			- Xp, Players XP.
 			- Artfact XP, Show the players wepon Artifact XP.
-			- Show Honor XP, Show a bar for the new honor xp bar in game.
+			- Show Honor XP, Show a bar for the new honor xp bar.
 			- Show Reputation, show a bar for Reputation
-	- Added new checks to fix The FollowDance when spaming follow key.		
+	- Added new checks to fix The FollowDance when spaming follow key.
+	- You can now specify the number of characters per row up to 10.
 				
 *Jamba-Toon
 	- Removed Jamba-Currency From the toon module
-	- Added Team Release Prompts when you die to Release the spirits of all minions And release back to the minions bodys
+	- Added Team Release Prompts when you die to Release the spirits of all minions. And release back to the minions bodys.
 			
 * New Module Jamba-Curr
 	- All Currency Information

@@ -541,6 +541,7 @@ function AJM:OnInitialize()
 	AJM:LoadJambaModule( "Jamba-Trade" )
 	AJM:LoadJambaModule( "Jamba-Video" )
 	AJM:LoadJambaModule( "Jamba-Curr" )
+	AJM:LoadJambaModule( "Jamba-Mount" )
 end
 
 function AJM:LoadJambaModule( moduleName )
