@@ -103,6 +103,8 @@ AJM.settings = {
 		currencyFrameBorderColourA = 1.0,		
 		currencyBorderStyle = L["Blizzard Tooltip"],
 		currencyBackgroundStyle = L["Blizzard Dialog Background"],
+		currencyFontStyle = L["Arial Narrow"],
+		currencyFontSize = 12,		
 		currencyScale = 1,
 		currencyNameWidth = 60,
 		currencyPointsWidth = 50,
@@ -392,6 +394,25 @@ function AJM:SettingsCreateCurrency( top )
 	AJM.settingsControl.currencyBackgroundColourPicker:SetHasAlpha( true )
 	AJM.settingsControl.currencyBackgroundColourPicker:SetCallback( "OnValueConfirmed", AJM.SettingsBackgroundColourPickerChanged )
 	movingTop = movingTop - mediaHeight - verticalSpacing
+	--Font
+	AJM.settingsControl.currencyMediaFont = JambaHelperSettings:CreateMediaFont( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		left, 
+		movingTop,
+		L["Font"]
+	)
+	AJM.settingsControl.currencyMediaFont:SetCallback( "OnValueChanged", AJM.SettingsChangeFontStyle )
+	AJM.settingsControl.currencyFontSize = JambaHelperSettings:CreateSlider( 
+		AJM.settingsControl, 
+		halfWidthSlider, 
+		column2left, 
+		movingTop, 
+		L["Font Size"]
+	)	
+	AJM.settingsControl.currencyFontSize:SetSliderValues( 8, 20 , 1 )
+	AJM.settingsControl.currencyFontSize:SetCallback( "OnValueChanged", AJM.SettingsChangeFontSize )
+	movingTop = movingTop - mediaHeight - verticalSpacing
 	AJM.settingsControl.currencySliderSpaceForName = JambaHelperSettings:CreateSlider( 
 		AJM.settingsControl, 
 		headingWidth, 
@@ -470,10 +491,10 @@ function AJM:SettingsRefresh()
 	AJM.settingsControl.currencyScaleSlider:SetValue( AJM.db.currencyScale )
 	AJM.settingsControl.currencyMediaBorder:SetValue( AJM.db.currencyBorderStyle )
 	AJM.settingsControl.currencyMediaBackground:SetValue( AJM.db.currencyBackgroundStyle )
-
-
 	AJM.settingsControl.currencyBackgroundColourPicker:SetColor( AJM.db.currencyFrameBackgroundColourR, AJM.db.currencyFrameBackgroundColourG, AJM.db.currencyFrameBackgroundColourB, AJM.db.currencyFrameBackgroundColourA )
 	AJM.settingsControl.currencyBorderColourPicker:SetColor( AJM.db.currencyFrameBorderColourR, AJM.db.currencyFrameBorderColourG, AJM.db.currencyFrameBorderColourB, AJM.db.currencyFrameBorderColourA )
+	AJM.settingsControl.currencyMediaFont:SetValue( AJM.db.currencyFontStyle )
+	AJM.settingsControl.currencyFontSize:SetValue( AJM.db.currencyFontSize )
 	AJM.settingsControl.currencySliderSpaceForName:SetValue( AJM.db.currencyNameWidth )
 	AJM.settingsControl.currencySliderSpaceForGold:SetValue( AJM.db.currencyGoldWidth )
 	AJM.settingsControl.currencySliderSpaceForPoints:SetValue( AJM.db.currencyPointsWidth )
@@ -482,6 +503,7 @@ function AJM:SettingsRefresh()
 	if AJM.currencyListFrameCreated == true then
 		AJM:CurrencyListSetColumnWidth()
 		AJM:SettingsUpdateBorderStyle()
+		AJM:SettingsUpdateFontStyle()
 		AJM:CurrencyUpdateWindowLock()
 		JambaToonCurrencyListFrame:SetScale( AJM.db.currencyScale )
 		AJM:UpdateHendingText()
@@ -599,6 +621,16 @@ function AJM:SettingsBorderColourPickerChanged( event, r, g, b, a )
 	AJM:SettingsRefresh()
 end
 
+function AJM:SettingsChangeFontStyle( event, value )
+	AJM.db.currencyFontStyle = value
+	AJM:SettingsRefresh()
+end
+
+function AJM:SettingsChangeFontSize( event, value )
+	AJM.db.currencyFontSize = value
+	AJM:SettingsRefresh()
+end
+
 function AJM:SettingsChangeSliderSpaceForName( event, value )
 	AJM.db.currencyNameWidth = tonumber( value )
 	AJM:SettingsRefresh()
@@ -666,7 +698,6 @@ function AJM:JambaOnSettingsReceived( characterName, settings )
 		-- Update the settings.
 		AJM.db.currGold = settings.currGold
 		AJM.db.currGoldInGuildBank = settings.currGoldInGuildBank
-		--Changed Text
 		AJM.db.CcurrTypeOne = settings.CcurrTypeOne
 		AJM.db.CcurrTypeOneName = settings.CcurrTypeOneName
 		AJM.db.CcurrTypeTwo = settings.CcurrTypeTwo
@@ -694,6 +725,10 @@ function AJM:JambaOnSettingsReceived( characterName, settings )
 		AJM.db.currencyFrameBorderColourG = settings.currencyFrameBorderColourG
 		AJM.db.currencyFrameBorderColourB = settings.currencyFrameBorderColourB
 		AJM.db.currencyFrameBorderColourA = settings.currencyFrameBorderColourA	
+		AJM.db.currencyMediaBorder = settings.currencyBorderStyle
+		AJM.db.currencyMediaBackground = settings.currencyBackgroundStyle
+		AJM.db.currencyFontSize = settings.currencyFontSize
+		AJM.db.currencyFontStyle = settings.currencyFontStyle
 		AJM.db.currencyNameWidth = settings.currencyNameWidth
 		AJM.db.currencyPointsWidth = settings.currencyPointsWidth
 		AJM.db.currencyGoldWidth = settings.currencyGoldWidth
@@ -931,10 +966,12 @@ function AJM:CreateJambaToonCurrencyListFrame()
 	updateButton:SetHeight( 22 )
 	updateButton:SetWidth( 55 )
 	updateButton:SetText( L["Update"] )		
+	
 	frame.updateButton = updateButton
 	
 	AJM:SettingsUpdateBorderStyle()
 	AJM:CurrencyUpdateWindowLock()
+	AJM:SettingsUpdateFontStyle()
 	JambaToonCurrencyListFrame:Hide()
 	AJM.currencyListFrameCreated = true
 	AJM:UpdateHendingText()
@@ -991,6 +1028,32 @@ function AJM:SettingsUpdateBorderStyle()
 	frame:SetBackdropBorderColor( AJM.db.currencyFrameBorderColourR, AJM.db.currencyFrameBorderColourG, AJM.db.currencyFrameBorderColourB, AJM.db.currencyFrameBorderColourA )
 	frame:SetAlpha( AJM.db.currencyFrameAlpha )
 end
+
+function AJM:SettingsUpdateFontStyle()
+	local textFont = AJM.SharedMedia:Fetch( "font", AJM.db.currencyFontStyle )
+	local textSize = AJM.db.currencyFontSize
+	local frame = JambaToonCurrencyListFrame
+	frame.titleName:SetFont( textFont , textSize , "OUTLINE")
+	frame.characterNameText:SetFont( textFont , textSize , "OUTLINE")
+	frame.GoldText:SetFont( textFont , textSize , "OUTLINE")
+	frame.TotalGoldGuildTitleText:SetFont( textFont , textSize , "OUTLINE")
+	frame.TotalGoldGuildText:SetFont( textFont , textSize , "OUTLINE")
+	frame.TotalGoldText:SetFont( textFont , textSize , "OUTLINE")
+	frame.TotalGoldTitleText:SetFont( textFont , textSize , "OUTLINE")
+	for characterName, currencyFrameCharacterInfo in pairs( AJM.currencyFrameCharacterInfo ) do
+		AJM:Print("test", characterName)
+		--currencyFrameCharacterInfo.characterNameText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.characterNameText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.GoldText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeOneText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeTwoText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeThreeText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeFourText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeFiveText:SetFont( textFont , textSize , "OUTLINE")
+		currencyFrameCharacterInfo.TypeSixText:SetFont( textFont , textSize , "OUTLINE")
+	end
+end
+
 
 function AJM:CurrencyListSetHeight()
 	local additionalLines = 0
@@ -1214,7 +1277,6 @@ function AJM:CurrencyListSetColumnWidth()
 		parentFrame.TotalGoldText:Hide()
 		parentFrame.TotalGoldGuildTitleText:Hide()
 		parentFrame.TotalGoldGuildText:Hide()	
-
 	end
 end
 
@@ -1326,6 +1388,8 @@ function AJM:CreateJambaCurrencyFrameInfo( characterName, parentFrame )
 	frameTypeSixText:SetJustifyH( "CENTER" )
 	currencyFrameCharacterInfo.TypeSixText = frameTypeSixText
 	left = left + spacing
+	
+	AJM:SettingsUpdateFontStyle()
 end
 
 function AJM:JambaToonHideCurrency()

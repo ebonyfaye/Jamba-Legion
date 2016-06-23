@@ -53,6 +53,9 @@ L["Enable Clique Support - **reload UI to take effect**"] = true
 L["Transparency"] = true
 L["Border Colour"] = true
 L["Background Colour"] = true
+L["Arial Narrow"] = true
+L["Font"] = true
+L["Font Size"] = true
 L["Display Team List Horizontally"] = true
 L["Show Team List Title"] = true
 L["Bag Information"] = true
@@ -77,7 +80,7 @@ L["Has New Mail From:"] = true
 L["Currency:"] = true
 L["Unknown Sender"] = true
 L["Show ToolTip"] = true
-
+L["Characters Per Bar"] = true
 --Help System
 
 L["Show Team List"] = true

@@ -3,28 +3,8 @@ The Repo for legion WoW 7.0.3
 ---------------------------
 Changes:
 
--- Jamba-Curr Add Legion defaults Currencys http://legion.wowhead.com/currencies/legion
-		Is now a dropbox Box!!! tidy all up -- Ebony 
-		TODO: check there is no missing Currencys
+TODO: Trun off Print msgs on jamba-FTL
 	
--- DM have a random % quest that need adding to jamba-questwatcher < need to look this up *sigh* < have seen this bar a few times now on normal quests.
-
-		
-Add Font and text size to GUI <TODO.
-		Jamba-Team display
-		Jamba-Curr
-		Jamba-itemUse
-		Jamba-QuestWatcher
-		Jamba-Target
-
-Only Shows character name if the character is not from the same server < jamba-questwatcher. <TODO
-
-
-TODO: BUG: JambaDispaly Team, -Add Own Code to support, for Millon and not just thusand when the player is over 1M HP > so, 1.5m was 1500 k
-
-TODO: Fix jamba set master button in team becouse you need to push settings after you press it? more work easy to fix.
-
-TODO: Have a Look at Jamba-FTL spaming chat or assit not updaing right.
 	
 ---------------------------
 ChangeLogs:
@@ -58,13 +38,14 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 	- Removed Loot options as you can not not set loot outside of dungons/raids.
 	
 
-* Jamba-Quest-Watcher 
+* Jamba-Quest-Tracker
 	-Renamed from Jamba Quest Watcher to Jamba Objective Tracker(To fit in line with blizzards own naming)
 		- Now Shows Scenario Objective on the watcher.
 		- Shows Bouns Scenario Objective.
 		- Fixed with Broken Shore QuestLines a % bar needed codeing in.
 		- Only Show stage if there is more the one stage (so does not show in dungons.)
-		- Only Shows character name if the character is not from the same server. < TODO
+		- Added support to change the font And text size
+		- Only Shows character name if the character is not from the same server.
 
 -- This needs a lot of work still EBONY TODO: taint on dropdown box.
 
@@ -128,6 +109,7 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
 		- Now shows the Currency Gold Icons when showing gold/Sliver/Copper
 		- No Longer Shows Currency for Offline minions.
 		- Should Now Order minions That are Offline/Online correcly.
+		- Added support to change the font And text size.
 		
 * Jamba-Taxi
 	- Fixed a Frame Bug with The new flight maps in borken island (Legion Zones)		

@@ -46,8 +46,8 @@ AJM.settings = {
 		teamListHorizontalSpacing = 6,
 		barVerticalSpacing = 2,
 		barHorizontalSpacing = 2,
-		--listInGroupsofFive = true,
 		charactersPerRow = 9,
+		--Old code kept for Legacy Purpose
 		barsAreStackedVertically = true,
 		teamListHorizontal = true,
 		showListTitle = true,
@@ -227,7 +227,7 @@ local function GetCharacterHeight()
 	
 	else
 		height = max( heightPortrait, heightFollowStatus, heightExperienceStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
-	--height = max( heightPortrait, heightBagInformation, heightFollowStatus, heightExperienceStatus, heightReputationStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
+		--height = max( heightPortrait, heightBagInformation, heightFollowStatus, heightExperienceStatus, heightReputationStatus, heightHealthStatus, heightPowerStatus, heightComboStatus )
 	end
 	return height
 end
@@ -279,15 +279,6 @@ end
 
 local function UpdateJambaTeamListDimensions()
 	local frame = JambaDisplayTeamListFrame
-	local charactersPerRow = AJM.db.charactersPerRow
-	local MaxCharacters = JambaApi.GetTeamListMaximumOrder()
-	--local test = 0
-	--if (MaxCharacters / charactersPerRow ) > 0. and (MaxCharacters / charactersPerRow ) < 0. then
-		test = math.floor(MaxCharacters / charactersPerRow )
-	--else
-	--	test = (MaxCharacters / charactersPerRow )
-	--end	
-	--	AJM:Print("test510", test)
 	if AJM.db.showListTitle == true then
 		AJM.db.teamListTitleHeight = 15
 		JambaDisplayTeamListFrame.titleName:SetText( L["Jamba Team"] )
@@ -296,19 +287,9 @@ local function UpdateJambaTeamListDimensions()
 		JambaDisplayTeamListFrame.titleName:SetText( "" )
 	end
 	if AJM.db.teamListHorizontal == true then
-		
-			--frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() )  * ( charactersPerRow ) )
-			--frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * test ) ---( math.ceil(MaxCharacters) / charactersPerRow )   )
-			AJM.frameWidth = frame:GetWidth()
-		
-		
-		AJM:Print("test", AJM.totalMembersDisplayed, frame:GetWidth() )
-		--else
+		--Old code kept for Legacy Purpose
 		--	frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() * AJM.totalMembersDisplayed) )
 		--	frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() )
-	
-		--end
-	
 	else
 		frame:SetWidth( (AJM.db.teamListHorizontalSpacing * 3) + GetCharacterWidth() )
 		frame:SetHeight( AJM.db.teamListTitleHeight + (GetCharacterHeight() * AJM.totalMembersDisplayed) + (AJM.db.teamListVerticalSpacing * 3) )
@@ -415,8 +396,6 @@ function AJM:RefreshTeamListControlsHide()
 		-- Hide their status bar.
 		AJM:HideJambaTeamStatusBar( characterName )		
 	end
-	
-	
 	UpdateJambaTeamListDimensions()
 end
 
@@ -425,16 +404,7 @@ function AJM:RefreshTeamListControlsShow()
 		AJM.refreshShowTeamListControlsPending = true
 		return
 	end
-	-- Iterate all the team members.
-	--[[
-	AJM.totalMembersDisplayed = 0
-	AJM.groupNumber = 0
-	AJM.totalUnitsPerRows = 5
-	local maxRows = JambaApi.GetTeamListMaximumOrder()
-	local maxGroups = maxRows / AJM.totalUnitsPerRows
-	]]
-	
-	
+
 	AJM.totalMembersDisplayed = 0
 	for index, characterName in JambaApi.TeamListOrdered() do
 		characterName = JambaUtilities:AddRealmToNameIfMissing ( characterName )
@@ -487,7 +457,6 @@ function AJM:SettingsUpdateFontStyle()
 	local textFont = AJM.SharedMedia:Fetch( "font", AJM.db.fontStyle )
 	local textSize = AJM.db.fontSize
 	for characterName, characterStatusBar in pairs( AJM.characterStatusBar ) do	
-		--characterStatusBar["followBarText"]:SetFont("Fonts\\FRIZQT__.TTF", textSize , "OUTLINE")
 		characterStatusBar["followBarText"]:SetFont( textFont , textSize , "OUTLINE")		
 		characterStatusBar["experienceBarText"]:SetFont( textFont , textSize , "OUTLINE")
 		characterStatusBar["experienceArtBarText"]:SetFont( textFont , textSize , "OUTLINE")
@@ -499,10 +468,6 @@ function AJM:SettingsUpdateFontStyle()
 
 	end
 end
-
-
-
-
 
 function AJM:SettingsUpdateBorderStyle()
 	local borderStyle = AJM.SharedMedia:Fetch( "border", AJM.db.borderStyle )
@@ -557,20 +522,6 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	characterStatusBar["bagInformationFrame"] = bagInformationFrame
 	characterStatusBar["bagInformationFrameText"] = bagInformationFrameText
 --]]
---[[	--set the ilevel Information.	
-	local ilvlInformationFrameName = AJM.globalFramePrefix.."IlvlInformationFrame"
-	local ilvlInformationFrame = CreateFrame( "Frame", ilvlInformationFrameName, parentFrame )
-	ilvlInformationFrame.overall = 999
-	ilvlInformationFrame.equipped = 999
-	ilvlInformationFrame.characterLevel = 0
-	ilvlInformationFrame.characterMaxLevel = 0
-	ilvlInformationFrame.gold = 0
-	ilvlInformationFrame.durability = 100
-	ilvlInformationFrame.slotsFree = 999
-	ilvlInformationFrame.totalSlots = 999
-	ilvlInformationFrame.toolText = "nothing"
-	characterStatusBar["ilvlInformationFrame"] = ilvlInformationFrame
-]]
 	-- Set the follow bar.
 	local followName = AJM.globalFramePrefix.."FollowBar"
 	local followBar = CreateFrame( "StatusBar", followName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
@@ -596,7 +547,6 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	followBarText:SetAllPoints()
 	characterStatusBar["followBarText"] = followBarText
 	AJM:SettingsUpdateFollowText( characterName ) --, UnitLevel( Ambiguate( characterName, "none" ) ), nil, nil )
-	
 	--ToolTip infomation
 	followBar.FreeBagSpace = 0
 	followBar.TotalBagSpace = 8
@@ -607,13 +557,8 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	followBar.CurrText = "currNothing"
 	followBar.CharacterLevel = 1
 	followBar.MaxCharacterLevel = 100
-	
-	
-	
 	followBarClick:SetScript("OnEnter", function(self) AJM:ShowFollowTooltip(followBarClick, followBar, characterName, true) end)
-	--followBarClick:SetScript("OnLeave", function(self) AJM:ShowFollowTooltip(followBarClick, CharacterName, false) end)
 	followBarClick:SetScript("OnLeave", function(self) GameTooltip:Hide() end)
-	
 	-- Set the experience bar.
 	local experienceName = AJM.globalFramePrefix.."ExperienceBar"
 	local experienceBar = CreateFrame( "StatusBar", experienceName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
@@ -665,7 +610,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	experienceArtBarText.artifactPointsAvailable = 0
 	characterStatusBar["experienceArtBarText"] = experienceArtBarText
 	AJM:UpdateExperienceStatus( characterName, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil )
--- Set the HonorXP bar.
+	-- Set the HonorXP bar.
 	local experienceHonorName = AJM.globalFramePrefix.."ExperienceHonorBar"
 	local experienceHonorBar = CreateFrame( "StatusBar", experienceHonorName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
 	experienceHonorBar.backgroundTexture = experienceArtBar:CreateTexture( experienceArtName.."BackgroundTexture", "ARTWORK" )
@@ -692,7 +637,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	experienceHonorBarText.canPrestige = "N/A"
 	characterStatusBar["experienceHonorBarText"] = experienceHonorBarText
 	AJM:UpdateExperienceStatus( characterName, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil )	
--- Set the reputation bar.
+	-- Set the reputation bar.
 	local reputationName = AJM.globalFramePrefix.."ReputationBar"
 	local reputationBar = CreateFrame( "StatusBar", reputationName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
 	reputationBar.backgroundTexture = reputationBar:CreateTexture( reputationName.."BackgroundTexture", "ARTWORK" )
@@ -719,8 +664,6 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	reputationBarText.reputationBarValue = 100
 	characterStatusBar["reputationBarText"] = reputationBarText
 	AJM:UpdateReputationStatus( characterName, nil, nil, nil )
-	
-	
 	-- Set the health bar.
 	local healthName = AJM.globalFramePrefix.."HealthBar"
 	local healthBar = CreateFrame( "StatusBar", healthName, parentFrame, "TextStatusBar,SecureActionButtonTemplate" )
@@ -796,8 +739,6 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	comboBarText.playerCombo = 0
 	comboBarText.playerMaxCombo = 5
 	characterStatusBar["comboBarText"] = comboBarText
-
-
 	AJM:UpdateComboStatus( characterName, nil, nil )
 	-- Add the health and power click bars to ClickCastFrames for addons like Clique to use.
 	--Ebony if Support for Clique if not on then default to target unit
@@ -821,6 +762,8 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 		comboBarClick:SetAttribute( "type1", "target")
 	end
 end
+
+
 
 function AJM:ShowFollowTooltip( frame, followBar, characterName, canShow )
 	--AJM:Print("test", frame, characterName, canShow)
@@ -882,19 +825,16 @@ function AJM:HideJambaTeamStatusBar( characterName )
 	characterStatusBar["portraitButton"]:Hide()
 	characterStatusBar["portraitButtonClick"]:Hide()
 --	characterStatusBar["bagInformationFrame"]:Hide()
---	characterStatusBar["ilvlInformationFrame"]:Hide()
 	characterStatusBar["followBar"]:Hide()
 	characterStatusBar["followBarClick"]:Hide()
 	characterStatusBar["experienceBar"]:Hide()
 	characterStatusBar["experienceBarClick"]:Hide()
-	
 	characterStatusBar["experienceArtBar"]:Hide()
 	characterStatusBar["experienceArtBarClick"]:Hide()
 	characterStatusBar["experienceHonorBar"]:Hide()
 	characterStatusBar["experienceHonorBarClick"]:Hide()	
 	characterStatusBar["reputationBar"]:Hide()
 	characterStatusBar["reputationBarClick"]:Hide()	
-	
 	characterStatusBar["healthBar"]:Hide()
 	characterStatusBar["healthBarClick"]:Hide()
 	characterStatusBar["powerBar"]:Hide()
@@ -918,100 +858,61 @@ function AJM:UpdateJambaTeamStatusBar( characterName, characterPosition )
 	local positionLeft = 0
 	local positionTop = -AJM.db.teamListTitleHeight - (AJM.db.teamListVerticalSpacing * 2)
 	local charactersPerRow = AJM.db.charactersPerRow
-	
-	--	frame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() * AJM.totalMembersDisplayed) )
-	--	frame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() )
-	
-	
 	if AJM.db.teamListHorizontal == true then
-		--if AJM.db.listInGroupsofFive == true then
-			if characterPosition < charactersPerRow then
-				positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
-				AJM:Print("test1", positionLeft)
-				parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() ) 
-			-- Row 2
-			elseif 	characterPosition < ( charactersPerRow * 2 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight)
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + (positionLeft) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + ( GetCharacterHeight() ) * 2 ) 
-			-- Row 3	
-			elseif 	characterPosition < ( charactersPerRow * 3 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 2 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 2 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 3 )
-			-- Row 4	
-			elseif 	characterPosition < ( charactersPerRow * 4 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 3 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 3 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 4 )
-			-- Row 5
-			elseif 	characterPosition < ( charactersPerRow * 5 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 4 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 4 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 5)
-			-- Row 6
-			elseif 	characterPosition < ( charactersPerRow * 6 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 5 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 5 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 6 )				
-			--Row 7
-			elseif 	characterPosition < ( charactersPerRow * 7 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 6 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 6 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 7 )
-			--Row 8
-			elseif 	characterPosition < ( charactersPerRow * 8 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 7 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 7 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 8 )				
-			--Row 9
-			elseif 	characterPosition < ( charactersPerRow * 9 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 8 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 8 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 9 )
-			--Row 10
-			elseif 	characterPosition < ( charactersPerRow * 10 ) then
-				positionLeft = -6 + (characterPosition - charactersPerRow * 9 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
-				positionTop = (positionTop - characterHeight * 9 )
-				--parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
-				parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 10 )
-			else		
-				return
-				
-			
-			
-			end	
-
-
-
-
-
-	--AJM:Print("test1541", characterPosition)
-		
-		--[[
-		if characterPosition < characterRows then
-			AJM:Print("test1", characterName)
-			newCharacterPosition = characterPosition - characterRows
+		if characterPosition < charactersPerRow then
 			positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
-			test = characterRows + characterRows
-			AJM:Print("test1", characterName, test)
-		elseif characterPosition < test then
-			AJM:Print("test2", characterName)
-			test = characterRows + characterRows
-		elseif 	characterPosition < test then
-			AJM:Print("test3", characterName)
-			
-		end
-		]]
+			parentFrame:SetWidth( (AJM.db.teamListVerticalSpacing * 3) + (GetCharacterWidth() ) + ( positionLeft ) )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() ) 
+		-- Row 2
+		elseif 	characterPosition < ( charactersPerRow * 2 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight)
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + ( GetCharacterHeight() ) * 2 ) 
+		-- Row 3	
+		elseif 	characterPosition < ( charactersPerRow * 3 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 2 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 2 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 3 )
+			-- Row 4	
+		elseif 	characterPosition < ( charactersPerRow * 4 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 3 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 3 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 4 )
+		-- Row 5
+		elseif 	characterPosition < ( charactersPerRow * 5 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 4 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 4 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 5)
+		-- Row 6
+		elseif 	characterPosition < ( charactersPerRow * 6 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 5 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 5 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 6 )				
+		--Row 7
+		elseif 	characterPosition < ( charactersPerRow * 7 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 6 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 6 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 7 )
+		--Row 8
+		elseif 	characterPosition < ( charactersPerRow * 8 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 7 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 7 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 8 )				
+		--Row 9
+		elseif 	characterPosition < ( charactersPerRow * 9 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 8 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 8 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 9 )
+			--Row 10
+		elseif 	characterPosition < ( charactersPerRow * 10 ) then
+			positionLeft = -6 + (characterPosition - charactersPerRow * 9 ) * ( characterWidth ) + (AJM.db.teamListHorizontalSpacing * 3)
+			positionTop = (positionTop - characterHeight * 9 )
+			parentFrame:SetHeight( AJM.db.teamListTitleHeight + (AJM.db.teamListVerticalSpacing * 3) + GetCharacterHeight() * 10 )
+		else		
+			return
+		end	
+	--Old code kept for Legacy Purpose
+		--positionLeft = -6 + (characterPosition * characterWidth) + (AJM.db.teamListHorizontalSpacing * 3)
 	else
 		positionLeft = 6
 		positionTop = positionTop - (characterPosition * characterHeight)
