@@ -995,6 +995,7 @@ function AJM:RESURRECT_REQUEST( event, ... )
 		StaticPopup_Hide( "SKINNED" )
 		StaticPopup_Hide( "SKINNED_REPOP" )
 		StaticPopup_Hide( "DEATH" )
+		StaticPopup_Hide( "RECOVER_TEAM" )
 	end
 end
 

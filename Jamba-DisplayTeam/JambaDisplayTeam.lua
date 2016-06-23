@@ -3492,6 +3492,7 @@ function AJM:OnEnable()
 	--AJM:ScheduleRepeatingTimer("SendExperienceStatusUpdateCommand", 5)
 end
 
+
 -- Called when the addon is disabled.
 function AJM:OnDisable()
 end
