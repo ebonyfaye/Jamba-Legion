@@ -1228,19 +1228,21 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 				local stageName, stageDescription, numCriteria, _, _, _, numSpells, spellInfo, weightedProgress = C_Scenario.GetStepInfo()
 				--AJM:Print("test match", numCriteria)
 				if numCriteria == 0 then
+					--AJM:Print("test match 0")
 					if (weightedProgress) then
 						--AJM:Print("Checking Progress", weightedProgress)
 						local questID = 1001	
 						local criteriaIndex = 0
 						local maxProgress = 100
-						local totalQuantity = 100
+						--Placeholder does not work on borkenshore questlines......
+						--local totalQuantity = 100
 						local completed = false
 						local amountCompleted = tostring(weightedProgress).."/"..(maxProgress)
 						local name = "Scenario:"..stageName.." "..currentStage.."/"..numStages
 						--AJM:Print("scenarioProgressInfo", questID, name, criteriaIndex, stageDescription , amountCompleted , totalQuantity, completed )
-							if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
+							--if (AJM:QuestCacheUpdate( questID, criteriaIndex, amountCompleted, objectiveFinished ) == true) or (useCache == false) then
 								AJM:JambaSendCommandToTeam( AJM.COMMAND_QUEST_WATCH_OBJECTIVE_UPDATE, questID, name, numCriteria, stageDescription , amountCompleted , totalQuantity, completed )
-							end
+							--end
 					else
 						--AJM:Print("ScenarioDONE", stageDescription)
 						local questID = 1001
@@ -1258,8 +1260,11 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 				for criteriaIndex = 1, numCriteria do
 		--AJM:Print("Player has", numCriteria, "Criterias", "and is checking", criteriaIndex)
 				local criteriaString, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed = C_Scenario.GetCriteriaInfo(criteriaIndex)
-				local questID = 1001
-				local amountCompleted = tostring(quantity).."/"..(totalQuantity)
+		--AJM:Print("test", criteriaString, criteriaType, completed, quantity, totalQuantity )
+				--Ebony to fix a bug with character trial quest (this might be a blizzard bug) TODO relook at somepoint in beta.
+				if (criteriaString) then
+					local questID = 1001
+					local amountCompleted = tostring( quantity ).."/"..( totalQuantity ) 
 					--AJM:Print("Stages", numStages)
 					local name = nil
 						if (numStages) > 1 then
@@ -1277,7 +1282,8 @@ function AJM:JambaQuestWatcherUpdate( useCache )
 							AJM:JambaSendMessageToTeam( AJM.db.messageArea, objectiveText.." "..amountCompleted, false )
 							end
 						end							
-					end
+						end
+					end	
 				end
 			end
 		end
@@ -1386,8 +1392,8 @@ function AJM:DoQuestWatchObjectiveUpdate( characterName, questID, questName, obj
 	AJM:UpdateQuestWatchList( questID, questName, objectiveIndex, objectiveText, characterName, amountCompleted, objectiveFinished, isComplete )
 end
 
-function AJM:UpdateQuestWatchList( questID, questName, objectiveIndex, objectiveText, name, amountCompleted, objectiveFinished, isComplete )
-    local characterName = (( Ambiguate( name, "none" ) ))
+function AJM:UpdateQuestWatchList( questID, questName, objectiveIndex, objectiveText, characterName, amountCompleted, objectiveFinished, isComplete )
+    --local characterName = (( Ambiguate( name, "none" ) ))
 	AJM:DebugMessage( "UpdateQuestWatchList", questID, questName, objectiveIndex, objectiveText, characterName, amountCompleted, objectiveFinished, isComplete )
 	local questHeaderPosition = AJM:GetQuestHeaderInWatchList( questID, questName, characterName )
 	local objectiveHeaderPosition = AJM:GetObjectiveHeaderInWatchList( questID, questName, objectiveIndex, objectiveText, "", questHeaderPosition )
