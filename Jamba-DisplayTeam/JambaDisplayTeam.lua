@@ -2485,6 +2485,10 @@ function AJM:SendInfomationUpdateCommand()
 					end
 			end
 		end
+		if curTotal == 0 then
+			curTotal = 1
+			maxTotal = 1
+		end	
 		local durability = curTotal / maxTotal * 100
 		--Mail (blizzard minimap code)
 		mailText = "nothing"
@@ -2712,6 +2716,18 @@ function AJM:UPDATE_EXHAUSTION( event, ... )
 end
 
 function AJM:PLAYER_LEVEL_UP( event, ... )
+	AJM:SendExperienceStatusUpdateCommand()	
+end
+
+function AJM:HONOR_XP_UPDATE(event, arg1, agr2, ...)
+	AJM:SendExperienceStatusUpdateCommand()	
+end
+
+function AJM:HONOR_LEVEL_UPDATE(event, arg1, agr2, ...)
+	AJM:SendExperienceStatusUpdateCommand()	
+end
+
+function AJM:HONOR_PRESTIGE_UPDATE(event, arg1, agr2, ...)
 	AJM:SendExperienceStatusUpdateCommand()	
 end
 
@@ -3473,6 +3489,9 @@ function AJM:OnEnable()
 	AJM:RegisterEvent( "UNIT_POWER_FREQUENT")
 	AJM:RegisterEvent( "RUNE_POWER_UPDATE" )
 	AJM:RegisterEvent( "PLAYER_TALENT_UPDATE")
+	AJM:RegisterEvent( "HONOR_XP_UPDATE" )
+	AJM:RegisterEvent( "HONOR_LEVEL_UPDATE" )
+	AJM:RegisterEvent( "HONOR_PRESTIGE_UPDATE" )
 	AJM.SharedMedia.RegisterCallback( AJM, "LibSharedMedia_Registered" )
     AJM.SharedMedia.RegisterCallback( AJM, "LibSharedMedia_SetGlobal" )	
 	AJM:RegisterMessage( JambaApi.MESSAGE_TEAM_CHARACTER_ADDED, "OnCharactersChanged" )
@@ -3491,7 +3510,6 @@ function AJM:OnEnable()
 	AJM:ScheduleTimer( "SendComboStatusUpdateCommand", 5 )
 	--AJM:ScheduleRepeatingTimer("SendExperienceStatusUpdateCommand", 5)
 end
-
 
 -- Called when the addon is disabled.
 function AJM:OnDisable()

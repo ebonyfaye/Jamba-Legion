@@ -724,6 +724,8 @@ function AJM:OnEnable()
 	AJM:RegisterEvent( "CORPSE_IN_RANGE" )
 	AJM:RegisterEvent( "CORPSE_IN_INSTANCE" )
 	AJM:RegisterEvent( "CORPSE_OUT_OF_RANGE" )	
+	AJM:RegisterEvent( "PLAYER_UNGHOST" )
+	AJM:RegisterEvent( "PLAYER_ALIVE" )
 	AJM:RegisterEvent( "CONFIRM_SUMMON")
 	AJM:RegisterEvent( "DUEL_REQUESTED" )
 	AJM:RegisterEvent( "GUILD_INVITE_REQUEST" )
@@ -815,6 +817,23 @@ function AJM:DUEL_REQUESTED( event, challenger, ... )
 	end
 end
 
+function AJM:PLAYER_UNGHOST(event, ...)
+		StaticPopup_Hide( "RECOVER_CORPSE" )
+		StaticPopup_Hide( "RECOVER_CORPSE_INSTANCE" )
+		StaticPopup_Hide( "XP_LOSS" )
+		StaticPopup_Hide( "RECOVER_TEAM")
+		StaticPopup_Hide(  "TEAMDEATH" )
+end
+
+function AJM:PLAYER_ALIVE(event, ...)
+		StaticPopup_Hide( "RECOVER_CORPSE" )
+		StaticPopup_Hide( "RECOVER_CORPSE_INSTANCE" )
+		StaticPopup_Hide( "XP_LOSS" )
+		StaticPopup_Hide( "RECOVER_TEAM" )
+		StaticPopup_Hide( "TEAMDEATH" )
+end
+
+
 function AJM:CORPSE_IN_RANGE(event, ...)
 	local teamMembers = JambaApi.GetTeamListMaximumOrderOnline()
 	if teamMembers > 1 and AJM.db.acceptDeathRequests == true then
@@ -826,7 +845,6 @@ function AJM:CORPSE_IN_INSTANCE(event, ...)
 		StaticPopup_Show("RECOVER_CORPSE_INSTANCE")
 		StaticPopup_Hide("RECOVER_TEAM")
 end
-
 		
 function AJM:CORPSE_OUT_OF_RANGE(event, ...)
 		StaticPopup_Hide("RECOVER_CORPSE")
@@ -842,7 +860,6 @@ function AJM:PLAYER_DEAD( event, ...)
 		StaticPopup_Show( "TEAMDEATH" )	
 	end
 end
-
 -- Mosty taken from blizzard StaticPopup Code
 
 StaticPopupDialogs["TEAMDEATH"] = {
@@ -996,6 +1013,7 @@ function AJM:RESURRECT_REQUEST( event, ... )
 		StaticPopup_Hide( "SKINNED_REPOP" )
 		StaticPopup_Hide( "DEATH" )
 		StaticPopup_Hide( "RECOVER_TEAM" )
+		StaticPopup_Hide( "TEAMDEATH" )
 	end
 end
 
