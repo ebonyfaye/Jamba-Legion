@@ -29,8 +29,8 @@ AJM.moduleName = "Jamba-Message"
 AJM.settingsDatabaseName = "JambaMessageProfileDB"
 AJM.chatCommand = "jamba-message"
 local L = LibStub( "AceLocale-3.0" ):GetLocale( AJM.moduleName )
-AJM.parentDisplayName = L["Advanced"]
-AJM.moduleDisplayName = L["Core: Message Display"]
+AJM.parentDisplayName = L["Chat"]
+AJM.moduleDisplayName = L["Message Display"]
 
 -------------------------------------------------------------------------------------------------------------
 -- Message area management.
@@ -554,7 +554,7 @@ function AJM:SettingsAreaListScrollRefresh()
 		AJM.settingsControl.areaList.rows[iterateDisplayRows].columns[2].textString:SetText( "" )
 		AJM.settingsControl.areaList.rows[iterateDisplayRows].columns[1].textString:SetTextColor( 1.0, 1.0, 1.0, 1.0 )
 		AJM.settingsControl.areaList.rows[iterateDisplayRows].columns[2].textString:SetTextColor( 1.0, 1.0, 1.0, 1.0 )
-		AJM.settingsControl.areaList.rows[iterateDisplayRows].highlight:SetTexture( 0.0, 0.0, 0.0, 0.0 )
+		AJM.settingsControl.areaList.rows[iterateDisplayRows].highlight:SetColorTexture( 0.0, 0.0, 0.0, 0.0 )
 		-- Get data.
 		local dataRowNumber = iterateDisplayRows + AJM.settingsControl.areaListOffset
 		if dataRowNumber <= GetAreaListMaxPosition() then
@@ -566,7 +566,7 @@ function AJM:SettingsAreaListScrollRefresh()
 			AJM.settingsControl.areaList.rows[iterateDisplayRows].columns[2].textString:SetText( areaType )
 			-- Highlight the selected row.
 			if dataRowNumber == AJM.settingsControl.areaListHighlightRow then
-				AJM.settingsControl.areaList.rows[iterateDisplayRows].highlight:SetTexture( 1.0, 1.0, 0.0, 0.5 )
+				AJM.settingsControl.areaList.rows[iterateDisplayRows].highlight:SetColorTexture( 1.0, 1.0, 0.0, 0.5 )
 			end
 		end
 	end

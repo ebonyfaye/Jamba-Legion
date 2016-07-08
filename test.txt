@@ -1,0 +1,93 @@
+Hello, and welcome to Jamba tutorials.
+Let's talk about the new version of Jamba 5.0.
+
+In this video, we going to go over a few changes for Jamba 5.0.
+This Release is for the upcoming World of Warcraft expansion Legion. 
+This will be used for the pre patch 7.0.3 as well. 
+That is just around the corner.
+
+Let's start shell we, Changes to Core:
+
+We have Updated Ace 3.0 to the newest and latest. 
+We have changed the Config GUI to now use the Default ace config frame. The changes lets you resize the frame. and has now a close button.
+We have also added Tooltips when you Hover over the GUI options for a  bit of extra help and to clean up some of the long text.
+
+We have renamed the tab Help to commands as this shows command lines.
+
+Ok, that does the main changes for core, Now let's talk about Jamba-Team.
+We have added two new ways to add team members to the team with the command line and GUI.
+You can now Use @Target to add a team member that is your current target.
+As well we added @MouseOver to add the current MouseOver target to the team lists.
+
+Loot options Have been changed you can now only set Free for all, Personal Loot and Group Loot. 
+All the other options have been removed.
+Note: That the only place loot options work in Legion is in PVE Instances! 
+
+Now it's time to talk about Jamba-Quest-Tracker
+
+This has had some of the biggest changes. 1st it's Been renamed from Quest Watcher.
+
+We now fully support Scenario Objectives and Bonus Scenario Objectives.
+This means that Objectives now show in PVE Instances.
+
+We have added support to change the font And text size so you can make this look nice with your UI.
+
+Time to Talk About Jamba-Quest:
+Big thanks to Schilm from dual-boxing.com for the the new changes!.
+
+We have added buttons to the Blizzard's Quest Rightclick Dropdown Menu to Track, Untrack and to Abandon Quests on all minions.
+
+The Jamba-Quest-Bar is now part of the QuestMap Frame.
+And haves the following buttons Abandon All, Share All, Track All and Untrack All.
+
+Time to talk about Jamba-Display-Team
+
+We have made some of the biggest changes here as well!
+ 
+As you can see it now shows all the bars vertically.
+You can now stack Them up to 10 characters high.
+and then it makes a new row.
+
+Values are now Abbreviated to smaller Numbers. 
+
+It no longer Shows max Value if showing Percentages. 
+
+We have added support to change the font And text sizes!,
+
+Added a NewTooltip when you hover over the follow bar to show:
+Level of minion, If not level capped.
+ItemLevel of minion.
+Durability of the minion.
+Bag Space of the minion.
+Gold of the minion.
+Mail if the minion has mail and who it is from.
+You can turn this off if you don't like it.
+
+Changes to the XP bar.
+You can now show up to four Xp Bars.
+    Xp, Players XP.
+    Artifact XP, Show the players weapon Artifact XP.
+    Show Honor XP, Show a bar for the new honor xp bar.
+    Show Reputation, show a bar for Reputation.
+As you can see this just takes the same space on the bar, So you do not have to keep resizing the other bars for them to fit.
+    
+Added a new Class Power Bar that supports all the 2nd Class Powers on most classes that have it. EG: Warlock SoulShards.
+
+Now it's time to talk about Jamba-Toon.
+Added  Release Prompts when you die to Release the spirits of all minions. And release back to the minions bodies.
+
+Jamba Currency has had some big changes so let's talk about that.
+
+There is a now a DropDown Box to show the Currency's you wish to show.
+Now shows Currency Icon, Unlike the three Letters of text it used to.
+Now shows the Currency Gold Icons when showing Gold,silver and Copper.
+No Longer Shows Currency for Offline minions, It now updates right when the minion comes back online.
+
+Jamba-Advanced-Loot 
+No longer Cares if the Personal-Loot is set! so it only works in PVE Instances.
+ 
+I hope you got a glance on the new version and some of the changes we have done.
+
+ Please let me know what you think?
+
+Thanks for watching.
