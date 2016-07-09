@@ -39,46 +39,46 @@ AJM.settings = {
 		borderStyle = L["Blizzard Tooltip"],
 		backgroundStyle = L["Blizzard Dialog Background"],
 		fontStyle = L["Arial Narrow"],
-		fontSize = 11,
+		fontSize = 12,
 		teamListScale = 1,
 		teamListTitleHeight = 15,
 		teamListVerticalSpacing = 3,
 		teamListHorizontalSpacing = 6,
 		barVerticalSpacing = 2,
 		barHorizontalSpacing = 2,
-		charactersPerRow = 9,
+		charactersPerRow = 1,
 		--Old code kept for Legacy Purpose
 		barsAreStackedVertically = true,
 		teamListHorizontal = true,
-		showListTitle = true,
+		showListTitle = false,
 		showCharacterPortrait = true,
-		characterPortraitWidth = 20,
+		characterPortraitWidth = 80,
 		showFollowStatus = true,
-		followStatusWidth = 80,
-		followStatusHeight = 20,
+		followStatusWidth = 100,
+		followStatusHeight = 15,
 		followStatusShowName = true,
 		showExperienceStatus = true,
 		showXpStatus = true,
-		showArtifactStatus = true,
+		showArtifactStatus = false,
 		showHonorStatus = false,
 		showRepStatus = false,
-		experienceStatusWidth = 80,
-		experienceStatusHeight = 20,
+		experienceStatusWidth = 100,
+		experienceStatusHeight = 15,
 		experienceStatusShowValues = false,
 		experienceStatusShowPercentage = true,		
-		showHealthStatus = false,
-		healthStatusWidth = 80,
-		healthStatusHeight = 20,
+		showHealthStatus = true,
+		healthStatusWidth = 100,
+		healthStatusHeight = 30,
 		healthStatusShowValues = true,
 		healthStatusShowPercentage = true,		
-		showPowerStatus = false,
-		powerStatusWidth = 80,
-		powerStatusHeight = 20,
+		showPowerStatus = true,
+		powerStatusWidth = 100,
+		powerStatusHeight = 15,
 		powerStatusShowValues = true,
 		powerStatusShowPercentage = true,
 		showComboStatus = false,
-		comboStatusWidth = 80,
-		comboStatusHeight = 20,
+		comboStatusWidth = 100,
+		comboStatusHeight = 10,
 		comboStatusShowValues = true,
 		comboStatusShowPercentage = true,		
 --		showBagInformation = true,
@@ -87,10 +87,10 @@ AJM.settings = {
 --		bagInformationHeight = 25,
 		showToolTipInfo = true,
 --		ShowEquippedOnly = false,
-		framePoint = "CENTER",
-		frameRelativePoint = "CENTER",
+		framePoint = "LEFT",
+		frameRelativePoint = "LEFT",
 		frameXOffset = 0,
-		frameYOffset = 0,
+		frameYOffset = 80,
 		frameAlpha = 1.0,
 		frameBackgroundColourR = 1.0,
 		frameBackgroundColourG = 1.0,
@@ -685,7 +685,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	healthBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
 	healthBarText:SetFont( textFont , textSize, "OUTLINE")
 	healthBarText:SetAllPoints()
-	healthBarText.playerHealth = 100
+	healthBarText.playerHealth = 0
 	healthBarText.playerMaxHealth = 100
 	characterStatusBar["healthBarText"] = healthBarText
 	AJM:UpdateHealthStatus( characterName, nil, nil )
@@ -710,7 +710,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	powerBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
 	powerBarText:SetFont( textFont , textSize, "OUTLINE")
 	powerBarText:SetAllPoints()
-	powerBarText.playerPower = 100
+	powerBarText.playerPower = 0
 	powerBarText.playerMaxPower = 100
 	characterStatusBar["powerBarText"] = powerBarText
 	AJM:UpdatePowerStatus( characterName, nil, nil, nil )
@@ -3105,6 +3105,7 @@ function AJM:SettingsUpdateHealthAll()
 end
 
 function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, isDead )
+	--AJM:Print("testUpdate", characterName, playerHealth, playerMaxHealth, isDead) 
 	if CanDisplayTeamList() == false then
 		return
 	end
@@ -3118,6 +3119,10 @@ function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, i
 	end
 	local healthBarText = characterStatusBar["healthBarText"]	
 	local healthBar = characterStatusBar["healthBar"]	
+	
+	if playerMaxHealth == 0 then 
+		playerMaxHealth = healthBarText.playerMaxHealth
+	end
 	if playerHealth == nil then
 		playerHealth = healthBarText.playerHealth
 	end
@@ -3141,9 +3146,10 @@ function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, i
 	healthBar:SetValue( tonumber( playerHealth ) )
 	local text = ""
 	if UnitIsDeadOrGhost(Ambiguate( characterName, "none" ) ) == true then
-	
 		--AJM:Print("dead", characterName)
 		text = text..L["DEAD"]	
+	elseif UnitIsConnected(Ambiguate( characterName, "none" ) ) == false then
+		text = text..L["OffLine"]
 	else
 		if AJM.db.healthStatusShowValues == true then
 			text = text..tostring( AbbreviateLargeNumbers(playerHealth) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxHealth) )..L[" "]
@@ -3157,21 +3163,25 @@ function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, i
 		end
 	end
 	healthBarText:SetText( text )		
-	AJM:SetStatusBarColourForHealth( healthBar, floor((playerHealth/playerMaxHealth)*100) )
+	AJM:SetStatusBarColourForHealth( healthBar, floor((playerHealth/playerMaxHealth)*100), characterName)
 end
 
-function AJM:SetStatusBarColourForHealth( statusBar, statusValue )
+function AJM:SetStatusBarColourForHealth( statusBar, statusValue, characterName )
 	local r, g, b = 0, 0, 0
-	statusValue = statusValue / 100
-	if( statusValue > 0.5 ) then
-		r = (1.0 - statusValue) * 2
-		g = 1.0
-	else
-		r = 1.0
-		g = statusValue * 2
+	if UnitIsConnected(Ambiguate( characterName, "none" ) ) == false then
+		statusBar:SetStatusBarColor( r, g, b )
+	else	
+		statusValue = statusValue / 100
+		if( statusValue > 0.5 ) then
+			r = (1.0 - statusValue) * 2
+			g = 1.0
+		else
+			r = 1.0
+			g = statusValue * 2
+		end
+		b = 0.0
+		statusBar:SetStatusBarColor( r, g, b )
 	end
-	b = 0.0
-	statusBar:SetStatusBarColor( r, g, b )
 end	
 
 -------------------------------------------------------------------------------------------------------------
@@ -3204,12 +3214,13 @@ function AJM:SettingsUpdatePowerAll()
 end
 
 function AJM:UpdatePowerStatus( characterName, playerPower, playerMaxPower)
+	--AJM:Print("testPOwer", characterName, playerPower, playerMaxPower )
 	if CanDisplayTeamList() == false then
 		return
 	end
 	if AJM.db.showPowerStatus == false then
 		return
-	end
+	end	
 	local originalChatacterName = characterName
 	characterName = JambaUtilities:AddRealmToNameIfMissing( characterName )
 	local characterStatusBar = AJM.characterStatusBar[characterName]
@@ -3218,6 +3229,11 @@ function AJM:UpdatePowerStatus( characterName, playerPower, playerMaxPower)
 	end
 	local powerBarText = characterStatusBar["powerBarText"]	
 	local powerBar = characterStatusBar["powerBar"]	
+	
+	if playerMaxPower == 0 then
+		playerMaxPower = powerBarText.playerMaxPower
+	end
+	
 	if playerPower == nil then
 		playerPower = powerBarText.playerPower
 	end
@@ -3240,6 +3256,8 @@ function AJM:UpdatePowerStatus( characterName, playerPower, playerMaxPower)
 	powerBar:SetMinMaxValues( 0, tonumber( playerMaxPower ) )
 	powerBar:SetValue( tonumber( playerPower ) )
 	local text = ""
+	
+	
 	if AJM.db.powerStatusShowValues == true then
 		text = text..tostring( AbbreviateLargeNumbers(playerPower) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxPower) )..L[" "]
 	end
@@ -3516,7 +3534,18 @@ function AJM:OnDisable()
 end
 
 function AJM:PLAYER_ENTERING_WORLD( event, ... )
-	AJM:SendComboStatusUpdateCommand()
+	AJM:ScheduleTimer( "RefreshTeamListControls", 3 )
+	AJM:ScheduleTimer( "SendExperienceStatusUpdateCommand", 5 )
+	AJM:ScheduleTimer( "SendReputationStatusUpdateCommand", 5 )
+	AJM:ScheduleTimer( "SendInfomationUpdateCommand", 5 )
+	AJM:ScheduleTimer( "SendComboStatusUpdateCommand", 5 )
+	for characterName, order in JambaApi.TeamList() do
+		if JambaApi.GetCharacterOnlineStatus( characterName ) == true then
+			unit = 	Ambiguate( characterName, "none" )
+			AJM:ScheduleTimer( "SendHealthStatusUpdateCommand", 5, unit )
+			AJM:ScheduleTimer( "SendPowerStatusUpdateCommand", 5, unit )
+		end
+	end
 end
 
 function AJM:OnMasterChanged( message, characterName )

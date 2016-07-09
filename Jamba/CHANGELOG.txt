@@ -39,7 +39,8 @@ Initial release.
         - Fixed with Broken Shore QuestLines a % bar needed coding in.
         - Only Show stage if there is more the one stage (so does not show in dungeons.)
         - Added support to change the font And text size
-
+		- Now automatically sets the frame to the Right Hand Side of the UI.
+		
 * Jamba-Quest (A big thanks to Schilm from dual-boxing.com to the new changes. little edited by me )
     - Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and un-track and to abandon all quests.
     -New Bar Now part of the QuestMap Frame. with new buttons
@@ -111,7 +112,8 @@ Initial release.
 
 * Jamba-ItemUse
     - You can now Use spells on the item bar without errors.     
-
+	- Now Automatically sets to the Bottom Right then the center of the UI.
+	
 * Jamba-Follow
     - Made some backend checks to make sure follow has been really been broken. (spamming follow key should not spam "follow Borken")
     - NoLonger warns if the player is on a taxi

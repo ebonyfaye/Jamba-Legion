@@ -67,7 +67,7 @@ L["Show Item Level"] = true
 L["Equipped iLvl Only"] = true
 L["Stack Text"] = true
 L["DEAD"] = true
-
+L["OffLine"] = true
 
 --new stuff
 L["Toon Information"] = true
