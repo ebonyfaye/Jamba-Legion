@@ -33,9 +33,9 @@ AJM.simpleCurrList = {}
 -- Currency Identifiers. To add you own just add a new line at the bottom of this part
 -- http://www.wowhead.com/currencies
 -- Old Stuff
-AJM.currTypes.DalaranJewelcraftingToken = 61
+--AJM.currTypes.DalaranJewelcraftingToken = 61
 AJM.currTypes.ChampionsSeal = 241
-AJM.currTypes.IllustriousJewelcraftersToken = 361
+--AJM.currTypes.IllustriousJewelcraftersToken = 361
 AJM.currTypes.TolBaradCommendation = 391
 AJM.currTypes.LesserCharmOfGoodFortune = 738
 AJM.currTypes.ElderCharmOfGoodFortune = 697
@@ -51,6 +51,7 @@ AJM.currTypes.Darkmoon = 515
 AJM.currTypes.Oil = 1101
 AJM.currTypes.InevitableFate = 1129
 AJM.currTypes.TimeWalker = 1166
+AJM.currTypes.Valor = 1191
 --Legion Currency
 AJM.currTypes.OrderResources = 1220
 AJM.currTypes.AncientMana = 1155
@@ -125,19 +126,19 @@ function AJM:GetConfiguration()
 		get = "JambaConfigurationGetSetting",
 		set = "JambaConfigurationSetSetting",		
 		args = {
-			currency = {
+			show = {
 				type = "input",
 				name = L["Show Currency"],
 				desc = L["Show the current toon the currency values for all members in the team."],
-				usage = "/jamba-curr currency",
+				usage = "/jamba-curr show",
 				get = false,
 				set = "JambaToonRequestCurrency",
 			},
-			currencyhide = {
+			hide = {
 				type = "input",
 				name = L["Hide Currency"],
 				desc = L["Hide the currency values for all members in the team."],
-				usage = "/jamba-curr currencyhide",
+				usage = "/jamba-curr hide",
 				get = false,
 				set = "JambaToonHideCurrency",
 			},			
@@ -1041,7 +1042,7 @@ function AJM:SettingsUpdateFontStyle()
 	frame.TotalGoldText:SetFont( textFont , textSize , "OUTLINE")
 	frame.TotalGoldTitleText:SetFont( textFont , textSize , "OUTLINE")
 	for characterName, currencyFrameCharacterInfo in pairs( AJM.currencyFrameCharacterInfo ) do
-		AJM:Print("test", characterName)
+		--AJM:Print("test", characterName)
 		--currencyFrameCharacterInfo.characterNameText:SetFont( textFont , textSize , "OUTLINE")
 		currencyFrameCharacterInfo.characterNameText:SetFont( textFont , textSize , "OUTLINE")
 		currencyFrameCharacterInfo.GoldText:SetFont( textFont , textSize , "OUTLINE")

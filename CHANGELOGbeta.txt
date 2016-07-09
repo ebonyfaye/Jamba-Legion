@@ -9,8 +9,8 @@ ChangeLogs:
 ---------------------------
 Jamba Version: 5.0
 WoW Game Version: 7.0.3
-Release Date: TBA
-Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Trade
+Release Date: 19/07/2016
+Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Curr, Trade
 
 *Jamba-Proc
     -Removed 
@@ -44,11 +44,9 @@ Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Proc, Pu
         - Only Show stage if there is more the one stage (so does not show in dungeons.)
         - Added support to change the font And text size
 
--- This needs a lot of work still EBONY TODO: taint on drop-down box.
-
 * Jamba-Quest (A big thanks to Schilm from dual-boxing.com to the new changes. little edited by me )
     - Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and un-track and to abandon all quests.
-    -New Bar Now part of the QuestMap Frame. with new buttons(TODO: Beta - Fix/change icons.)
+    -New Bar Now part of the QuestMap Frame. with new buttons
         -Abandon All
             -Works just like it used to. It loops through all of your toons and abandons all the quests on each toon. 
             -Now ignores quests that cannot be abandoned, such as the Account Wide quests Luxlunae mentioned.
