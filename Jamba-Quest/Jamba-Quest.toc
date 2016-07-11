@@ -8,9 +8,5 @@
 ## Dependencies: Jamba
 ## SavedVariables: JambaQuestProfileDB
 ## LoadOnDemand: 1
-## X-Curse-Packaged-Version: Beta-4.3i
-## X-Curse-Project-Name: Jamba
-## X-Curse-Project-ID: jamba
-## X-Curse-Repository-ID: wow/jamba/mainline
 Locales\Locales.xml
 JambaQuest.lua

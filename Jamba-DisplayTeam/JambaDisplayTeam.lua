@@ -3147,9 +3147,7 @@ function AJM:UpdateHealthStatus( characterName, playerHealth, playerMaxHealth, i
 	local text = ""
 	if UnitIsDeadOrGhost(Ambiguate( characterName, "none" ) ) == true then
 		--AJM:Print("dead", characterName)
-		text = text..L["DEAD"]	
-	elseif UnitIsConnected(Ambiguate( characterName, "none" ) ) == false then
-		text = text..L["OffLine"]
+		text = text..L["DEAD"]
 	else
 		if AJM.db.healthStatusShowValues == true then
 			text = text..tostring( AbbreviateLargeNumbers(playerHealth) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxHealth) )..L[" "]
@@ -3168,9 +3166,6 @@ end
 
 function AJM:SetStatusBarColourForHealth( statusBar, statusValue, characterName )
 	local r, g, b = 0, 0, 0
-	if UnitIsConnected(Ambiguate( characterName, "none" ) ) == false then
-		statusBar:SetStatusBarColor( r, g, b )
-	else	
 		statusValue = statusValue / 100
 		if( statusValue > 0.5 ) then
 			r = (1.0 - statusValue) * 2
@@ -3181,7 +3176,6 @@ function AJM:SetStatusBarColourForHealth( statusBar, statusValue, characterName 
 		end
 		b = 0.0
 		statusBar:SetStatusBarColor( r, g, b )
-	end
 end	
 
 -------------------------------------------------------------------------------------------------------------
@@ -3256,8 +3250,6 @@ function AJM:UpdatePowerStatus( characterName, playerPower, playerMaxPower)
 	powerBar:SetMinMaxValues( 0, tonumber( playerMaxPower ) )
 	powerBar:SetValue( tonumber( playerPower ) )
 	local text = ""
-	
-	
 	if AJM.db.powerStatusShowValues == true then
 		text = text..tostring( AbbreviateLargeNumbers(playerPower) )..L[" / "]..tostring( AbbreviateLargeNumbers(playerMaxPower) )..L[" "]
 	end
@@ -3403,7 +3395,9 @@ function AJM:UpdateComboStatus( characterName, playerCombo, playerMaxCombo )
 	if playerCombo == nil then
 		playerCombo = comboBarText.playerCombo
 	end
-	
+	if playerMaxCombo == 0 then
+		playerMaxCombo = comboBarText.playerMaxCombo
+	end
 	if playerMaxCombo == nil then
 		playerMaxCombo = comboBarText.playerMaxCombo
 	end
@@ -3534,19 +3528,22 @@ function AJM:OnDisable()
 end
 
 function AJM:PLAYER_ENTERING_WORLD( event, ... )
+	--AJM:ScheduleTimer( "UpdateAll", 3 )
+end
+
+function AJM:UpdateAll(event, ...)
 	AJM:ScheduleTimer( "RefreshTeamListControls", 3 )
-	AJM:ScheduleTimer( "SendExperienceStatusUpdateCommand", 5 )
-	AJM:ScheduleTimer( "SendReputationStatusUpdateCommand", 5 )
-	AJM:ScheduleTimer( "SendInfomationUpdateCommand", 5 )
-	AJM:ScheduleTimer( "SendComboStatusUpdateCommand", 5 )
-	for characterName, order in JambaApi.TeamList() do
-		if JambaApi.GetCharacterOnlineStatus( characterName ) == true then
-			unit = 	Ambiguate( characterName, "none" )
-			AJM:ScheduleTimer( "SendHealthStatusUpdateCommand", 5, unit )
-			AJM:ScheduleTimer( "SendPowerStatusUpdateCommand", 5, unit )
-		end
+	AJM:ScheduleTimer( "SendExperienceStatusUpdateCommand", 2 )
+	AJM:ScheduleTimer( "SendReputationStatusUpdateCommand", 2 )
+	AJM:ScheduleTimer( "SendInfomationUpdateCommand", 2 )
+	AJM:ScheduleTimer( "SendComboStatusUpdateCommand", 2 )
+	for index, characterName in JambaApi.TeamListOrderedOnline() do
+		unit = Ambiguate( characterName, "none" )
+		AJM:ScheduleTimer( "SendHealthStatusUpdateCommand", 2, unit )
+		AJM:ScheduleTimer( "SendPowerStatusUpdateCommand", 2, unit )
 	end
 end
+
 
 function AJM:OnMasterChanged( message, characterName )
 	AJM:SettingsRefresh()

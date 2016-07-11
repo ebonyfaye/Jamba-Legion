@@ -195,7 +195,7 @@ function AJM:OnEnable()
 
 	JambaQuestMapQuestOptionsDropDown.questID = 0;		-- for QuestMapQuestOptionsDropDown_Initialize
 	UIDropDownMenu_Initialize(JambaQuestMapQuestOptionsDropDown, JambaQuestMapQuestOptionsDropDown_Initialize, "MENU");
-	
+
 end
 
 -- Called when the addon is disabled.
@@ -1844,7 +1844,7 @@ function AJM:QuestMapQuestOptions_ToggleTrackQuest(questID)
 	local questLogIndex = GetQuestLogIndexByID(questID);
 	
 	if ( IsQuestWatched(questLogIndex) ) then
-		QuestObjectiveTracker_UntrackQuest(nil, questLogIndex);
+		QuestObjectiveTracker_UntrackQuest(nil, questID);
 	else
 		AddQuestWatch(questLogIndex, true);
 		QuestSuperTracking_OnQuestTracked(questID);
@@ -1874,15 +1874,17 @@ function AJM:QuestMapQuestOptions_AbandonQuest(questID)
 end
 
 function AJM:QuestMapQuestOptions_TrackQuest(questID, questLogIndex)
-	if ( not IsQuestWatched(questLogIndex) ) then
+	--AJM:Print("test", questID, questLogIndex )
+	if ( not IsQuestWatched(questID) ) then
 		AddQuestWatch(questLogIndex, true);
 		QuestSuperTracking_OnQuestTracked(questID);
 	end
 end
 
 function AJM:QuestMapQuestOptions_UnTrackQuest(questID, questLogIndex)
+	--AJM:Print("test", questID, questLogIndex )
 	if ( IsQuestWatched(questLogIndex) ) then
-		QuestObjectiveTracker_UntrackQuest(nil, questLogIndex);
+		QuestObjectiveTracker_UntrackQuest(nil, questID);
 	end
 end
 
