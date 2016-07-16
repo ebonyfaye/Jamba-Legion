@@ -1,7 +1,7 @@
 ﻿---------------------------
 ChangeLogs:
 ---------------------------
-Jamba Version: 5.0
+Jamba Version: 5.0-1
 WoW Game Version: 7.0.3
 Release Date: 19/07/2016
 Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Curr, Trade
@@ -29,7 +29,7 @@ Initial release.
         @target will add your current target to the team list
         @mouseOver Will add your current MouseOver to the team list.
     - cleaned up some loot code. and some offline code.    
-    - Removed Loot options as you can not set Loot outside of dungeons/raids.
+    - Loot can olny be set to Group/FFA/Personal. ( Olny works in a Instances )
     
 
 * Jamba-Quest-Tracker
@@ -41,8 +41,9 @@ Initial release.
         - Added support to change the font And text size
 		- Now automatically sets the frame to the Right Hand Side of the UI.
 		
-* Jamba-Quest (A big thanks to Schilm from dual-boxing.com to the new changes. little edited by me )
-    - Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and un-track and to abandon all quests.
+* Jamba-Quest 
+    - A big thanks to Schilm from dual-boxing.com to the new changes. little edited by me 
+	- Added buttons to blizzard Quest Rightclick Dropdown Menu to Track and un-track and to abandon all quests.
     -New Bar Now part of the QuestMap Frame. with new buttons
         -Abandon All
             -Works just like it used to. It loops through all of your toons and abandons all the quests on each toon. 
@@ -94,14 +95,14 @@ Initial release.
             
 * New Module Jamba-Curr
     - All Currency Information
-    **    - You can now add Currency IDs with one line in the config file if you need to.
-        - There is a now a DropDown Box to show the Currency's you like to show
-        - You can Have a max of 6 Currencies.
-        - Now shows Currency Icon Then The Three Letters of text.
-        - Now shows the Currency Gold Icons when showing gold/Sliver/Copper
-        - No Longer Shows Currency for Offline minions.
-        - Should Now Order minions That are Offline/Online correctly.
-        - Added support to change the font And text size.
+    **- You can now add Currency IDs with one line in the config file if you need to.
+    - There is a now a DropDown Box to show the Currency's you like to show
+    - You can Have a max of 6 Currencies.
+    - Now shows Currency Icon Then The Three Letters of text.
+    - Now shows the Currency Gold Icons when showing gold/Sliver/Copper
+    - No Longer Shows Currency for Offline minions.
+    - Should Now Order minions That are Offline/Online correctly.
+    - Added support to change the font And text size.
         
 * Jamba-Taxi
     - Fixed a Frame Bug with The new flight maps in broken island (Legion Zones)        

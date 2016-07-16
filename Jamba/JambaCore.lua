@@ -717,7 +717,8 @@ function AJM:CoreSettingsCreateInfo( top )
 		headingWidth, 
 		column2Left, 
 		movingTop,
-		L["www.dual-boxing.com"]
+		L["www.twitter.com/jenn_ebony"]
+		
 	)		
 	movingTop = movingTop - labelContinueHeight
 	AJM.settingsControl.labelInformation21 = JambaHelperSettings:CreateContinueLabel( 
@@ -725,10 +726,18 @@ function AJM:CoreSettingsCreateInfo( top )
 		headingWidth, 
 		column2Left, 
 		movingTop,
+		L["www.dual-boxing.com"]
+	)
+	movingTop = movingTop - labelContinueHeight
+	AJM.settingsControl.labelInformation22 = JambaHelperSettings:CreateContinueLabel( 
+		AJM.settingsControl, 
+		headingWidth, 
+		column2Left, 
+		movingTop,
 		L["www.isboxer.com"]
 	)	
 	--CopyRight heading
-	movingTop = movingTop - labelContinueHeight * 5
+	movingTop = movingTop - labelContinueHeight * 4
 	AJM.settingsControl.labelInformation30 = JambaHelperSettings:CreateContinueLabel( 
 		AJM.settingsControl, 
 		headingWidth, 

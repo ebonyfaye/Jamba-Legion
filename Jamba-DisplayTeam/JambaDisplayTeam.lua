@@ -685,7 +685,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	healthBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
 	healthBarText:SetFont( textFont , textSize, "OUTLINE")
 	healthBarText:SetAllPoints()
-	healthBarText.playerHealth = 0
+	healthBarText.playerHealth = 100
 	healthBarText.playerMaxHealth = 100
 	characterStatusBar["healthBarText"] = healthBarText
 	AJM:UpdateHealthStatus( characterName, nil, nil )
@@ -710,7 +710,7 @@ function AJM:CreateJambaTeamStatusBar( characterName, parentFrame )
 	powerBarText:SetTextColor( 1.00, 1.00, 1.00, 1.00 )
 	powerBarText:SetFont( textFont , textSize, "OUTLINE")
 	powerBarText:SetAllPoints()
-	powerBarText.playerPower = 0
+	powerBarText.playerPower = 100
 	powerBarText.playerMaxPower = 100
 	characterStatusBar["powerBarText"] = powerBarText
 	AJM:UpdatePowerStatus( characterName, nil, nil, nil )

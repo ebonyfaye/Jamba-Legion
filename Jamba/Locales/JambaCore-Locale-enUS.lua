@@ -62,6 +62,7 @@ L["For user manuals and documentation please visit:"] = true
 L["Useful websites:"] = true
 L["www.dual-boxing.com"] = true
 L["www.isboxer.com"] = true
+L["www.twitter.com/jenn_ebony"] = true
 L["Special thanks to olipcs on dual-boxing.com for writing the FTL Helper module."] = true
 L["Advanced Loot by schilm (Max Schilling) - modified by Tehtsuo and Jafula."] = true
 L["Attempting to reset the Jamba Settings Frame."] = true
@@ -89,16 +90,16 @@ L["Full Change Log"] = true
 L["Full ChangeLog"] = true
 L["ChangeLog"] = true
 L["Shows the Full changelog\nOpens a new Frame."] = true
-L["Text1"] = "Welcome to Legion 7.0.3!"
-L["Text2"] = "Jamba Has Had a Lot of changes here are a few..."
-L["Text3"] = "display-team been updated a lot."
-L["Text4"] = "Honor/XP/Artifact/Rep can be Showen."
-L["Text5"] = "Can see the Class Power for a lot of the other clasess."
-L["Text6"] = "QuestLog changes with a DropdownMenu."
-L["Text7"] = "Quest Watcher Been renamed and now supports most Objectives."
-L["Text8"] = "new Sutff for Currency!"
-L["Text9"] = ""
-L["Text10"] = ""
+L["Text1"] = "Welcome to Legion 7.0.3!" 
+L["Text2"] = "" 
+L["Text3"] = "Jamba Has Had a Lot of changes here is a few important ones to check out"
+L["Text4"] = ""
+L["Text5"] = "Display-team has some nice new changes!."
+L["Text6"] = "Honor/XP/Artifact/Rep are now on the same bar."
+L["Text7"] = ""
+L["Text8"] = "QuestLog changes with a Dropdown-Menu."
+L["Text9"] = "Quest Watcher Been renamed and now Supports Most Objectives."
+L["Text10"] = "Now Easyer To UseCurrency!"
 
 
 
