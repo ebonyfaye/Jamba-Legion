@@ -1,12 +1,12 @@
 ﻿---------------------------
 ChangeLogs:
 ---------------------------
-Jamba Version: 5.0-1
+Jamba Version: 5.0.1
 WoW Game Version: 7.0.3
 Release Date: 19/07/2016
 Modules: AdvancedLoot, Core, Display-Team, Follow, FTL, ItemUse, Macro, Purchase, Quest, Sell, Talk, Target, Taxi, Toon, Curr, Trade
 
-Initial release.
+Initial Legion Release.
 
 *Jamba-Proc
     -Removed 
